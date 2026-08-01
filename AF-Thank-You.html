@@ -76,6 +76,21 @@ h1,h2,h3{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;letter-spaci
   backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .top__in{max-width:1120px;margin:0 auto;padding:13px 22px;display:flex;
   align-items:center;justify-content:space-between;gap:14px}
+.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
+.brand__mark{width:31px;height:31px;border-radius:9px;background:var(--grad);flex:none;
+  display:grid;place-items:center;box-shadow:0 7px 18px -7px rgba(245,179,1,.85)}
+.brand__mark svg{width:17px;height:17px;display:block}
+.brand__txt{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15.5px;
+  letter-spacing:-.015em;white-space:nowrap;line-height:1.1;color:#fff}
+.brand__txt b{background:var(--grad);-webkit-background-clip:text;background-clip:text;
+  color:transparent;font-weight:800}
+.brand:hover .brand__mark{transform:translateY(-1px)}
+.brand__mark{transition:.2s}
+@media(max-width:560px){
+  .brand__txt{font-size:14px}
+  .brand__mark{width:28px;height:28px;border-radius:8px}
+  .brand__txt .the{display:none}
+}
 .top__logo{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:16px;
   color:#fff;text-decoration:none}
 .top__logo b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -204,7 +219,7 @@ body.barred .footer{padding-bottom:118px}
 <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGPBKZVL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
 
 <div class="top"><div class="top__in">
-  <a class="top__logo" href="/">IYA <b>//</b> The AI Affiliate Machine</a>
+  <a class="brand" href="/" aria-label="The AI Affiliate Machine — home"><span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11 5 6.4 19" stroke="#1A1230" stroke-width="3.6" stroke-linecap="round"/><path d="M18.2 5 13.6 19" stroke="#1A1230" stroke-width="3.6" stroke-linecap="round"/></svg></span><span class="brand__txt"><span class="the">The </span>AI Affiliate <b>Machine</b></span></a>
   <span class="top__badge"><svg class="tick" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#8CF0B4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg> Payment received</span>
 </div></div>
 

@@ -31,10 +31,15 @@ a:hover{color:var(--gold)}
   backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .top__in{max-width:1120px;margin:0 auto;padding:14px 22px;display:flex;
   align-items:center;justify-content:space-between;gap:14px}
-.top__logo{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:16px;
-  color:#fff;text-decoration:none}
-.top__logo b{background:var(--grad);-webkit-background-clip:text;
-  background-clip:text;color:transparent}
+.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
+.brand__mark{width:31px;height:31px;border-radius:9px;background:var(--grad);flex:none;
+  display:grid;place-items:center;box-shadow:0 7px 18px -7px rgba(245,179,1,.85);transition:.2s}
+.brand__mark svg{width:17px;height:17px;display:block}
+.brand:hover .brand__mark{transform:translateY(-1px)}
+.brand__txt{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15.5px;
+  letter-spacing:-.015em;white-space:nowrap;line-height:1.1;color:#fff}
+.brand__txt b{background:var(--grad);-webkit-background-clip:text;background-clip:text;
+  color:transparent;font-weight:800}
 .btn{display:inline-flex;align-items:center;gap:9px;background:var(--grad);color:#1A1230;
   padding:11px 20px;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;
   font-size:14.5px;font-weight:800;text-decoration:none;transition:.2s;white-space:nowrap;
@@ -43,7 +48,9 @@ a:hover{color:var(--gold)}
 .short{display:none}
 @media(max-width:560px){
   .top__in{padding:11px 16px}
-  .top__logo{font-size:14px;white-space:nowrap}
+  .brand__txt{font-size:14px}
+  .brand__mark{width:28px;height:28px;border-radius:8px}
+  .brand__txt .the{display:none}
   .btn{padding:10px 15px;font-size:13.5px}
   .full{display:none}.short{display:inline}
 }
@@ -95,7 +102,7 @@ b,strong{color:#fff;font-weight:700}
 <body>
 
 <div class="top"><div class="top__in">
-  <a class="top__logo" href="/">IYA <b>//</b> <span class="full">The </span>AI Affiliate Machine</a>
+  <a class="brand" href="/" aria-label="The AI Affiliate Machine — home"><span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11 5 6.4 19" stroke="#1A1230" stroke-width="3.6" stroke-linecap="round"/><path d="M18.2 5 13.6 19" stroke="#1A1230" stroke-width="3.6" stroke-linecap="round"/></svg></span><span class="brand__txt"><span class="the">The </span>AI Affiliate <b>Machine</b></span></a>
   <a class="btn" href="/"><span class="full">Back to the masterclass</span><span class="short">Masterclass</span></a>
 </div></div>
 
