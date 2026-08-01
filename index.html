@@ -1450,6 +1450,30 @@ var SUPABASE_TABLE = "masterclass_config";
       }).catch(function(){});
   }
 })();
+/* ── InitiateCheckout ──────────────────────────────────────────────────────
+   TagMango's pixel setting only accepts an ID and emits PageView, so the
+   checkout-intent signal has to come from our side. Fires on the click that
+   sends someone to TagMango — same funnel position, on a domain we control.
+   Once per visit, so the three CTAs can't inflate the count. The eventID lets
+   a platform-fired or server-side event for the same checkout dedupe against
+   this one rather than double-counting. */
+(function(){
+  var KEY='iya_ic';
+  function amount(){
+    var p=(window.IYA_CONFIG&&IYA_CONFIG.price)||'';
+    return parseInt(String(p).replace(/[^0-9]/g,''),10)||199;
+  }
+  function fire(){
+    try{ if(sessionStorage.getItem(KEY))return; }catch(e){}
+    var eid='ic_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
+    if(window.fbq) fbq('track','InitiateCheckout',{value:amount(),currency:'INR'},{eventID:eid});
+    if(window.dataLayer) dataLayer.push({event:'initiate_checkout',value:amount(),currency:'INR',event_id:eid});
+    try{ sessionStorage.setItem(KEY,eid); }catch(e){}
+  }
+  document.querySelectorAll('[data-cfg-href="registrationUrl"]')
+    .forEach(function(a){ a.addEventListener('click',fire); });
+})();
+
 /* ── hero background video: decorative, so only fetch it where it earns its
    bytes. Phones and reduced-motion users keep the poster image instead. ── */
 (function(){

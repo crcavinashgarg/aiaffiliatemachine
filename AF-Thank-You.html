@@ -20,19 +20,23 @@
    Otherwise we fall back to a per-day key, so a genuine repeat purchase on a
    later date still registers.
    NOTE: if server-side GTM (GTM-WGPBKZVL) already sends Purchase to this same
-   pixel, pass it the SAME eventID or you will count each sale twice. */
-(function(){
+   pixel, pass it the SAME eventID or you will count each sale twice.
+   Value is read from IYA_CONFIG.price rather than hardcoded, so changing the
+   price in one place cannot leave the reported revenue behind. That has to
+   wait for DOMContentLoaded because IYA_CONFIG is declared lower down. */
+addEventListener('DOMContentLoaded',function(){
   var q=new URLSearchParams(location.search);
   var oid=q.get('order_id')||q.get('orderId')||q.get('txn_id')||q.get('transaction_id')
         ||q.get('payment_id')||q.get('mangoId')||q.get('transactionId')||'';
   var scope=oid||new Date().toISOString().slice(0,10);
   var key='iya_purchase_'+scope, eid;
   try{ if(localStorage.getItem(key)) return; }catch(e){}
+  var val=parseInt(String((window.IYA_CONFIG&&IYA_CONFIG.price)||'').replace(/[^0-9]/g,''),10)||199;
   eid=oid?('tm_'+oid):('ty_'+scope+'_'+Math.random().toString(36).slice(2,10));
-  if(window.fbq) fbq('track','Purchase',{value:199,currency:'INR'},{eventID:eid});
-  if(window.dataLayer) dataLayer.push({event:'purchase',value:199,currency:'INR',event_id:eid});
+  if(window.fbq) fbq('track','Purchase',{value:val,currency:'INR'},{eventID:eid});
+  if(window.dataLayer) dataLayer.push({event:'purchase',value:val,currency:'INR',event_id:eid});
   try{ localStorage.setItem(key,eid); }catch(e){}
-})();
+});
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1673061543783104&ev=PageView&noscript=1" alt=""/></noscript>
 <!-- End Meta Pixel Code -->
