@@ -10,6 +10,9 @@
 
 <title>The AI Affiliate Machine — Live Masterclass with Avinash Garg</title>
 <meta name="description" content="One product in. A full affiliate machine out — website, ad creatives, landing pages, traffic. Live, in 90 minutes, with a ClickBank Platinum affiliate. No code.">
+<!-- Only opt into scroll-reveal if JS can actually run AND the browser can
+     observe. Without this flag the page renders fully visible. -->
+<script>if('IntersectionObserver' in window)document.documentElement.className+=' js';</script>
 
 <!-- Share preview (WhatsApp / Facebook / Instagram DM / X) + icons.
      og:image must stay an absolute URL — crawlers do not resolve relative ones
@@ -77,8 +80,12 @@ img{max-width:100%;display:block}
 .blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:.4;z-index:0;pointer-events:none}
 .blob--p{background:radial-gradient(circle,#7C3AED,transparent 70%)}
 .blob--k{background:radial-gradient(circle,#F5B301,transparent 70%);opacity:.22}
-.reveal{opacity:0;transform:translateY(26px);transition:.7s cubic-bezier(.2,.7,.2,1)}
-.reveal.in{opacity:1;transform:none}
+/* Scroll-reveal is an enhancement, never a gate. The hidden state applies only
+   once JS has confirmed it can run and observe (see the .js flag set in <head>),
+   so a script error, a blocked inline script or a browser without
+   IntersectionObserver leaves the page fully readable instead of blank. */
+.js .reveal{opacity:0;transform:translateY(26px);transition:.7s cubic-bezier(.2,.7,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
 /* top bar */
 .top{position:sticky;top:0;z-index:50;background:rgba(12,10,34,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .top__in{max-width:1120px;margin:0 auto;padding:13px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px}
@@ -606,7 +613,7 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
 <div class="top"><div class="top__in">
   <a class="brand" href="/" aria-label="The AI Affiliate Machine — home"><span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11 5 6.4 19" stroke="#1A1230" stroke-width="3.6" stroke-linecap="round"/><path d="M18.2 5 13.6 19" stroke="#1A1230" stroke-width="3.6" stroke-linecap="round"/></svg></span><span class="brand__txt"><span class="the">The </span>AI Affiliate <b>Machine</b></span></a>
   <div class="top__right">
-    <span class="top__live"><span class="pulse"></span> Live <span data-cfg="dateShort">[DATE]</span>, <span data-cfg="time">[TIME]</span></span>
+    <span class="top__live"><span class="pulse"></span> Live <span data-cfg="dateShort">Sun 2 Aug</span>, <span data-cfg="time">08:00 PM IST</span></span>
     <a href="#register" class="btn">Grab your seat <span class="btn__arrow">→</span></a>
   </div>
 </div></div>
@@ -626,8 +633,8 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
         <a href="#learn" class="btn--ghost">See what you'll learn</a>
       </div>
       <div class="hero__meta">
-        <div class="m"><span class="mk">When</span><span class="mv"><span class="g" data-cfg="dateShort">[DATE]</span></span></div>
-        <div class="m"><span class="mk">Doors</span><span class="mv"><span data-cfg="time">[TIME]</span></span></div>
+        <div class="m"><span class="mk">When</span><span class="mv"><span class="g" data-cfg="dateShort">Sun 2 Aug</span></span></div>
+        <div class="m"><span class="mk">Doors</span><span class="mv"><span data-cfg="time">08:00 PM IST</span></span></div>
         <div class="m"><span class="mk">Runtime</span><span class="mv">90 min live</span></div>
       </div>
     </div>
@@ -1107,7 +1114,7 @@ run();
     <div class="offer__price" data-cfg="price">₹199</div>
     <div class="offer__sub">Everything above, built live in 90 minutes.</div>
     <a href="https://learn.internetyouthacademy.com/l/dffe2cd9ad" data-cfg-href="registrationUrl" class="btn btn--big">Book my seat now <span class="btn__arrow">→</span></a>
-    <div class="offer__meta"><span data-cfg="dateFull">[DATE], [TIME] IST</span> · seat confirmed instantly · join link on WhatsApp</div>
+    <div class="offer__meta"><span data-cfg="dateFull">Sun 2 Aug · 08:00 PM IST</span> · seat confirmed instantly · join link on WhatsApp</div>
   </div></div>
 </section>
 
@@ -1322,7 +1329,7 @@ run();
     <div class="final__price" data-cfg="price">₹199</div>
     <p class="anchor">Less than a movie ticket — to see, and build, the exact system I run my own affiliate business on. If it's not worth far more than ₹199, I'll refund you.</p>
     <div><a href="https://learn.internetyouthacademy.com/l/dffe2cd9ad" data-cfg-href="registrationUrl" class="btn btn--big">Register now <span class="btn__arrow">→</span></a></div>
-    <p class="final__note">Live, once · <strong style="color:#fff" data-cfg="dateFull">[DATE], [TIME] IST</strong> · your seat is confirmed the moment you register, and the join link drops in your WhatsApp.</p>
+    <p class="final__note">Live, once · <strong style="color:#fff" data-cfg="dateFull">Sun 2 Aug · 08:00 PM IST</strong> · your seat is confirmed the moment you register, and the join link drops in your WhatsApp.</p>
   </div>
 </section>
 
@@ -1332,7 +1339,7 @@ run();
     <div class="sbar__left">
       <span class="sbar__live"><span class="pulse"></span> Live masterclass · one time · no replay</span>
       <div class="sbar__title">Turn one product into a <b>full affiliate machine</b> — in 90 minutes.</div>
-      <div class="sbar__meta"><b data-cfg="dateShort">[DATE]</b> · <b data-cfg="time">[TIME]</b> · seats are limited</div>
+      <div class="sbar__meta"><b data-cfg="dateShort">Sun 2 Aug</b> · <b data-cfg="time">08:00 PM IST</b> · seats are limited</div>
     </div>
     <div class="sbar__cd" id="sbarCd">
       <div class="u"><b id="cdD">--</b><span>Days</span></div><div class="s">:</div>
@@ -1550,7 +1557,12 @@ var SUPABASE_TABLE = "masterclass_config";
 })();
 (function(){var g=document.getElementById('dgrid');if(g){for(var i=0;i<90;i++){var c=document.createElement('div');c.className='cell';g.appendChild(c);}
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){[].forEach.call(g.children,function(cell,i){setTimeout(function(){cell.classList.add(i<30?'a':i<60?'b':'c');},i*18);});io.unobserve(g);}});},{threshold:.3});io.observe(g);}})();
-(function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});})();
+/* If anything here fails, drop the .js flag so every .reveal section falls back
+   to plain visible rather than staying at opacity 0 forever. */
+(function(){try{
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+}catch(err){document.documentElement.className=document.documentElement.className.replace(/\bjs\b/,'');}})();
 </script>
 <script>(function(){var v=document.querySelector(".hero__bgv");if(v){v.muted=true;v.setAttribute("muted","");v.setAttribute("playsinline","");function go(){var p=v.play();if(p&&p.catch)p.catch(function(){});}go();document.addEventListener("visibilitychange",go);window.addEventListener("load",go);}})();</script>
 </body>
