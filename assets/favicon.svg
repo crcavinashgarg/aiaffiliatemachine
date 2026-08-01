@@ -6,9 +6,9 @@
       <stop offset="1" stop-color="#E0890B"/>
     </linearGradient>
   </defs>
+  <!-- Filled variant of the outlined header monogram: a hairline border would
+       vanish at 16px, so the tile carries the gold and the letter is knocked out. -->
   <rect width="64" height="64" rx="15" fill="url(#g)"/>
-  <g transform="translate(32 32) scale(2.35) translate(-12 -12)">
-    <path d="M12 2.6l2.3 6.2 6.2 2.3-6.2 2.3L12 19.6l-2.3-6.2L3.5 11.1l6.2-2.3z" fill="#1A1230"/>
-    <path d="M19.2 17.2l.8 2.1 2.1.8-2.1.8-.8 2.1-.8-2.1-2.1-.8 2.1-.8z" fill="#1A1230"/>
-  </g>
+  <path d="M32 14.5 L45.5 49 H38.2 L35.4 41.4 H28.6 L25.8 49 H18.5 Z M32 25.8 L30.2 35.4 H33.8 Z"
+        fill="#12102B" fill-rule="evenodd"/>
 </svg>

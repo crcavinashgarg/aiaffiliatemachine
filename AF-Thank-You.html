@@ -77,9 +77,14 @@ h1,h2,h3{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;letter-spaci
 .top__in{max-width:1120px;margin:0 auto;padding:13px 22px;display:flex;
   align-items:center;justify-content:space-between;gap:14px}
 .brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
-.brand__mark{width:31px;height:31px;border-radius:9px;background:var(--grad);flex:none;
-  display:grid;place-items:center;box-shadow:0 7px 18px -7px rgba(245,179,1,.85)}
-.brand__mark svg{width:17px;height:17px;display:block}
+/* Outlined monogram: a hairline gold rule on dark reads as a firm; a solid
+   gold tile reads as an app icon. The favicon uses a filled variant because a
+   1px border disappears at 16px. */
+.brand__mark{width:31px;height:31px;border-radius:9px;flex:none;transition:.2s;
+  border:1.7px solid rgba(245,179,1,.72);background:rgba(245,179,1,.08);
+  display:grid;place-items:center;font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:800;font-size:16px;line-height:1;padding-bottom:1px;
+  background-clip:padding-box;color:var(--gold-2)}
 .brand__txt{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15.5px;
   letter-spacing:-.015em;white-space:nowrap;line-height:1.1;color:#fff}
 .brand__txt b{background:var(--grad);-webkit-background-clip:text;background-clip:text;
@@ -219,7 +224,7 @@ body.barred .footer{padding-bottom:118px}
 <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGPBKZVL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
 
 <div class="top"><div class="top__in">
-  <a class="brand" href="/" aria-label="The AI Affiliate Machine — home"><span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.6l2.3 6.2 6.2 2.3-6.2 2.3L12 19.6l-2.3-6.2L3.5 11.1l6.2-2.3z" fill="#1A1230"/><path d="M19.2 17.2l.8 2.1 2.1.8-2.1.8-.8 2.1-.8-2.1-2.1-.8 2.1-.8z" fill="#1A1230"/></svg></span><span class="brand__txt"><span class="the">The </span>AI Affiliate <b>Machine</b></span></a>
+  <a class="brand" href="/" aria-label="The AI Affiliate Machine — home"><span class="brand__mark" aria-hidden="true">A</span><span class="brand__txt"><span class="the">The </span>AI Affiliate <b>Machine</b></span></a>
   <span class="top__badge"><svg class="tick" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#8CF0B4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg> Payment received</span>
 </div></div>
 

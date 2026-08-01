@@ -90,9 +90,14 @@ img{max-width:100%;display:block}
 .top{position:sticky;top:0;z-index:50;background:rgba(12,10,34,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .top__in{max-width:1120px;margin:0 auto;padding:13px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px}
 .brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
-.brand__mark{width:31px;height:31px;border-radius:9px;background:var(--grad);flex:none;
-  display:grid;place-items:center;box-shadow:0 7px 18px -7px rgba(245,179,1,.85)}
-.brand__mark svg{width:17px;height:17px;display:block}
+/* Outlined monogram: a hairline gold rule on dark reads as a firm; a solid
+   gold tile reads as an app icon. The favicon uses a filled variant because a
+   1px border disappears at 16px. */
+.brand__mark{width:31px;height:31px;border-radius:9px;flex:none;transition:.2s;
+  border:1.7px solid rgba(245,179,1,.72);background:rgba(245,179,1,.08);
+  display:grid;place-items:center;font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:800;font-size:16px;line-height:1;padding-bottom:1px;
+  background-clip:padding-box;color:var(--gold-2)}
 .brand__txt{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15.5px;
   letter-spacing:-.015em;white-space:nowrap;line-height:1.1;color:#fff}
 .brand__txt b{background:var(--grad);-webkit-background-clip:text;background-clip:text;
@@ -118,7 +123,18 @@ img{max-width:100%;display:block}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,10,34,.95) 0%,rgba(12,10,34,.80) 42%,rgba(12,10,34,.5) 100%);z-index:1;pointer-events:none}
 .hero .wrap{position:relative;z-index:2}
 .hero .blob{z-index:0}
+/* The video is the proof asset, so give it the larger column and let the hero
+   (and only the hero) run wider than the 1120px body grid on big screens —
+   otherwise a 1440px monitor leaves the right third of the fold empty. */
 .hero__grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;position:relative;z-index:2}
+/* Only take width from the headline column where there is genuinely room —
+   rebalancing at 1280 narrowed the headline, added a line, and pushed the CTA
+   below the fold. Below 1360 we widen the wrap only. */
+@media(min-width:1200px){.hero .wrap{max-width:1180px}}
+@media(min-width:1360px){
+  .hero .wrap{max-width:1260px}
+  .hero__grid{grid-template-columns:1fr 1.08fr;gap:44px}
+}
 @media(max-width:900px){.hero__grid{grid-template-columns:1fr;gap:36px}}
 .hero__badge{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.06);border:1px solid rgba(245,179,1,.35);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:700;color:#fff;box-shadow:var(--shadow)}
 .hero__badge b{color:var(--gold-2)}
@@ -611,7 +627,7 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGPBKZVL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="top"><div class="top__in">
-  <a class="brand" href="/" aria-label="The AI Affiliate Machine — home"><span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.6l2.3 6.2 6.2 2.3-6.2 2.3L12 19.6l-2.3-6.2L3.5 11.1l6.2-2.3z" fill="#1A1230"/><path d="M19.2 17.2l.8 2.1 2.1.8-2.1.8-.8 2.1-.8-2.1-2.1-.8 2.1-.8z" fill="#1A1230"/></svg></span><span class="brand__txt"><span class="the">The </span>AI Affiliate <b>Machine</b></span></a>
+  <a class="brand" href="/" aria-label="The AI Affiliate Machine — home"><span class="brand__mark" aria-hidden="true">A</span><span class="brand__txt"><span class="the">The </span>AI Affiliate <b>Machine</b></span></a>
   <div class="top__right">
     <span class="top__live"><span class="pulse"></span> Live <span data-cfg="dateShort">Sun 2 Aug</span>, <span data-cfg="time">08:00 PM IST</span></span>
     <a href="#register" class="btn">Grab your seat <span class="btn__arrow">→</span></a>
