@@ -7,8 +7,34 @@
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WGPBKZVL');</script>
 <!-- End Google Tag Manager -->
 <!-- Meta Pixel Code -->
-<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1588515772894190');fbq('track','PageView');/* Conversion event for this registration — uncomment ONE if you are NOT already firing it from GTM: */ /* fbq('track','CompleteRegistration'); */ /* fbq('track','Purchase',{value:199,currency:'INR'}); */</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1588515772894190&ev=PageView&noscript=1" alt=""/></noscript>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1673061543783104');fbq('track','PageView');</script>
+<script>
+/* Purchase — fires ONCE per completed order.
+   This page is publicly reachable and survives a refresh, so an unguarded
+   fbq('track','Purchase') would log another sale on every reload and inflate
+   reported ROAS. Two protections:
+     1. eventID — lets Meta dedupe this against the same order arriving via
+        the Conversions API / server-side GTM, so they never double-count.
+     2. a localStorage lock — blocks refreshes and back-button revisits.
+   If TagMango appends an order id to the redirect URL we key off that (exact).
+   Otherwise we fall back to a per-day key, so a genuine repeat purchase on a
+   later date still registers.
+   NOTE: if server-side GTM (GTM-WGPBKZVL) already sends Purchase to this same
+   pixel, pass it the SAME eventID or you will count each sale twice. */
+(function(){
+  var q=new URLSearchParams(location.search);
+  var oid=q.get('order_id')||q.get('orderId')||q.get('txn_id')||q.get('transaction_id')
+        ||q.get('payment_id')||q.get('mangoId')||q.get('transactionId')||'';
+  var scope=oid||new Date().toISOString().slice(0,10);
+  var key='iya_purchase_'+scope, eid;
+  try{ if(localStorage.getItem(key)) return; }catch(e){}
+  eid=oid?('tm_'+oid):('ty_'+scope+'_'+Math.random().toString(36).slice(2,10));
+  if(window.fbq) fbq('track','Purchase',{value:199,currency:'INR'},{eventID:eid});
+  if(window.dataLayer) dataLayer.push({event:'purchase',value:199,currency:'INR',event_id:eid});
+  try{ localStorage.setItem(key,eid); }catch(e){}
+})();
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1673061543783104&ev=PageView&noscript=1" alt=""/></noscript>
 <!-- End Meta Pixel Code -->
 
 <title>You're in — The AI Affiliate Machine</title>
