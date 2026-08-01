@@ -52,112 +52,212 @@ addEventListener('DOMContentLoaded',function(){
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#FFFFFF; --bg-alt:#F6F5FC; --lav:#F1EEFC; --card:#FFFFFF;
-  --ink:#16132A; --ink-soft:#4C4766; --muted:#8B86A6;
-  --purple:#7C3AED; --purple-2:#8B5CF6; --pink:#EC4899; --pink-2:#F472B6;
-  --grad:linear-gradient(100deg,#7C3AED 0%,#C026D3 55%,#EC4899 100%);
-  --border:#ECE9F6; --border-2:#E3DEF3;
+  --bg:#0C0A22; --bg-2:#141036; --card:#1A1544; --card-2:#221C55;
+  --ink:#FFFFFF; --ink-soft:#C3BCE0; --muted:#A9A1D0;
+  --gold:#F5B301; --gold-2:#FBD04A; --gold-d:#D99400;
+  --grad:linear-gradient(120deg,#FBD24A 0%,#F5B301 55%,#E0890B 100%);
+  --wa:#25D366; --wa-2:#4AE383; --wa-d:#0F7A3D;
+  --border:rgba(255,255,255,.10); --border-2:rgba(255,255,255,.18);
+  --shadow:0 20px 50px -26px rgba(0,0,0,.7); --shadow-lg:0 34px 80px -34px rgba(0,0,0,.8);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-h1,h2,h3{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;
+  line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.08}
 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.wrap{max-width:680px;margin:0 auto;padding:0 22px}
-.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;z-index:0;pointer-events:none}
-.blob--p{background:radial-gradient(circle,#C4B5FD,transparent 70%)}
-.blob--k{background:radial-gradient(circle,#FBCFE8,transparent 70%)}
+.wrap{max-width:720px;margin:0 auto;padding:0 22px}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);z-index:0;pointer-events:none}
+.blob--g{background:radial-gradient(circle,rgba(245,179,1,.30),transparent 70%)}
+.blob--w{background:radial-gradient(circle,rgba(37,211,102,.22),transparent 70%)}
 
-.nav{border-bottom:1px solid var(--border);background:rgba(255,255,255,.85);backdrop-filter:blur(10px);position:sticky;top:0;z-index:20}
-.nav__in{max-width:1080px;margin:0 auto;padding:16px 22px;display:flex;align-items:center;justify-content:center}
-.nav__logo{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px}
-.nav__logo b{background:var(--grad);-webkit-background-clip:text;color:transparent}
+/* top bar — same language as the landing page */
+.top{position:sticky;top:0;z-index:50;background:rgba(12,10,34,.86);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.top__in{max-width:1120px;margin:0 auto;padding:13px 22px;display:flex;
+  align-items:center;justify-content:space-between;gap:14px}
+.top__logo{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:16px;
+  color:#fff;text-decoration:none}
+.top__logo b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.top__badge{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:800;
+  letter-spacing:.4px;color:#8CF0B4;background:rgba(37,211,102,.13);
+  border:1px solid rgba(37,211,102,.32);padding:7px 14px;border-radius:999px;white-space:nowrap}
+.top__badge .tick{width:15px;height:15px;flex:none}
 
-.hero{position:relative;text-align:center;padding:70px 0 40px;overflow:hidden}
-.tick{width:78px;height:78px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;margin:0 auto 26px;box-shadow:0 18px 40px -14px rgba(192,38,211,.6);position:relative;z-index:1}
-.tick svg{width:38px;height:38px}
-.kicker{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--purple);position:relative;z-index:1}
-.kicker .dot{width:6px;height:6px;border-radius:50%;background:var(--grad)}
-.hero h1{font-size:clamp(30px,6vw,46px);margin:16px 0 0;position:relative;z-index:1}
-.hero p.sub{font-size:clamp(16px,2.4vw,19px);color:var(--ink-soft);max-width:520px;margin:18px auto 0;position:relative;z-index:1}
+.hero{position:relative;padding:52px 0 26px;overflow:hidden;text-align:center}
+.seal{width:70px;height:70px;border-radius:50%;background:var(--grad);display:grid;place-items:center;
+  margin:0 auto 22px;box-shadow:0 18px 44px -14px rgba(245,179,1,.75);position:relative;z-index:1}
+.seal svg{width:34px;height:34px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:800;
+  letter-spacing:1.6px;text-transform:uppercase;color:var(--gold-2);
+  background:rgba(245,179,1,.12);border:1px solid rgba(245,179,1,.25);
+  padding:7px 15px;border-radius:999px;position:relative;z-index:1}
+h1{font-size:clamp(31px,5.6vw,46px);margin:18px 0 0;position:relative;z-index:1}
+.sub{font-size:clamp(16px,2.2vw,18.5px);color:var(--ink-soft);max-width:520px;
+  margin:15px auto 0;position:relative;z-index:1}
+.sub b{color:#fff}
 
-.card{background:var(--card);border:1px solid var(--border);border-radius:20px;box-shadow:0 20px 50px -30px rgba(80,40,140,.35);padding:32px;margin-top:8px;position:relative;z-index:1}
-.detail{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;padding:16px 0;border-bottom:1px dashed var(--border-2);text-align:center}
-.detail:last-of-type{border-bottom:none}
-.detail .k{font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
-.detail .v{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:20px;color:var(--ink)}
+/* ── the one action ─────────────────────────────────────────────────── */
+.act{position:relative;z-index:1;margin:30px 0 0;border-radius:24px;padding:32px 26px 28px;
+  background:linear-gradient(180deg,rgba(37,211,102,.14),rgba(18,140,126,.07));
+  border:1.5px solid rgba(37,211,102,.42);box-shadow:0 30px 70px -34px rgba(37,211,102,.55);
+  text-align:center;overflow:hidden}
+.act::before{content:"";position:absolute;inset:-1px auto auto -1px;width:calc(100% + 2px);height:2px;
+  background:linear-gradient(90deg,transparent,var(--wa-2),var(--wa),transparent);
+  background-size:45% 100%;background-repeat:no-repeat;animation:sweep 3.4s linear infinite}
+@keyframes sweep{0%{background-position:-50% 0}100%{background-position:150% 0}}
+.act__step{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:#06301A;
+  font-size:11.5px;font-weight:900;letter-spacing:1.3px;text-transform:uppercase;
+  padding:7px 15px;border-radius:999px}
+.act h2{font-size:clamp(24px,4.2vw,32px);margin:16px 0 0;color:#fff}
+.act h2 span{background:linear-gradient(120deg,var(--wa-2),var(--wa));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.act p{color:var(--ink-soft);font-size:16px;max-width:430px;margin:12px auto 0}
+.act p b{color:#fff}
+.wa__btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  background:linear-gradient(180deg,var(--wa-2),var(--wa));color:#042A14;
+  padding:20px 38px;border-radius:16px;font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:19px;font-weight:800;text-decoration:none;margin-top:24px;
+  box-shadow:0 18px 40px -12px rgba(37,211,102,.8);transition:.2s;
+  animation:waglow 2.6s ease-in-out infinite}
+.wa__btn:hover{transform:translateY(-3px);box-shadow:0 26px 54px -14px rgba(37,211,102,.95)}
+@keyframes waglow{0%,100%{box-shadow:0 18px 40px -12px rgba(37,211,102,.6)}
+  50%{box-shadow:0 20px 52px -8px rgba(37,211,102,1)}}
+.wa__btn svg{width:26px;height:26px;flex:none}
+.act__note{margin-top:15px;font-size:13.5px;color:#8CF0B4}
+.act__cd{margin-top:20px;padding-top:18px;border-top:1px dashed rgba(37,211,102,.3);
+  font-size:14px;color:var(--ink-soft)}
+.act__cd b{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#fff;
+  font-variant-numeric:tabular-nums}
 
-.wa{margin-top:30px;background:linear-gradient(180deg,#F0FDF4,#ECFDF3);border:1.5px solid #BBF7D0;border-radius:20px;padding:30px 26px;text-align:center;position:relative;z-index:1}
-.wa__badge{display:inline-flex;align-items:center;gap:8px;background:#16A34A;color:#fff;font-size:12px;font-weight:700;letter-spacing:.5px;padding:7px 14px;border-radius:999px;text-transform:uppercase}
-.wa h2{font-size:clamp(21px,3.6vw,27px);margin:16px 0 8px;color:#14532D}
-.wa p{color:#3F6E4E;max-width:440px;margin:0 auto 22px;font-size:15.5px}
-.wa__btn{display:inline-flex;align-items:center;gap:11px;background:#25D366;color:#08331B;border:none;padding:17px 32px;border-radius:14px;font-family:'Inter',sans-serif;font-size:17px;font-weight:800;cursor:pointer;text-decoration:none;transition:.22s;box-shadow:0 14px 30px -12px rgba(37,211,102,.75)}
-.wa__btn:hover{transform:translateY(-2px);box-shadow:0 20px 40px -14px rgba(37,211,102,.85)}
-.wa__btn svg{width:24px;height:24px}
-.wa__note{margin-top:16px;font-size:13px;color:#4B7A5B}
+/* warning — why this is not optional */
+.warn{display:flex;gap:14px;align-items:flex-start;text-align:left;margin-top:18px;
+  background:rgba(245,179,1,.08);border:1px solid rgba(245,179,1,.28);
+  border-radius:16px;padding:16px 18px;position:relative;z-index:1}
+.warn .ic{flex:none;width:26px;height:26px;border-radius:8px;background:var(--grad);
+  display:grid;place-items:center;font-weight:900;color:#1A1230;font-size:15px}
+.warn p{font-size:14.5px;color:var(--ink-soft);margin:0}
+.warn b{color:var(--gold-2)}
 
-.steps{margin-top:34px;text-align:left}
-.steps h3{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--purple);text-align:center;margin-bottom:20px}
-.step{display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border)}
-.step:last-child{border-bottom:none}
-.step__n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--lav);color:var(--purple);font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
-.step__t{font-weight:700;color:var(--ink);font-size:15.5px}
+/* supporting detail, deliberately quieter than the action above */
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;position:relative;z-index:1}
+.meta .m{flex:1 1 190px;background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:15px 17px;text-align:left}
+.meta .k{font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+.meta .v{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:17px;color:#fff;margin-top:4px}
+.meta .v.g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.next{margin-top:34px;text-align:left;position:relative;z-index:1}
+.next h3{font-size:12px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;
+  color:var(--gold-2);text-align:center;margin-bottom:16px}
+.step{display:flex;gap:15px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--border)}
+.step:first-of-type{border-top:none}
+.step__n{flex:none;width:30px;height:30px;border-radius:50%;background:rgba(245,179,1,.14);
+  border:1px solid rgba(245,179,1,.3);color:var(--gold-2);
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;
+  display:grid;place-items:center}
+.step__t{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;color:#fff;font-size:15.5px}
 .step__d{color:var(--ink-soft);font-size:14.5px;margin-top:2px}
+.reassure{text-align:center;color:var(--muted);font-size:13.5px;margin:32px auto 0;max-width:470px;
+  position:relative;z-index:1}
 
-.reassure{text-align:center;color:var(--muted);font-size:13.5px;margin:34px auto 0;max-width:460px}
-.footer{border-top:1px solid var(--border);margin-top:50px;padding:26px 0;text-align:center;color:var(--muted);font-size:13px}
-.footer a{color:var(--purple);text-decoration:none;margin:0 8px}
+.footer{border-top:1px solid var(--border);margin-top:44px;padding:28px 0 34px;text-align:center;
+  color:var(--muted);font-size:13px;background:#08061A}
+.footer a{color:var(--gold-2);text-decoration:none;margin:0 8px;opacity:.9}
+.footer a:hover{text-decoration:underline;opacity:1}
 .footlegal{margin-top:12px;font-size:13px}
 .footlegal a{margin:0 6px}
-.footlegal a:hover{text-decoration:underline}
-.footlegal .sep{color:var(--muted)}
-@media(max-width:520px){.footlegal a{display:inline-block;margin:4px 6px}.footlegal .sep{display:none}}
+.footlegal .sep{color:rgba(138,131,168,.5)}
+
+/* sticky reminder of the one action */
+.sbar{position:fixed;left:0;right:0;bottom:0;z-index:60;
+  background:linear-gradient(180deg,rgba(23,18,60,.93),rgba(10,8,28,.97));
+  backdrop-filter:blur(16px) saturate(140%);border-top:1px solid rgba(37,211,102,.3);
+  box-shadow:0 -18px 50px rgba(0,0,0,.55);transform:translateY(115%);opacity:0;pointer-events:none;
+  transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .4s ease}
+.sbar.show{transform:translateY(0);opacity:1;pointer-events:auto}
+.sbar__in{max-width:720px;margin:0 auto;padding:12px 22px calc(12px + env(safe-area-inset-bottom));
+  display:flex;align-items:center;gap:16px;justify-content:space-between}
+.sbar__t{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15px;color:#fff;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sbar__s{font-size:12.5px;color:var(--muted);margin-top:2px}
+.sbar .wa__btn{margin-top:0;padding:13px 22px;font-size:15px;border-radius:12px;flex:none}
+.sbar .wa__btn svg{width:20px;height:20px}
+/* reserve room only while the bar is up, so it never sits over the footer links */
+body.barred .footer{padding-bottom:118px}
+
+@media(max-width:620px){
+  .hero{padding:38px 0 20px}
+  .act{padding:26px 18px 24px;border-radius:20px}
+  .wa__btn{width:100%;padding:18px 20px;font-size:17px}
+  .sbar__txt{display:none}
+  .sbar__in{padding:10px 14px calc(10px + env(safe-area-inset-bottom));justify-content:center}
+  .sbar .wa__btn{width:100%;justify-content:center}
+  .footer a{display:inline-block;margin:4px 8px}
+  .footlegal .sep{display:none}
+}
+@media(prefers-reduced-motion:reduce){.act::before,.wa__btn{animation:none!important}}
+
 </style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGPBKZVL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
 
-
-<div class="nav"><div class="nav__in">
-  <div class="nav__logo">IYA <b>//</b> The AI Affiliate Machine</div>
+<div class="top"><div class="top__in">
+  <a class="top__logo" href="/">IYA <b>//</b> The AI Affiliate Machine</a>
+  <span class="top__badge"><svg class="tick" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#8CF0B4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg> Payment received</span>
 </div></div>
 
 <section class="hero">
-  <span class="blob blob--p" style="width:420px;height:420px;top:-120px;right:-60px"></span>
-  <span class="blob blob--k" style="width:360px;height:360px;bottom:-160px;left:-100px"></span>
+  <span class="blob blob--g" style="width:460px;height:460px;top:-190px;right:-140px"></span>
+  <span class="blob blob--w" style="width:420px;height:420px;top:180px;left:-170px"></span>
   <div class="wrap">
-    <div class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <div class="kicker"><span class="dot"></span> Your seat is confirmed</div>
-    <h1>You're in. Now do <span class="g">one thing.</span></h1>
-    <p class="sub">Your spot for the live masterclass is booked. Everything from here — the joining link, the reminders, the bonuses — comes through <strong>one WhatsApp group.</strong></p>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#1A1230" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <span class="eyebrow">Your seat is confirmed</span>
+    <h1>You're in. Now do <span class="g">the one thing</span> that gets you in the room.</h1>
+    <p class="sub">Your seat is paid for — but the joining link is <b>not emailed</b>. It only drops in the WhatsApp group, minutes before we go live.</p>
 
-    <div class="card">
-      <div class="detail"><span class="k">Your masterclass</span><span class="v" data-cfg="dateFull">[DATE], [TIME] IST</span></div>
-      <div class="detail"><span class="k">Runtime</span><span class="v">90 minutes · live, once</span></div>
+    <!-- THE single objective -->
+    <div class="act">
+      <span class="act__step">Required · takes 5 seconds</span>
+      <h2>Join the <span>WhatsApp group</span></h2>
+      <p>This is where your <b>live joining link</b>, the reminders and the bonuses all land. It is the only place they are sent.</p>
+      <a class="wa__btn" href="https://chat.whatsapp.com/Fo60ewNttqL2E6iTreAm5k" data-cfg-href="whatsappLink" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.16c-.24.68-1.42 1.31-1.96 1.36-.5.05-1.13.07-1.83-.11-.42-.11-.96-.29-1.66-.59-2.92-1.26-4.83-4.2-4.98-4.4-.15-.2-1.2-1.59-1.2-3.03s.76-2.15 1.03-2.44c.27-.29.59-.37.79-.37.2 0 .39.002.56.01.18.008.42-.07.66.5.24.58.82 2 .89 2.14.07.15.12.32.02.51-.1.2-.15.32-.29.49-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.29.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.29.15.46.12.63-.07.17-.2.73-.85.92-1.14.2-.29.39-.24.66-.15.27.1 1.7.8 1.99.95.29.15.49.22.56.34.07.12.07.68-.17 1.36z"/></svg> Join the WhatsApp group</a>
+      <div class="act__note">Free · you can leave straight after the class</div>
+      <div class="act__cd" id="cdWrap">Class starts in <b id="cd">--</b></div>
     </div>
 
-    <div class="wa">
-      <span class="wa__badge">Step 1 · Required</span>
-      <h2>Join the WhatsApp group</h2>
-      <p>This is where your live joining link drops, plus the reminders so you actually show up. If you skip this, you'll miss the room.</p>
-      <a href="https://chat.whatsapp.com/Fo60ewNttqL2E6iTreAm5k" data-cfg-href="whatsappLink" class="wa__btn" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="#08331B"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.16c-.24.68-1.42 1.31-1.96 1.36-.5.05-1.13.07-1.83-.11-.42-.11-.96-.29-1.66-.59-2.92-1.26-4.83-4.2-4.98-4.4-.15-.2-1.2-1.59-1.2-3.03s.76-2.15 1.03-2.44c.27-.29.59-.37.79-.37.2 0 .39.002.56.01.18.008.42-.07.66.5.24.58.82 2 .89 2.14.07.15.12.32.02.51-.1.2-.15.32-.29.49-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.29.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.29.15.46.12.63-.07.17-.2.73-.85.92-1.14.2-.29.39-.24.66-.15.27.1 1.7.8 1.99.95.29.15.49.22.56.34.07.12.07.68-.17 1.36z"/></svg>
-        Join the WhatsApp group
-      </a>
-      <div class="wa__note">Takes 5 seconds · you can leave anytime after the class.</div>
+    <div class="warn">
+      <span class="ic">!</span>
+      <p>If you don't join the group, <b>you will not get the link</b> — and there's no recording afterwards. This is the whole reason this page exists.</p>
     </div>
 
-    <div class="steps">
+    <div class="meta">
+      <div class="m"><div class="k">Your masterclass</div><div class="v g" data-cfg="dateFull">[DATE], [TIME] IST</div></div>
+      <div class="m"><div class="k">Runtime</div><div class="v">90 minutes · live, once</div></div>
+    </div>
+
+    <div class="next">
       <h3>What happens next</h3>
       <div class="step"><span class="step__n">1</span><div><div class="step__t">Join the WhatsApp group above</div><div class="step__d">Your one home for the link, reminders and bonuses.</div></div></div>
       <div class="step"><span class="step__n">2</span><div><div class="step__t">Watch for the reminder</div><div class="step__d">We'll ping the group before we go live — <span data-cfg="dateFull">[DATE], [TIME] IST</span>.</div></div></div>
       <div class="step"><span class="step__n">3</span><div><div class="step__t">Show up live &amp; build with me</div><div class="step__d">No recording. The hands-on build and Q&amp;A only happen in the room.</div></div></div>
     </div>
 
-    <p class="reassure">Didn't mean to book? No worries — just don't join the group. Otherwise, see you inside. 💜</p>
+    <p class="reassure">Didn't mean to book? No problem — just don't join the group, and see the <a href="/refund" style="color:var(--gold-2)">refund policy</a>. Otherwise, see you inside.</p>
   </div>
 </section>
 
-<div class="footer"><div class="wrap">© Internet Youth Academy · Avinash Garg &nbsp;·&nbsp; <a href="https://www.instagram.com/avinashgargofficial/">Instagram</a><a href="https://www.youtube.com/@AvinashGargOfficial">YouTube</a><a href="https://www.linkedin.com/in/avinashgargofficial/">LinkedIn</a><p class="footlegal"><a href="/privacy">Privacy Policy</a><span class="sep">·</span><a href="/terms">Terms &amp; Conditions</a><span class="sep">·</span><a href="/refund">Refund Policy</a></p></div></div>
+<div class="footer"><div class="wrap">© Internet Youth Academy · Avinash Garg &nbsp;·&nbsp; <a href="https://www.instagram.com/avinashgargofficial/" target="_blank" rel="noopener">Instagram</a><a href="https://www.youtube.com/@AvinashGargOfficial" target="_blank" rel="noopener">YouTube</a><a href="https://www.linkedin.com/in/avinashgargofficial/" target="_blank" rel="noopener">LinkedIn</a><p class="footlegal"><a href="/privacy">Privacy Policy</a><span class="sep">·</span><a href="/terms">Terms &amp; Conditions</a><span class="sep">·</span><a href="/refund">Refund Policy</a></p></div></div>
+
+<!-- sticky reminder: the page has exactly one objective -->
+<div class="sbar" id="sbar" aria-hidden="true"><div class="sbar__in">
+  <div class="sbar__txt">
+    <div class="sbar__t">You're not done yet</div>
+    <div class="sbar__s">The joining link only drops in WhatsApp</div>
+  </div>
+  <a class="wa__btn" href="https://chat.whatsapp.com/Fo60ewNttqL2E6iTreAm5k" data-cfg-href="whatsappLink" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.16c-.24.68-1.42 1.31-1.96 1.36-.5.05-1.13.07-1.83-.11-.42-.11-.96-.29-1.66-.59-2.92-1.26-4.83-4.2-4.98-4.4-.15-.2-1.2-1.59-1.2-3.03s.76-2.15 1.03-2.44c.27-.29.59-.37.79-.37.2 0 .39.002.56.01.18.008.42-.07.66.5.24.58.82 2 .89 2.14.07.15.12.32.02.51-.1.2-.15.32-.29.49-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.29.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.29.15.46.12.63-.07.17-.2.73-.85.92-1.14.2-.29.39-.24.66-.15.27.1 1.7.8 1.99.95.29.15.49.22.56.34.07.12.07.68-.17 1.36z"/></svg> Join the group</a>
+</div></div>
 
 <script>
 /* ═══════════════════════════════════════════════════════════════════
@@ -215,6 +315,45 @@ var SUPABASE_TABLE = "masterclass_config";  // table your admin panel writes to
           seatCount:r.seatCount||r.seat_count||IYA_CONFIG.seatCount
         });
       }).catch(function(){});
+  }
+})();
+
+/* ── countdown to the class + sticky WhatsApp reminder ──────────────────
+   Same IST handling as the landing page: webinarDate/webinarTime are IST
+   (UTC+5:30), converted to a real instant so the timer is right anywhere. */
+(function(){
+  var el=document.getElementById('cd'), wrap=document.getElementById('cdWrap');
+  var bar=document.getElementById('sbar'), act=document.querySelector('.act');
+  var deadline=null;
+  function setDeadline(c){
+    var p=(c.webinarDate||'').split('-');
+    if(p.length!==3){deadline=null;return;}
+    var m=(c.webinarTime||'').trim().toUpperCase().match(/^(\d{1,2}):(\d{2})\s*(AM|PM)?$/);
+    var hh=m?+m[1]:0, mm=m?+m[2]:0;
+    if(m&&m[3]==='PM'&&hh<12)hh+=12;
+    if(m&&m[3]==='AM'&&hh===12)hh=0;
+    deadline=Date.UTC(+p[0],+p[1]-1,+p[2],hh,mm)-19800000;
+  }
+  function tick(){
+    if(deadline===null||!el)return;
+    var d=deadline-Date.now();
+    if(d<=0){ if(wrap) wrap.innerHTML='<b>We’re live now — the link is in the group</b>'; return; }
+    var s=Math.floor(d/1000), dd=Math.floor(s/86400), h=Math.floor(s/3600)%24,
+        mi=Math.floor(s/60)%60, se=s%60;
+    el.textContent=(dd?dd+'d ':'')+h+'h '+mi+'m '+se+'s';
+  }
+  if(window.IYA_CONFIG) setDeadline(window.IYA_CONFIG);
+  tick(); setInterval(tick,1000);
+
+  /* Reveal the sticky bar only once the main join card has scrolled away —
+     while it is on screen the bar would just compete with itself. */
+  if(bar&&act&&'IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      var on=!es[0].isIntersecting;
+      bar.classList.toggle('show',on);
+      document.body.classList.toggle('barred',on);
+      bar.setAttribute('aria-hidden',on?'false':'true');
+    },{threshold:0}).observe(act);
   }
 })();
 </script>
