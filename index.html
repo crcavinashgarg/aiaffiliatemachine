@@ -597,6 +597,10 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
 .sbar__price .k{font-size:10px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted)}
 .sbar__price .v{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:25px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-top:5px}
 .sbar__btn{padding:15px 26px;font-size:16px;border-radius:13px;white-space:nowrap;animation:ctaglow 2.6s ease-in-out infinite}
+.sbar__prow{display:inline-flex;align-items:baseline;gap:8px;white-space:nowrap;margin-top:4px}
+.sbar__price .v{margin-top:0}
+.sbar__price .was{font-size:14px;letter-spacing:.3px}
+@media(max-width:640px){.sbar__price .was{font-size:12px}}
 @media(max-width:1040px){.sbar__title{font-size:14px}.sbar__cd .u{min-width:43px}.sbar__in{gap:16px}}
 @media(max-width:900px){.sbar__left{display:none}.sbar__in{justify-content:space-between;gap:14px}}
 @media(max-width:620px){
@@ -1367,7 +1371,7 @@ run();
       <div class="u"><b id="cdS">--</b><span>Sec</span></div>
     </div>
     <div class="sbar__right">
-      <div class="sbar__price"><span class="k">Today</span><span class="was" style="font-size:13px;margin-right:6px">₹4,999</span><span class="v" data-cfg="price">₹199</span></div>
+      <div class="sbar__price"><span class="k">Today</span><span class="sbar__prow"><span class="was">₹4,999</span><span class="v" data-cfg="price">₹199</span></span></div>
       <a href="https://learn.internetyouthacademy.com/l/dffe2cd9ad" data-cfg-href="registrationUrl" class="btn sbar__btn">Book my seat <span class="btn__arrow">→</span></a>
     </div>
   </div>
