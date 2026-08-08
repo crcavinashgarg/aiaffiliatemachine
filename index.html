@@ -653,6 +653,7 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
         <a href="#register" class="btn btn--big">Book my seat — <span data-cfg="price">₹199</span> <span class="btn__arrow">→</span></a>
         <a href="#learn" class="btn--ghost">See what you'll learn</a>
       </div>
+      <a href="#bonuses" class="bonus-teaser">&#127873; Plus <b>&#8377;17,900+ in free bonuses</b> &mdash; included free</a>
       <div class="hero__meta">
         <div class="m"><span class="mk">When</span><span class="mv"><span class="g" data-cfg="dateShort">Sun 9 Aug</span></span></div>
         <div class="m"><span class="mk">Doors</span><span class="mv"><span data-cfg="time">11:00 AM IST</span></span></div>
@@ -1135,6 +1136,7 @@ run();
     <div class="was" style="font-size:22px;margin-bottom:-4px">₹4,999</div>
     <div class="offer__price" data-cfg="price">₹199</div>
     <div class="offer__sub">Everything above, built live in 90 minutes.</div>
+    <a href="#bonuses" class="bonus-teaser" style="margin:4px 0 6px">&#127873; Plus <b>&#8377;17,900+ in free bonuses</b> included</a>
     <a href="https://learn.internetyouthacademy.com/l/dffe2cd9ad" data-cfg-href="registrationUrl" class="btn btn--big">Book my seat now <span class="btn__arrow">→</span></a>
     <div class="offer__meta"><span data-cfg="dateFull">Sun 9 Aug · 11:00 AM IST</span> · seat confirmed instantly · join link on WhatsApp</div>
   </div></div>
@@ -1334,6 +1336,11 @@ run();
 .bon-bg .p{position:absolute;bottom:-12px;border-radius:50%;background:rgba(251,208,74,.9);box-shadow:0 0 9px 2px rgba(245,179,1,.5);animation:bonRise linear infinite}
 @keyframes bonRise{0%{transform:translateY(0);opacity:0}12%{opacity:.95}86%{opacity:.5}100%{transform:translateY(-520px);opacity:0}}
 @media(prefers-reduced-motion:reduce){#bonuses .b-head,#bonuses .bcard,#bonuses .bonus-total{opacity:1!important;transform:none!important;animation:none!important}#bonuses .bcard__img::after{display:none}.bon-bg .blob,.bon-bg .p{animation:none}.bon-bg .p{display:none}}
+.bonus-teaser{display:inline-flex;align-items:center;gap:8px;margin-top:18px;background:rgba(245,179,1,.1);border:1px solid rgba(245,179,1,.34);color:var(--gold-2);border-radius:999px;padding:10px 17px;font-weight:700;font-size:14.5px;text-decoration:none;transition:background .2s,border-color .2s,transform .2s;animation:teaseGlow 3s ease-in-out infinite}
+.bonus-teaser:hover{background:rgba(245,179,1,.17);border-color:rgba(245,179,1,.6);transform:translateY(-2px)}
+.bonus-teaser b{color:#fff;font-weight:800}
+@keyframes teaseGlow{0%,100%{box-shadow:0 0 0 rgba(245,179,1,0)}50%{box-shadow:0 0 20px -4px rgba(245,179,1,.5)}}
+@media(prefers-reduced-motion:reduce){.bonus-teaser{animation:none}}
 </style>
 <!-- BONUSES -->
 <section class="sec sec--dark" id="bonuses">
