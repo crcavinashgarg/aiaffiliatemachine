@@ -254,9 +254,8 @@ body.barred .footer{padding-bottom:118px}
    ⚙️  EDIT ONLY THIS BLOCK — keep it identical to the landing page's
    block so both pages always agree. Change date / time / links here.
 
-   OPTIONAL live sync: fill SUPABASE_URL + SUPABASE_KEY (same admin-panel
-   project as your Digital Freedom site) and the WhatsApp link + date
-   update here automatically whenever you change them in your admin panel.
+   These are only the FALLBACK values. Whatever is saved in the IYA admin
+   panel (/admin/masterclass -> Configuration) overrides them on page load.
    ═══════════════════════════════════════════════════════════════════ */
 var IYA_CONFIG = {
   webinarDate:     "2026-08-12",   // ISO date, YYYY-MM-DD
@@ -267,9 +266,11 @@ var IYA_CONFIG = {
   seatCount:       300
 };
 /* ── optional: auto-sync from your Supabase admin panel (leave blank to skip) ── */
-var SUPABASE_URL   = "";                    // e.g. https://xxxxxxxx.supabase.co
-var SUPABASE_KEY   = "";                    // anon public key (safe to embed)
-var SUPABASE_TABLE = "masterclass_config";  // table your admin panel writes to
+/* Live sync: pulls whatever is saved in the IYA admin panel
+   (/admin/masterclass -> Configuration). Set to "" to disable and use only the
+   values above. The endpoint is read-only and holds no key — see
+   iya-website/app/api/masterclass/public-config/route.ts */
+var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/public-config";
 /* ═══════════════════ nothing to edit below this line ═══════════════════ */
 (function(){
   var M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -289,22 +290,29 @@ var SUPABASE_TABLE = "masterclass_config";  // table your admin panel writes to
       var k=el.getAttribute('data-cfg');if(f[k]!=null)el.textContent=f[k];});
     document.querySelectorAll('[data-cfg-href]').forEach(function(el){
       var k=el.getAttribute('data-cfg-href');if(c[k])el.setAttribute('href',c[k]);});
+    /* Without this the countdown keeps ticking to the hardcoded fallback date
+       even after the admin config has replaced everything else on the page. */
+    if(window.IYA_setDeadline)window.IYA_setDeadline(c);
   }
   apply(IYA_CONFIG);
-  if(SUPABASE_URL&&SUPABASE_KEY){
-    fetch(SUPABASE_URL.replace(/\/$/,'')+'/rest/v1/'+SUPABASE_TABLE+'?select=*&limit=1',
-      {headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY}})
-      .then(function(r){return r.ok?r.json():null;})
-      .then(function(rows){if(!rows||!rows.length)return;var r=rows[0];
+  /* The admin stores time as free text and may already include "IST"; we append
+     it ourselves, so strip any trailing one rather than render "8:00 PM IST IST". */
+  function cleanTime(t){return String(t||'').replace(/\s*IST\s*$/i,'').trim();}
+  if(IYA_CONFIG_API){
+    fetch(IYA_CONFIG_API,{cache:'no-store'})
+      .then(function(res){return res.ok?res.json():null;})
+      .then(function(j){
+        var r=j&&j.config;if(!r)return;
         apply({
-          webinarDate:r.webinarDate||r.webinar_date||IYA_CONFIG.webinarDate,
-          webinarTime:r.webinarTime||r.webinar_time||IYA_CONFIG.webinarTime,
-          price:(r.price!=null?(typeof r.price==='number'?(r.price?'₹'+r.price:'Free'):r.price):IYA_CONFIG.price),
-          registrationUrl:r.registrationUrl||r.registration_url||IYA_CONFIG.registrationUrl,
-          whatsappLink:r.whatsappLink||r.whatsapp_link||IYA_CONFIG.whatsappLink,
-          seatCount:r.seatCount||r.seat_count||IYA_CONFIG.seatCount
+          webinarDate:r.webinar_date||IYA_CONFIG.webinarDate,
+          webinarTime:cleanTime(r.webinar_time)||IYA_CONFIG.webinarTime,
+          price:(r.price!=null&&r.price!==''?(typeof r.price==='number'?(r.price?'\u20b9'+r.price:'Free'):r.price):IYA_CONFIG.price),
+          registrationUrl:r.registration_url||IYA_CONFIG.registrationUrl,
+          whatsappLink:r.whatsapp_link||IYA_CONFIG.whatsappLink,
+          seatCount:r.seat_count||IYA_CONFIG.seatCount
         });
-      }).catch(function(){});
+      })
+      .catch(function(){/* keep the hardcoded values above */});
   }
 })();
 
@@ -315,6 +323,9 @@ var SUPABASE_TABLE = "masterclass_config";  // table your admin panel writes to
   var el=document.getElementById('cd'), wrap=document.getElementById('cdWrap');
   var bar=document.getElementById('sbar'), act=document.querySelector('.act');
   var deadline=null;
+  /* Exposed so the config sync can re-point the countdown when the admin
+     panel returns a different date. */
+  window.IYA_setDeadline=setDeadline;
   function setDeadline(c){
     var p=(c.webinarDate||'').split('-');
     if(p.length!==3){deadline=null;return;}
