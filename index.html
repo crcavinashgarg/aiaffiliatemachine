@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WGPBKZVL');</script>
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1673061543783104');fbq('track','PageView');</script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1673061543783104&ev=PageView&noscript=1" alt=""/></noscript>
 
@@ -628,10 +626,7 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
 @media(prefers-reduced-motion:reduce){.marquee__track,.logobelt__track,.blob,.hero__h .g,.btn--big,.sbar::before,.sbar__btn,.flow__step,.flow__arrow svg,.flow::before,.mm__fill.gold,.mchip__v b,.mm__val,.journey::after,.jnode,.jstep .jcard,.mchip,.mchip__arw,.cmpcard--new,.cmp__ic--new{animation:none!important}.mm__fill{transition:none}}
 </style>
 </head>
-<body>
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGPBKZVL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
-<div class="top"><div class="top__in">
+<body><div class="top"><div class="top__in">
   <a class="brand" href="/" aria-label="The AI Affiliate Machine — home"><span class="brand__mark" aria-hidden="true">A</span><span class="brand__txt"><span class="the">The </span>AI Affiliate <b>Machine</b></span></a>
   <div class="top__right">
     <span class="top__live"><span class="pulse"></span> Live <span data-cfg="dateShort">Sun 16 Aug</span>, <span data-cfg="time">11:00 AM IST</span></span>
@@ -1608,20 +1603,81 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
    a platform-fired or server-side event for the same checkout dedupe against
    this one rather than double-counting. */
 (function(){
-  var KEY='iya_ic';
+  var KEY='iya_ic', SRC='iya_src', WINDOW_DAYS=30;
+  /* Tags we carry through to checkout: the UTM set, an affiliate ref, and the
+     ad-platform click ids. */
+  var TRACKED=['utm_source','utm_medium','utm_campaign','utm_content','utm_term',
+               'ref','fbclid','gclid'];
+
   function amount(){
     var p=(window.IYA_CONFIG&&IYA_CONFIG.price)||'';
     return parseInt(String(p).replace(/[^0-9]/g,''),10)||199;
   }
-  function fire(){
+
+  /* Remember where this visitor came from. Last touch wins: arriving on a
+     freshly tagged link overwrites an older source. Kept for WINDOW_DAYS so a
+     visitor who leaves and returns is still credited to the same channel. */
+  function capture(){
+    var q, found={}, any=false;
+    try{ q=new URLSearchParams(location.search); }catch(e){ return read(); }
+    TRACKED.forEach(function(k){
+      var v=q.get(k);
+      if(v){ found[k]=v; any=true; }
+    });
+    if(any){
+      try{ localStorage.setItem(SRC,JSON.stringify({t:Date.now(),v:found})); }catch(e){}
+      return found;
+    }
+    return read();
+  }
+  function read(){
+    try{
+      var raw=localStorage.getItem(SRC); if(!raw) return {};
+      var o=JSON.parse(raw);
+      if(!o||!o.t||Date.now()-o.t > WINDOW_DAYS*864e5){ localStorage.removeItem(SRC); return {}; }
+      return o.v||{};
+    }catch(e){ return {}; }
+  }
+
+  var source=capture();
+
+  /* Append the remembered tags to a checkout URL. Applied at click time rather
+     than on load, because the admin-config sync rewrites these hrefs
+     asynchronously and would otherwise wipe them. Existing params win, so a
+     second click cannot duplicate them. */
+  function withSource(url){
+    if(!url||url.charAt(0)==='#') return url;
+    var keys=Object.keys(source); if(!keys.length) return url;
+    try{
+      var u=new URL(url,location.href);
+      keys.forEach(function(k){ if(!u.searchParams.has(k)) u.searchParams.set(k,source[k]); });
+      return u.toString();
+    }catch(e){ return url; }
+  }
+
+  function fire(ev){
+    var a=ev.currentTarget;
+    try{ a.setAttribute('href',withSource(a.getAttribute('href'))); }catch(e){}
+
     try{ if(sessionStorage.getItem(KEY))return; }catch(e){}
     var eid='ic_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
-    if(window.fbq) fbq('track','InitiateCheckout',{value:amount(),currency:'INR'},{eventID:eid});
-    if(window.dataLayer) dataLayer.push({event:'initiate_checkout',value:amount(),currency:'INR',event_id:eid});
+    var props={value:amount(),currency:'INR'};
+    /* Carry the channel on the event too, so it is attributable in Meta even
+       if TagMango does not store the parameter against the order. */
+    if(source.utm_source) props.source=source.utm_source;
+    if(source.utm_campaign) props.campaign=source.utm_campaign;
+    if(window.fbq) fbq('track','InitiateCheckout',props,{eventID:eid});
+    if(window.dataLayer) dataLayer.push(Object.assign(
+      {event:'initiate_checkout',event_id:eid},props));
     try{ sessionStorage.setItem(KEY,eid); }catch(e){}
   }
+
   document.querySelectorAll('[data-cfg-href="registrationUrl"]')
     .forEach(function(a){ a.addEventListener('click',fire); });
+
+  /* Exposed so the source can be inspected in the console when debugging a
+     campaign link: IYA_source() */
+  window.IYA_source=function(){ return source; };
 })();
 
 /* ── hero background video: decorative, so only fetch it where it earns its
