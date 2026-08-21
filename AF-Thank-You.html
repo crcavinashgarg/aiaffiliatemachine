@@ -255,7 +255,7 @@ body.barred .footer{padding-bottom:118px}
 var IYA_CONFIG = {
   webinarDate:     "2026-08-16",   // ISO date, YYYY-MM-DD
   webinarTime:     "11:00 AM",      // shown as-is; " IST" is added for you
-  price:           "₹199",
+  price:           "₹97",
   registrationUrl: "https://learn.internetyouthacademy.com/l/dffe2cd9ad",
   whatsappLink:    "https://chat.whatsapp.com/I5PWWGUH3503URwtgloT9j",   // the group they join
   seatCount:       300
@@ -271,7 +271,7 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
   var M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var D=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   function fmt(c){
-    var o={price:c.price||'₹199',time:(c.webinarTime||'')+' IST'};
+    var o={price:c.price||'₹97',time:(c.webinarTime||'')+' IST'};
     var p=(c.webinarDate||'').split('-');
     if(p.length===3){var dt=new Date(Date.UTC(+p[0],+p[1]-1,+p[2]));
       var ds=D[dt.getUTCDay()]+' '+(+p[2])+' '+M[+p[1]-1];
