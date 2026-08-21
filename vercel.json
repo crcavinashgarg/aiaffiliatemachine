@@ -1,6 +1,9 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/AF-Thank-You", "destination": "/AF-Thank-You.html" }
+    { "source": "/AF-Thank-You", "destination": "/AF-Thank-You.html" },
+    { "source": "/professional", "destination": "/index.html" },
+    { "source": "/dropshipper", "destination": "/index.html" },
+    { "source": "/passive", "destination": "/index.html" }
   ]
 }

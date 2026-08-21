@@ -625,6 +625,44 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
 @media(max-width:359px){.sbar__price{display:none}}
 @media(prefers-reduced-motion:reduce){.marquee__track,.logobelt__track,.blob,.hero__h .g,.btn--big,.sbar::before,.sbar__btn,.flow__step,.flow__arrow svg,.flow::before,.mm__fill.gold,.mchip__v b,.mm__val,.journey::after,.jnode,.jstep .jcard,.mchip,.mchip__arw,.cmpcard--new,.cmp__ic--new{animation:none!important}.mm__fill{transition:none}}
 </style>
+<script>
+/* Audience message-match: swaps hero + problem copy by URL. Default = affiliate (unchanged). */
+(function(){
+  var AUD = {
+    professional: {
+      h: 'Build a <span class="g">one-person AI business</span> — without quitting your job.',
+      sub: 'Websites, content, landing pages, follow-ups — <b>built by AI</b>, running in the background. No code, no team, no becoming an influencer. Just two free evenings a week.',
+      pe: 'The real problem',
+      ph: "You don't need a new career. You need <span class=\"g\">one income that's your own.</span>",
+      pl: 'The same AI everyone is nervous about at work is exactly what lets you build an income on the side — without more hours, and without quitting.'
+    },
+    dropshipper: {
+      h: 'Keep the <span class="g">whole margin</span> — no inventory, no RTOs.',
+      sub: 'The same skills you already have — finding winners, running ads — but you <b>never touch a product</b>. AI builds the sites, creatives and pages for you. No code, no team.',
+      pe: 'The real problem',
+      ph: "It was never your skill. It's the <span class=\"g\">model.</span>",
+      pl: "Finding winners and running ads is the hard part — and you're already good at it. Inventory, couriers and returns are what quietly eat everything you earn."
+    },
+    passive: {
+      h: "Build an income that <span class=\"g\">doesn't stop when you do.</span>",
+      sub: "Not an app or a stock tip — a <b>system that keeps running</b> after you've stopped. AI makes the content, handles the follow-ups and brings in the sales, across more than one stream.",
+      pe: 'The real problem',
+      ph: 'If you stopped tomorrow, <span class="g">how long until the money stopped?</span>',
+      pl: 'The job, the freelance work, even the side hustle — they all still need you showing up. Real passive income is a system that runs without you.'
+    }
+  };
+  function slug(){
+    var q=(new URLSearchParams(location.search).get('a')||'').toLowerCase();
+    var p=location.pathname.replace(/\/+$/,'').split('/').pop().toLowerCase().replace(/\.html$/,'');
+    var s=q||p;
+    return AUD[s]?s:'affiliate';
+  }
+  var A = AUD[slug()];
+  function set(id,html){ var e=document.getElementById(id); if(e&&html!=null){ e.innerHTML=html; } }
+  window.__applyHero=function(){ if(A){ set('heroH',A.h); set('heroSub',A.sub); } };
+  window.__applyProblem=function(){ if(A){ set('probEyebrow',A.pe); set('probH',A.ph); set('probLead',A.pl); } };
+})();
+</script>
 </head>
 <body><div class="top"><div class="top__in">
   <a class="brand" href="/" aria-label="The AI Affiliate Machine — home"><span class="brand__mark" aria-hidden="true">A</span><span class="brand__txt"><span class="the">The </span>AI Affiliate <b>Machine</b></span></a>
@@ -642,8 +680,8 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
   <div class="wrap"><div class="hero__grid">
     <div>
       <span class="hero__badge"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2l2.4 6.9H21l-5.3 4 2 6.6L12 15.6 6.3 19.5l2-6.6L3 8.9h6.6z"/></svg> <b>ClickBank Platinum</b> · top 0.1% affiliates worldwide</span>
-      <h1 class="hero__h">Turn one product into a <span class="g">full affiliate machine</span> — live, in 90 minutes.</h1>
-      <p class="hero__sub">Websites, ad creatives, <b>videos</b>, landing pages — built by AI. The exact way I scaled US offers to six figures <b>in dollars, from India</b>. No code. No team.</p>
+      <h1 class="hero__h" id="heroH">Turn one product into a <span class="g">full affiliate machine</span> — live, in 90 minutes.</h1>
+      <p class="hero__sub" id="heroSub">Websites, ad creatives, <b>videos</b>, landing pages — built by AI. The exact way I scaled US offers to six figures <b>in dollars, from India</b>. No code. No team.</p>
       <div class="hero__cta">
         <a href="#register" class="btn btn--big">Book my seat — <span data-cfg="price">₹199</span> <span class="btn__arrow">→</span></a>
         <a href="#learn" class="btn--ghost">See what you'll learn</a>
@@ -672,6 +710,7 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
     </div>
   </div></div>
 </section>
+<script>window.__applyHero&&window.__applyHero();</script>
 
 <!-- PROOF BAR -->
 <div class="pbar"><div class="marquee"><div class="marquee__track"><span class="mq"><b>ClickBank Platinum</b> affiliate<span class="mq__dot"></span></span><span class="mq"><b>$264K+</b> on a single account<span class="mq__dot"></span></span><span class="mq">Top <b>0.1%</b> worldwide<span class="mq__dot"></span></span><span class="mq"><b>4,000+</b> mentored<span class="mq__dot"></span></span><span class="mq">Runs across <b>ClickBank</b>, <b>MaxWeb</b> &amp; <b>Digistore24</b><span class="mq__dot"></span></span><span class="mq"><b>Multiple accounts</b>, many networks<span class="mq__dot"></span></span><span class="mq"><span class="st">★★★★★</span> <b>4.4</b> Trustpilot<span class="mq__dot"></span></span><span class="mq"><b>ClickBank Platinum</b> affiliate<span class="mq__dot"></span></span><span class="mq"><b>$264K+</b> on a single account<span class="mq__dot"></span></span><span class="mq">Top <b>0.1%</b> worldwide<span class="mq__dot"></span></span><span class="mq"><b>4,000+</b> mentored<span class="mq__dot"></span></span><span class="mq">Runs across <b>ClickBank</b>, <b>MaxWeb</b> &amp; <b>Digistore24</b><span class="mq__dot"></span></span><span class="mq"><b>Multiple accounts</b>, many networks<span class="mq__dot"></span></span><span class="mq"><span class="st">★★★★★</span> <b>4.4</b> Trustpilot<span class="mq__dot"></span></span></div></div></div>
@@ -696,9 +735,9 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
   <span class="blob blob--p" style="width:400px;height:400px;top:0;left:-160px"></span>
   <div class="wrap">
     <div class="reveal" style="max-width:760px">
-      <span class="eyebrow">The real problem</span>
-      <h2 class="sec__h">You know how to find offers. So why are you still stuck at <span class="g">one or two?</span></h2>
-      <p class="sec__lead">Because finding the offer was never the hard part. Everything <em>after</em> it is — and that's what quietly caps your income.</p>
+      <span class="eyebrow" id="probEyebrow">The real problem</span>
+      <h2 class="sec__h" id="probH">You know how to find offers. So why are you still stuck at <span class="g">one or two?</span></h2>
+      <p class="sec__lead" id="probLead">Because finding the offer was never the hard part. Everything <em>after</em> it is — and that's what quietly caps your income.</p>
     </div>
     <div class="grind reveal">
       <div class="gcard"><div class="gnum">3 days</div><div class="gtext">how long a winning creative lasts — then you need <b>ten more</b>.</div></div>
@@ -719,6 +758,7 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
     <p class="bigline reveal">The ceiling isn't your skill. It's <span class="g">how fast you can build and test.</span></p>
   </div>
 </section>
+<script>window.__applyProblem&&window.__applyProblem();</script>
 
 <!-- THE SOLUTION -->
 <section class="sec" id="learn">
