@@ -626,7 +626,7 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
 @media(prefers-reduced-motion:reduce){.marquee__track,.logobelt__track,.blob,.hero__h .g,.btn--big,.sbar::before,.sbar__btn,.flow__step,.flow__arrow svg,.flow::before,.mm__fill.gold,.mchip__v b,.mm__val,.journey::after,.jnode,.jstep .jcard,.mchip,.mchip__arw,.cmpcard--new,.cmp__ic--new{animation:none!important}.mm__fill{transition:none}}
 </style>
 <script>
-/* Audience message-match: swaps hero + problem copy by URL. Default = affiliate (unchanged). */
+/* Audience message-match: swaps hero + problem + (dropshipper) deeper sections by URL. Default = affiliate. */
 (function(){
   var AUD = {
     professional: {
@@ -638,10 +638,42 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
     },
     dropshipper: {
       h: 'Keep the <span class="g">whole margin</span> — no inventory, no RTOs.',
-      sub: 'The same skills you already have — finding winners, running ads — but you <b>never touch a product</b>. AI builds the sites, creatives and pages for you. No code, no team.',
+      sub: 'The same skills you already have — finding winners, running ads — but you <b>never touch a product</b>. AI builds the store, the pages and the creatives for you. No code, no team.',
       pe: 'The real problem',
       ph: "It was never your skill. It's the <span class=\"g\">model.</span>",
-      pl: "Finding winners and running ads is the hard part — and you're already good at it. Inventory, couriers and returns are what quietly eat everything you earn."
+      pl: "Finding winners and running ads is the hard part — and you're already good at it. Inventory, couriers and returns are what quietly eat everything you earn.",
+      hideNetworks: true,
+      solH: 'Let AI do the building. <span class="g">You keep the whole margin.</span>',
+      solLead: 'In this masterclass I set up a system that does the repetitive work for you — your store, the product pages, the creatives, the follow-ups — so you can run more products without adding hours to your day. Think of it as an employee who works around the clock, for free.',
+      flow1d: 'The one decision that actually needs you. Drop in a product you want to sell — from any store or supplier.',
+      flow3d: 'Point traffic at it, test at volume, scale the winners. More products live, same you.',
+      j01t: 'Find a winning product',
+      j01d: "One that's selling right now — validated before you spend a rupee.",
+      j02t: 'Build your store &amp; product pages',
+      j02d: 'From one product name, on screen, in minutes — no code, no developer.',
+      j07t: 'Handle COD, returns &amp; follow-ups',
+      j07d: 'Let the system confirm orders and chase follow-ups — so returns stop eating your margin.',
+      incH: 'Same effort. <span class="g">Far more products live.</span>',
+      incLead: "Your income comes down to how many products you have running and how fast you can test. Here's what changes when the machine does the building.",
+      mmCap: 'Products you can run at the same time',
+      chipBanK: 'Bounce back from a dead product',
+      chipBanNew: 'same day',
+      incBig: 'More products × more tests = <span class="g">more sales</span> — without more hours.',
+      owWed: 'A hot product suddenly goes cold.',
+      owThu: 'Returns and RTOs start piling up.',
+      owFri: 'After ad spend and returns — barely any margin left.',
+      nwFri: 'Counting profit — and the whole margin is yours.',
+      whoH: 'Built for dropshippers — <span class="g">whether you\'re starting or scaling.</span>',
+      who1h: "You're just starting out",
+      who2h: "You're already running a store",
+      who1p: "Start with nothing but a product idea. The machine builds your store, product pages and creatives — so you're live without inventory, a supplier headache, or a single line of code.",
+      who2p: 'Already getting sales? Use AI to test new products and angles fast — fresh creatives, new videos, landing-page variations — and keep more of every sale. The testing that used to need a team now takes minutes.',
+      faqNicheQ: 'Do I need a product or a niche picked already?',
+      faqNicheA: 'No. The first thing we do live is find a product worth selling, so you leave with a direction instead of a blank page.',
+      faqBanQ: 'Will returns and RTOs still eat my profit?',
+      faqBanA: "That's exactly what we fix. You'll set up the system to confirm orders and chase follow-ups automatically, so returns stop quietly draining your margin.",
+      finalH: 'Stop building by hand.<br>Let AI run your store.',
+      finalAnchor: "Less than a movie ticket — to see, and build, the exact system I use to run more products without the inventory grind. If it's not worth far more than ₹199, I'll refund you."
     },
     passive: {
       h: "Build an income that <span class=\"g\">doesn't stop when you do.</span>",
@@ -651,6 +683,7 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
       pl: 'The job, the freelance work, even the side hustle — they all still need you showing up. Real passive income is a system that runs without you.'
     }
   };
+  var DEEP = ['solH','solLead','flow1d','flow3d','j01t','j01d','j02t','j02d','j07t','j07d','incH','incLead','mmCap','chipBanK','chipBanNew','incBig','owWed','owThu','owFri','nwFri','whoH','who1h','who2h','who1p','who2p','faqNicheQ','faqNicheA','faqBanQ','faqBanA','finalH','finalAnchor'];
   function slug(){
     var q=(new URLSearchParams(location.search).get('a')||'').toLowerCase();
     var p=location.pathname.replace(/\/+$/,'').split('/').pop().toLowerCase().replace(/\.html$/,'');
@@ -661,6 +694,13 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
   function set(id,html){ var e=document.getElementById(id); if(e&&html!=null){ e.innerHTML=html; } }
   window.__applyHero=function(){ if(A){ set('heroH',A.h); set('heroSub',A.sub); } };
   window.__applyProblem=function(){ if(A){ set('probEyebrow',A.pe); set('probH',A.ph); set('probLead',A.pl); } };
+  window.__applyDeep=function(){
+    if(!A) return;
+    DEEP.forEach(function(k){ if(A[k]!=null) set(k,A[k]); });
+    if(A.hideNetworks){ var n=document.getElementById('networks'); if(n) n.style.display='none'; }
+  };
+  if(document.readyState!=='loading'){ window.__applyDeep(); }
+  else{ document.addEventListener('DOMContentLoaded', window.__applyDeep); }
 })();
 </script>
 </head>
@@ -766,15 +806,15 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
   <div class="wrap">
     <div class="reveal" style="max-width:760px">
       <span class="eyebrow">The solution</span>
-      <h2 class="sec__h">Let AI do the building. <span class="g">You keep the commissions.</span></h2>
-      <p class="sec__lead">In this masterclass I set up a system that does the repetitive work for you — the sites, the creatives, the pages, the setup — so you can run more offers without adding hours to your day. Think of it as an employee who works around the clock, for free.</p>
+      <h2 class="sec__h" id="solH">Let AI do the building. <span class="g">You keep the commissions.</span></h2>
+      <p class="sec__lead" id="solLead">In this masterclass I set up a system that does the repetitive work for you — the sites, the creatives, the pages, the setup — so you can run more offers without adding hours to your day. Think of it as an employee who works around the clock, for free.</p>
     </div>
     <div class="flow reveal">
-      <div class="flow__step"><div class="flow__k">Step 1 — You</div><div class="flow__t">Pick a product</div><div class="flow__d">The one decision that actually needs you. Drop in a name from ClickBank, MaxWeb or Digistore24.</div></div>
+      <div class="flow__step"><div class="flow__k">Step 1 — You</div><div class="flow__t">Pick a product</div><div class="flow__d" id="flow1d">The one decision that actually needs you. Drop in a name from ClickBank, MaxWeb or Digistore24.</div></div>
       <div class="flow__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
       <div class="flow__step"><div class="flow__k">Step 2 — The system</div><div class="flow__t">Builds everything</div><div class="flow__d">A full website, ad creatives, and landing pages — generated on screen, in minutes, no code.</div></div>
       <div class="flow__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-      <div class="flow__step"><div class="flow__k">Step 3 — You</div><div class="flow__t">Run it &amp; earn</div><div class="flow__d">Point traffic at it, test at volume, scale the winners. More offers live, same you.</div></div>
+      <div class="flow__step"><div class="flow__k">Step 3 — You</div><div class="flow__t">Run it &amp; earn</div><div class="flow__d" id="flow3d">Point traffic at it, test at volume, scale the winners. More offers live, same you.</div></div>
     </div>
   </div>
 </section>
@@ -1150,13 +1190,13 @@ run();
       <h2 class="sec__h">In these 90 minutes, you'll watch me build — and learn to run — <span class="g">every piece of this:</span></h2>
     </div>
     <div class="journey reveal">
-      <div class="jstep"><div class="jnode">01</div><div class="jcard"><div class="jtitle">Find a winning offer</div><div class="jdesc">One that's converting right now — on ClickBank, MaxWeb or Digistore24.</div></div></div>
-      <div class="jstep"><div class="jnode">02</div><div class="jcard"><div class="jtitle">Build the whole website</div><div class="jdesc">From one product name, on screen, in minutes — no code.</div></div></div>
+      <div class="jstep"><div class="jnode">01</div><div class="jcard"><div class="jtitle" id="j01t">Find a winning offer</div><div class="jdesc" id="j01d">One that's converting right now — on ClickBank, MaxWeb or Digistore24.</div></div></div>
+      <div class="jstep"><div class="jnode">02</div><div class="jcard"><div class="jtitle" id="j02t">Build the whole website</div><div class="jdesc" id="j02d">From one product name, on screen, in minutes — no code.</div></div></div>
       <div class="jstep"><div class="jnode">03</div><div class="jcard"><div class="jtitle">Pump out the ad creatives</div><div class="jdesc">Ten fresh ones ready the moment one burns out.</div></div></div>
       <div class="jstep"><div class="jnode">04</div><div class="jcard"><div class="jtitle">Spin up landing pages</div><div class="jdesc">Variant after variant, until one really converts.</div></div></div>
       <div class="jstep"><div class="jnode">05</div><div class="jcard"><div class="jtitle">Set up your tracking</div><div class="jdesc">Know your winners before you spend a rupee to scale.</div></div></div>
       <div class="jstep"><div class="jnode">06</div><div class="jcard"><div class="jtitle">Test on a small budget</div><div class="jdesc">Find the winner cheap, before you commit real money.</div></div></div>
-      <div class="jstep"><div class="jnode">07</div><div class="jcard"><div class="jtitle">Keep your accounts alive</div><div class="jdesc">Clean setup done right — so a ban never costs you a week.</div></div></div>
+      <div class="jstep"><div class="jnode">07</div><div class="jcard"><div class="jtitle" id="j07t">Keep your accounts alive</div><div class="jdesc" id="j07d">Clean setup done right — so a ban never costs you a week.</div></div></div>
       <div class="jstep"><div class="jnode">08</div><div class="jcard"><div class="jtitle">Drive the traffic</div><div class="jdesc">Organic or paid — point either lane straight at your asset.</div></div></div>
       <div class="jstep"><div class="jnode">09</div><div class="jcard"><div class="jtitle">Scale the winners</div><div class="jdesc">Pour fuel on what pays, drop what doesn't. That's the game.</div></div></div>
       <div class="jstep jstep--fin"><div class="jnode">10</div><div class="jcard"><div class="jtitle">Build your own — live, with me</div><div class="jdesc">You don't leave with notes. You leave with a real asset you built in the room.</div></div></div>
@@ -1183,11 +1223,11 @@ run();
   <div class="wrap">
     <div class="reveal" style="max-width:720px">
       <span class="eyebrow">Why this changes your income</span>
-      <h2 class="sec__h">Same effort. <span class="g">Far more offers live.</span></h2>
-      <p class="sec__lead">Affiliate income comes down to how many good offers you have running and how much you can test. Here's what changes when the machine does the building.</p>
+      <h2 class="sec__h" id="incH">Same effort. <span class="g">Far more offers live.</span></h2>
+      <p class="sec__lead" id="incLead">Affiliate income comes down to how many good offers you have running and how much you can test. Here's what changes when the machine does the building.</p>
     </div>
     <div class="mm reveal">
-      <div class="mm__cap">Offers you can run at the same time</div>
+      <div class="mm__cap" id="mmCap">Offers you can run at the same time</div>
       <div class="mm__bars">
         <div class="mm__b"><span class="mm__fill dim" data-w="15" style="width:0"></span><span class="mm__val">1–2</span><span class="mm__who">by hand</span></div>
         <div class="mm__b"><span class="mm__fill gold" data-w="80" style="width:0"></span><span class="mm__val">5–10</span><span class="mm__who">with the machine</span></div>
@@ -1195,11 +1235,11 @@ run();
       <div class="mm__chips">
         <div class="mchip" style="--d:0.0"><div class="mchip__k">Fresh creatives / week</div><div class="mchip__row"><span class="mchip__old">2–3</span><span class="mchip__arw">→</span><span class="mchip__new">dozens</span></div></div>
         <div class="mchip" style="--d:0.4"><div class="mchip__k">Build a landing page</div><div class="mchip__row"><span class="mchip__old">a day+</span><span class="mchip__arw">→</span><span class="mchip__new">minutes</span></div></div>
-        <div class="mchip" style="--d:0.8"><div class="mchip__k">Back after a ban</div><div class="mchip__row"><span class="mchip__old">a week</span><span class="mchip__arw">→</span><span class="mchip__new">fast</span></div></div>
+        <div class="mchip" style="--d:0.8"><div class="mchip__k" id="chipBanK">Back after a ban</div><div class="mchip__row"><span class="mchip__old">a week</span><span class="mchip__arw">→</span><span class="mchip__new" id="chipBanNew">fast</span></div></div>
         <div class="mchip" style="--d:1.2"><div class="mchip__k">Freelancer cost / mo</div><div class="mchip__row"><span class="mchip__old">₹20,000+</span><span class="mchip__arw">→</span><span class="mchip__new">₹0</span></div></div>
       </div>
     </div>
-    <p class="bigline reveal" style="color:#fff">More offers × more tests = <span class="g">more commissions</span> — without more hours.</p>
+    <p class="bigline reveal" style="color:#fff" id="incBig">More offers × more tests = <span class="g">more commissions</span> — without more hours.</p>
   </div>
 </section>
 
@@ -1217,13 +1257,13 @@ run();
         <span class="cmpcard__tag">Your week now</span>
         <div class="cmpcard__h">Doing it all by hand</div>
         <div class="cmpcard__s">You are the bottleneck</div>
-        <div class="cmpweek"><div class="cmpday"><span class="cmpday__d">Mon</span><span class="cmpday__t">One landing page. That is the whole day.</span></div><div class="cmpday"><span class="cmpday__d">Tue</span><span class="cmpday__t">Launch it — then just wait.</span></div><div class="cmpday"><span class="cmpday__d">Wed</span><span class="cmpday__t">The one winning creative dies. Start from zero.</span></div><div class="cmpday"><span class="cmpday__d">Thu</span><span class="cmpday__t">An ad account gets flagged.</span></div><div class="cmpday"><span class="cmpday__d">Fri</span><span class="cmpday__t">A ban — and this week’s income stops.</span></div></div>
+        <div class="cmpweek"><div class="cmpday"><span class="cmpday__d">Mon</span><span class="cmpday__t">One landing page. That is the whole day.</span></div><div class="cmpday"><span class="cmpday__d">Tue</span><span class="cmpday__t">Launch it — then just wait.</span></div><div class="cmpday"><span class="cmpday__d">Wed</span><span class="cmpday__t" id="owWed">The one winning creative dies. Start from zero.</span></div><div class="cmpday"><span class="cmpday__d">Thu</span><span class="cmpday__t" id="owThu">An ad account gets flagged.</span></div><div class="cmpday"><span class="cmpday__d">Fri</span><span class="cmpday__t" id="owFri">A ban — and this week’s income stops.</span></div></div>
       </div>
       <div class="cmpcard cmpcard--new">
         <span class="cmpcard__tag">✦ With the AI Affiliate Machine</span>
         <div class="cmpcard__h">The Machine does the building</div>
         <div class="cmpcard__s">You just pick &amp; scale</div>
-        <div class="cmpweek"><div class="cmpday"><span class="cmpday__d">Mon</span><span class="cmpday__t">Five offers live before noon.</span></div><div class="cmpday"><span class="cmpday__d">Tue</span><span class="cmpday__t">Fresh creatives refill on tap.</span></div><div class="cmpday"><span class="cmpday__d">Wed</span><span class="cmpday__t">Swap the winner, pour on budget.</span></div><div class="cmpday"><span class="cmpday__d">Thu</span><span class="cmpday__t">A brand-new angle, built in minutes.</span></div><div class="cmpday cmpday--pay"><span class="cmpday__d">Fri</span><span class="cmpday__t">Counting commissions — in dollars.</span></div></div>
+        <div class="cmpweek"><div class="cmpday"><span class="cmpday__d">Mon</span><span class="cmpday__t">Five offers live before noon.</span></div><div class="cmpday"><span class="cmpday__d">Tue</span><span class="cmpday__t">Fresh creatives refill on tap.</span></div><div class="cmpday"><span class="cmpday__d">Wed</span><span class="cmpday__t">Swap the winner, pour on budget.</span></div><div class="cmpday"><span class="cmpday__d">Thu</span><span class="cmpday__t">A brand-new angle, built in minutes.</span></div><div class="cmpday cmpday--pay"><span class="cmpday__d">Fri</span><span class="cmpday__t" id="nwFri">Counting commissions — in dollars.</span></div></div>
       </div>
     </div>
     <p class="cmp__note reveal">Same effort in. <b>A completely different Friday.</b> That is exactly what we build together, live.</p>
@@ -1442,16 +1482,16 @@ setTimeout(function(){if(!s.classList.contains('bon-in'))go();},3000);}else{go()
   <div class="wrap">
     <div class="reveal" style="max-width:720px">
       <span class="eyebrow">Is this for you?</span>
-      <h2 class="sec__h">Built for affiliate marketers — <span class="g">whether you're starting or scaling.</span></h2>
+      <h2 class="sec__h" id="whoH">Built for affiliate marketers — <span class="g">whether you're starting or scaling.</span></h2>
     </div>
     <div class="fortwo reveal">
       <div class="forcard">
-        <div class="forcard__h">You're just starting out</div>
-        <p>Start with nothing but a product name. The machine builds your first website, creatives and landing page — so you're live without an offer, a niche, or a single line of code.</p>
+        <div class="forcard__h" id="who1h">You're just starting out</div>
+        <p id="who1p">Start with nothing but a product name. The machine builds your first website, creatives and landing page — so you're live without an offer, a niche, or a single line of code.</p>
       </div>
       <div class="forcard win">
-        <div class="forcard__h">You're already running offers</div>
-        <p>Already have a proven offer? Use AI to test new angles fast — fresh creatives, new videos, landing-page variations — and scale what works. The testing that used to need a team now takes minutes.</p>
+        <div class="forcard__h" id="who2h">You're already running offers</div>
+        <p id="who2p">Already have a proven offer? Use AI to test new angles fast — fresh creatives, new videos, landing-page variations — and scale what works. The testing that used to need a team now takes minutes.</p>
       </div>
     </div>
   </div>
@@ -1468,9 +1508,9 @@ setTimeout(function(){if(!s.classList.contains('bon-in'))go();},3000);}else{go()
       <details><summary>I'm not technical at all. Will I be able to keep up?</summary><p>Yes. If you can type a message in WhatsApp, you can run this. The whole point is that there's no code — you give the system a product name and it builds the rest.</p></details>
       <details><summary>I'm a complete beginner. Is this for me?</summary><p>Yes — and you'll have an edge, because you won't have to unlearn the manual grind. You start with the machine doing the heavy lifting from the very first day.</p></details>
       <details><summary>I'm already scaling. Will I learn anything new?</summary><p>This is built for you. It's how you go from running 1–2 offers to 5–10 without adding hours — more creatives tested, more pages live, more shots at commission.</p></details>
-      <details><summary>Do I need an offer or a niche picked already?</summary><p>No. The first thing we do live is find an offer worth promoting, so you leave with a direction instead of a blank page.</p></details>
+      <details><summary id="faqNicheQ">Do I need an offer or a niche picked already?</summary><p id="faqNicheA">No. The first thing we do live is find an offer worth promoting, so you leave with a direction instead of a blank page.</p></details>
       <details><summary>How much ad budget do I need?</summary><p>You can start small. You'll learn the low-budget testing method — how to find a winner on a tiny spend before you ever commit real money.</p></details>
-      <details><summary>What about my ad account getting suspended?</summary><p>We keep your setup clean and warmed the sensible way, so a suspension doesn't wipe out your week. No shady shortcuts.</p></details>
+      <details><summary id="faqBanQ">What about my ad account getting suspended?</summary><p id="faqBanA">We keep your setup clean and warmed the sensible way, so a suspension doesn't wipe out your week. No shady shortcuts.</p></details>
       <details><summary>Is it really only ₹199? And is there a recording?</summary><p>Yes, ₹199 — that small step keeps the room full of serious people. It's live, once, with no recording: the hands-on build and Q&amp;A only happen in the room.</p></details>
     </div>
   </div>
@@ -1480,11 +1520,11 @@ setTimeout(function(){if(!s.classList.contains('bon-in'))go();},3000);}else{go()
 <section class="final" id="register">
   <div class="wrap-n">
     <span class="eyebrow">Claim your seat</span>
-    <h2 class="sec__h" style="color:#fff;margin-top:18px">Stop building by hand.<br>Let AI run your affiliate machine.</h2>
+    <h2 class="sec__h" id="finalH" style="color:#fff;margin-top:18px">Stop building by hand.<br>Let AI run your affiliate machine.</h2>
     <div class="final__lbl" style="margin-top:26px">Live masterclass · one time · no replay</div>
     <div class="was" style="font-size:30px;margin:0 0 -4px">₹4,999</div>
     <div class="final__price" data-cfg="price">₹199</div>
-    <p class="anchor">Less than a movie ticket — to see, and build, the exact system I run my own affiliate business on. If it's not worth far more than ₹199, I'll refund you.</p>
+    <p class="anchor" id="finalAnchor">Less than a movie ticket — to see, and build, the exact system I run my own affiliate business on. If it's not worth far more than ₹199, I'll refund you.</p>
     <div><a href="https://learn.internetyouthacademy.com/l/dffe2cd9ad" data-cfg-href="registrationUrl" class="btn btn--big">Register now <span class="btn__arrow">→</span></a></div>
     <p class="final__note">Live, once · <strong style="color:#fff" data-cfg="dateFull">Sun 16 Aug · 11:00 AM IST</strong> · your seat is confirmed the moment you register, and the join link drops in your WhatsApp.</p>
   </div>
