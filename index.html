@@ -114,6 +114,18 @@ img{max-width:100%;display:block}
 .top__live .pulse{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(245,179,1,.5);animation:pulse 2s infinite}
 @media(min-width:720px){.top__live{display:flex}}
 .top .btn{padding:12px 22px;font-size:15px}
+/* Below ~400px the brand + nowrap CTA were wider than the viewport, so the
+   whole page picked up a horizontal scroll and the fixed sticky bar rode past
+   the right edge with it. 360px is a very common Android width — trim here. */
+@media(max-width:400px){
+  .top__in{padding:11px 13px;gap:10px}
+  .top__right{gap:10px}
+  .top .btn{padding:10px 13px;font-size:13.5px;gap:7px}
+}
+@media(max-width:340px){
+  .brand__txt{font-size:12.5px}
+  .top .btn{padding:9px 11px;font-size:12.5px}
+}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(245,179,1,.5)}70%{box-shadow:0 0 0 12px rgba(245,179,1,0)}100%{box-shadow:0 0 0 0 rgba(245,179,1,0)}}
 /* hero */
 .hero{padding:66px 0 74px;position:relative;overflow:hidden;background:#0C0A22}
