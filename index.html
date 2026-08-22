@@ -582,13 +582,19 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
 .sbar__meta{font-size:12.5px;color:var(--muted);margin-top:3px}
 .sbar__meta b{color:var(--ink-soft);font-weight:700}
 .sbar__cd{display:flex;align-items:flex-end;gap:6px;flex:none}
+.sbar__units{display:flex;align-items:flex-end;gap:inherit}
+/* Swap units ↔ "we're live" by class, never by rewriting innerHTML — the timer
+   nodes must survive, or a later config update has nothing left to write into. */
+.sbar__now{display:none}
+.sbar__cd.live .sbar__units{display:none}
+.sbar__cd.live .sbar__now{display:inline-flex}
 .sbar__cd .u{display:flex;flex-direction:column;align-items:center;min-width:47px;background:rgba(255,255,255,.05);border:1px solid var(--border-2);border-radius:11px;padding:6px 8px 5px}
 .sbar__cd .u b{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:20px;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
 .sbar__cd .u span{font-size:9px;letter-spacing:.9px;text-transform:uppercase;color:var(--muted);margin-top:4px;font-weight:800}
 .sbar__cd .s{font-weight:800;color:var(--gold-2);font-size:17px;padding-bottom:15px;opacity:.5}
 .sbar__cd.urgent .u{border-color:rgba(245,179,1,.45);background:rgba(245,179,1,.08)}
 .sbar__cd.urgent .u b{color:var(--gold-2)}
-.sbar__now{display:inline-flex;align-items:center;gap:9px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15px;color:var(--gold-2);white-space:nowrap}
+.sbar__now{align-items:center;gap:9px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15px;color:var(--gold-2);white-space:nowrap}
 .sbar__now .pulse{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(245,179,1,.55);animation:pulse 1.4s infinite}
 .sbar__right{display:flex;align-items:center;gap:18px;flex:none}
 .sbar__price{display:flex;flex-direction:column;align-items:flex-end;line-height:1}
@@ -599,20 +605,25 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
 .sbar__price .v{margin-top:0}
 .sbar__price .was{font-size:14px;letter-spacing:.3px}
 @media(max-width:640px){.sbar__price .was{font-size:12px}}
-@media(max-width:1040px){.sbar__title{font-size:14px}.sbar__cd .u{min-width:43px}.sbar__in{gap:16px}}
+/* 900–1040px: the title used to hit the ellipsis. Let it wrap instead — a
+   second line reads better than a headline cut off mid-word. */
+@media(max-width:1040px){.sbar__title{font-size:14px;white-space:normal;overflow:visible;text-overflow:clip}.sbar__cd .u{min-width:43px}.sbar__in{gap:16px}}
 @media(max-width:900px){.sbar__left{display:none}.sbar__in{justify-content:space-between;gap:14px}}
 @media(max-width:620px){
-  .sbar__in{padding:10px 14px calc(10px + env(safe-area-inset-bottom));gap:10px}
+  /* 360–411px is the tight band: countdown + price + CTA overran the row and
+     clipped the button. Trimmed here rather than dropping the ₹4,999 anchor. */
+  .sbar__in{padding:10px 14px calc(10px + env(safe-area-inset-bottom));gap:8px}
   .sbar__cd{gap:4px}
-  .sbar__cd .u{min-width:37px;padding:5px 4px 4px;border-radius:9px}
+  .sbar__cd .u{min-width:34px;padding:5px 3px 4px;border-radius:9px}
   .sbar__cd .u b{font-size:16px}
   .sbar__cd .u span{font-size:8px;margin-top:3px}
   .sbar__cd .s{display:none}
   .sbar__now{font-size:13px}
-  .sbar__right{gap:11px}
+  .sbar__right{gap:9px}
   .sbar__price .k{display:none}
   .sbar__price .v{font-size:19px}
-  .sbar__btn{padding:13px 16px;font-size:14.5px;border-radius:11px}
+  .sbar__price .was{font-size:11px}
+  .sbar__btn{padding:13px 13px;font-size:14.5px;border-radius:11px}
 }
 @media(max-width:413px){
   .sbar__in{padding:10px 12px calc(10px + env(safe-area-inset-bottom));gap:8px}
@@ -623,6 +634,10 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
   .sbar__btn{padding:12px 13px;font-size:13.5px}
 }
 @media(max-width:359px){.sbar__price{display:none}}
+/* 360–411px: countdown + price + CTA still overran and clipped the button.
+   Drop the struck-through anchor here — it survives in the offer and final
+   blocks, and a cut-off CTA costs more than a missing strikethrough. */
+@media(min-width:360px) and (max-width:411px){.sbar__price .was{display:none}}
 @media(prefers-reduced-motion:reduce){.marquee__track,.logobelt__track,.blob,.hero__h .g,.btn--big,.sbar::before,.sbar__btn,.flow__step,.flow__arrow svg,.flow::before,.mm__fill.gold,.mchip__v b,.mm__val,.journey::after,.jnode,.jstep .jcard,.mchip,.mchip__arw,.cmpcard--new,.cmp__ic--new{animation:none!important}.mm__fill{transition:none}}
 </style>
 <script>
@@ -632,6 +647,7 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
     professional: {
       h: 'Build a <span class="g">one-person AI business</span> — without quitting your job.',
       sub: 'Websites, content, landing pages, follow-ups — <b>built by AI</b>, running in the background. No code, no team, no becoming an influencer. Just two free evenings a week.',
+      sbarTitle: 'Build a <b>one-person AI business</b> — in 90 minutes.',
       vid: 'AF-hero-prof.mp4',
       vidPoster: 'AF-hero-prof-poster.jpg',
       pe: 'The real problem',
@@ -676,6 +692,7 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
     dropshipper: {
       h: 'Keep the <span class="g">whole margin</span> — no inventory, no RTOs.',
       sub: 'The same skills you already have — finding winners, running ads — but you <b>never touch a product</b>. AI builds the store, the pages and the creatives for you. No code, no team.',
+      sbarTitle: 'Keep the <b>whole margin</b> — no inventory, no RTOs.',
       vid: 'AF-hero-drop.mp4',
       vidPoster: 'AF-hero-drop-poster.jpg',
       pe: 'The real problem',
@@ -720,6 +737,7 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
     passive: {
       h: "Build an income that <span class=\"g\">doesn't stop when you do.</span>",
       sub: "Not an app or a stock tip — a <b>system that keeps running</b> after you've stopped. AI makes the content, handles the follow-ups and brings in the sales, across more than one stream.",
+      sbarTitle: 'Build an income that <b>doesn\'t stop when you do</b>.',
       vid: 'AF-hero-passive.mp4',
       vidPoster: 'AF-hero-passive-poster.jpg',
       pe: 'The real problem',
@@ -762,7 +780,7 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
       finalAnchor: "Less than a movie ticket — to see, and build, the exact system I use to earn without trading my hours. If it's not worth far more than ₹57, I'll refund you."
     }
   };
-  var DEEP = ['solH','solLead','sysH','sysLead','flow1d','flow3d','j01t','j01d','j02t','j02d','j07t','j07d','incH','incLead','mmCap','chipBanK','chipBanOld','chipBanNew','incBig','owWed','owThu','owFri','nwFri','whoH','who1h','who2h','who1p','who2p','faqNicheQ','faqNicheA','faqBanQ','faqBanA','finalH','finalAnchor'];
+  var DEEP = ['solH','solLead','sysH','sysLead','flow1d','flow3d','j01t','j01d','j02t','j02d','j07t','j07d','incH','incLead','mmCap','chipBanK','chipBanOld','chipBanNew','incBig','owWed','owThu','owFri','nwFri','whoH','who1h','who2h','who1p','who2p','faqNicheQ','faqNicheA','faqBanQ','faqBanA','finalH','finalAnchor','sbarTitle'];
   function slug(){
     var q=(new URLSearchParams(location.search).get('a')||'').toLowerCase();
     var p=location.pathname.replace(/\/+$/,'').split('/').pop().toLowerCase().replace(/\.html$/,'');
@@ -1648,14 +1666,17 @@ setTimeout(function(){if(!s.classList.contains('bon-in'))go();},3000);}else{go()
   <div class="sbar__in">
     <div class="sbar__left">
       <span class="sbar__live"><span class="pulse"></span> Live masterclass · one time · no replay</span>
-      <div class="sbar__title">Turn one product into a <b>full affiliate machine</b> — in 90 minutes.</div>
+      <div class="sbar__title" id="sbarTitle">Turn one product into a <b>full affiliate machine</b> — in 90 minutes.</div>
       <div class="sbar__meta"><b data-cfg="dateShort">Sun 16 Aug</b> · <b data-cfg="time">11:00 AM IST</b> · seats are limited</div>
     </div>
     <div class="sbar__cd" id="sbarCd">
-      <div class="u"><b id="cdD">--</b><span>Days</span></div><div class="s">:</div>
-      <div class="u"><b id="cdH">--</b><span>Hrs</span></div><div class="s">:</div>
-      <div class="u"><b id="cdM">--</b><span>Min</span></div><div class="s">:</div>
-      <div class="u"><b id="cdS">--</b><span>Sec</span></div>
+      <div class="sbar__units">
+        <div class="u"><b id="cdD">--</b><span>Days</span></div><div class="s">:</div>
+        <div class="u"><b id="cdH">--</b><span>Hrs</span></div><div class="s">:</div>
+        <div class="u"><b id="cdM">--</b><span>Min</span></div><div class="s">:</div>
+        <div class="u"><b id="cdS">--</b><span>Sec</span></div>
+      </div>
+      <span class="sbar__now"><span class="pulse"></span>We&rsquo;re live &mdash; join now</span>
     </div>
     <div class="sbar__right">
       <div class="sbar__price"><span class="k">Today</span><span class="sbar__prow"><span class="was">₹4,999</span><span class="v" data-cfg="price">₹57</span></span></div>
@@ -1734,7 +1755,7 @@ setTimeout(function(){if(!s.classList.contains('bon-in'))go();},3000);}else{go()
    panel (/admin/masterclass -> Configuration) overrides them on page load.
    ═══════════════════════════════════════════════════════════════════ */
 var IYA_CONFIG = {
-  webinarDate:     "2026-08-16",
+  webinarDate:     "2026-08-23",
   webinarTime:     "11:00 AM",
   price:           "₹57",
   registrationUrl: "https://learn.internetyouthacademy.com/l/dffe2cd9ad",
@@ -1888,7 +1909,7 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
 /* ── sticky CTA bar: live countdown + reveal on scroll ── */
 (function(){
   var bar=document.getElementById('sbar');if(!bar)return;
-  var cd=document.getElementById('sbarCd'),done=false,deadline=null;
+  var cd=document.getElementById('sbarCd'),deadline=null;
   var el={D:document.getElementById('cdD'),H:document.getElementById('cdH'),
           M:document.getElementById('cdM'),S:document.getElementById('cdS')};
   function pad(n){return(n<10?'0':'')+n;}
@@ -1902,13 +1923,18 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
     if(m&&m[3]==='PM'&&hh<12)hh+=12;
     if(m&&m[3]==='AM'&&hh===12)hh=0;
     deadline=Date.UTC(+p[0],+p[1]-1,+p[2],hh,mm)-19800000;
-    done=false;tick();
+    tick();
   };
+  /* No latch here on purpose. The hardcoded IYA_CONFIG date is usually stale by
+     the time anyone loads the page, so the first tick lands in the past; the
+     real date arrives moments later from the config API. Anything that made
+     the expired state sticky would leave the bar permanently claiming the
+     masterclass is already running. */
   function tick(){
-    if(deadline===null||done)return;
+    if(deadline===null)return;
     var d=deadline-Date.now();
-    if(d<=0){done=true;cd.classList.remove('urgent');
-      cd.innerHTML='<span class="sbar__now"><span class="pulse"></span>We’re live — join now</span>';return;}
+    if(d<=0){cd.classList.add('live');cd.classList.remove('urgent');return;}
+    cd.classList.remove('live');
     var s=Math.floor(d/1000);
     el.D.textContent=pad(Math.floor(s/86400));
     el.H.textContent=pad(Math.floor(s/3600)%24);
