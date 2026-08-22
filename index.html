@@ -632,6 +632,8 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
     professional: {
       h: 'Build a <span class="g">one-person AI business</span> — without quitting your job.',
       sub: 'Websites, content, landing pages, follow-ups — <b>built by AI</b>, running in the background. No code, no team, no becoming an influencer. Just two free evenings a week.',
+      vid: 'AF-hero-prof.mp4',
+      vidPoster: 'AF-hero-prof-poster.jpg',
       pe: 'The real problem',
       ph: "You don't need a new career. You need <span class=\"g\">one income that's your own.</span>",
       pl: 'The same AI everyone is nervous about at work is exactly what lets you build an income on the side — without more hours, and without quitting.',
@@ -759,7 +761,20 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
   }
   var A = AUD[slug()];
   function set(id,html){ var e=document.getElementById(id); if(e&&html!=null){ e.innerHTML=html; } }
-  window.__applyHero=function(){ if(A){ set('heroH',A.h); set('heroSub',A.sub); } };
+  /* Runs inline right after the hero markup. preload="none" means the .mp4 has
+     not been touched yet, so re-pointing <source> costs nothing. The default
+     poster is a different story: the preload scanner has usually already
+     started it, so a variant with its own poster pays for both (~79KB). */
+  window.__applyHero=function(){
+    if(!A) return;
+    set('heroH',A.h); set('heroSub',A.sub);
+    var v=document.getElementById('heroVideo');
+    if(v&&A.vid){
+      var s=v.querySelector('source');
+      if(A.vidPoster) v.poster=A.vidPoster;
+      if(s){ s.src=A.vid; v.load(); }
+    }
+  };
   window.__applyProblem=function(){ if(A){ set('probEyebrow',A.pe); set('probH',A.ph); set('probLead',A.pl); } };
   window.__applyDeep=function(){
     if(!A) return;
