@@ -902,6 +902,27 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
       <div class="flow__arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
       <div class="flow__step"><div class="flow__k">Step 3 — You</div><div class="flow__t">Run it &amp; earn</div><div class="flow__d" id="flow3d">Point traffic at it, test at volume, scale the winners. More offers live, same you.</div></div>
     </div>
+      <div class="reveal" style="text-align:center;max-width:640px;margin:40px auto 22px">
+        <span class="eyebrow">The system, working</span>
+        <h3 class="sec__h" style="font-size:clamp(20px,3vw,28px)" id="sysH">One command in. <span class="g">A business that runs itself out.</span></h3>
+        <p class="sec__lead" style="margin-left:auto;margin-right:auto" id="sysLead">Organic and paid, research, approvals, emails — built, published and optimised around the clock. You sleep; it keeps selling.</p>
+      </div>
+      <div class="demo reveal" id="sysdemo">
+        <style>#sysFrame{aspect-ratio:16/9!important}@media(max-width:620px){#sysdemo{max-width:420px}#sysFrame{aspect-ratio:40/71!important}}</style>
+        <iframe id="sysFrame" class="demo__frame" title="The AI Affiliate Machine — the system running 24/7" loading="lazy" scrolling="no"></iframe>
+      </div>
+      <script>(function(){try{
+        var AK={professional:1,dropshipper:1,passive:1};
+        var q=(new URLSearchParams(location.search).get('a')||'').toLowerCase();
+        var p=location.pathname.replace(/\/+$/,'').split('/').pop().toLowerCase().replace(/\.html$/,'');
+        var s=q||p; var slug=AK[s]?s:'affiliate';
+        var f=document.getElementById('sysFrame');
+        function pick(){return (window.innerWidth<=620?'assets/system-m.html':'assets/system.html')+'?a='+slug;}
+        var cur='';
+        function apply(){var want=pick(); if(want!==cur){cur=want; if(f) f.src=want;}}
+        apply();
+        var tmr; window.addEventListener('resize',function(){clearTimeout(tmr);tmr=setTimeout(apply,250);});
+      }catch(e){}})();</script>
   </div>
 </section>
 
