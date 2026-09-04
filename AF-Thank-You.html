@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Meta Pixel Code -->
-<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1673061543783104');fbq('track','PageView');</script>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1673061543783104');fbq('init','1029989303265750');fbq('track','PageView');</script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1673061543783104&ev=PageView&noscript=1" alt=""/></noscript>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1029989303265750&ev=PageView&noscript=1" alt=""/></noscript>
 <!-- End Meta Pixel Code -->
 
 <title>You're in — The AI Affiliate Machine</title>
@@ -309,6 +310,66 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
       })
       .catch(function(){/* keep the hardcoded values above */});
   }
+})();
+
+/* ── Purchase ──────────────────────────────────────────────────────────────
+   TagMango only redirects here after it has taken payment, so this page is
+   the conversion signal. It is also refreshable, bookmarkable and shareable,
+   and every one of those would otherwise report another sale and quietly
+   inflate ROAS — so the event is fired at most once.
+
+   Deduped on the order id when TagMango puts one in the redirect (that same
+   id is the eventID, so a server-side Purchase for the order dedupes against
+   this one instead of double-counting). With no id to key on, it falls back
+   to once per browser per DEDUPE_HOURS: long enough to swallow a refresh,
+   short enough that a genuine second purchase still registers.
+
+   Goes to both pixels — plain fbq('track') reports to every init'd pixel. */
+(function(){
+  var KEY='iya_purchase', DEDUPE_HOURS=6;
+  var ORDER_KEYS=['orderId','order_id','transactionId','transaction_id',
+                  'paymentId','payment_id','txnId','txn_id','mangoId'];
+
+  function orderId(){
+    try{
+      var q=new URLSearchParams(location.search);
+      for(var i=0;i<ORDER_KEYS.length;i++){
+        var v=q.get(ORDER_KEYS[i]);
+        if(v) return v;
+      }
+    }catch(e){}
+    return null;
+  }
+
+  /* Ticket price, same source the landing page uses for InitiateCheckout so
+     the two events agree. */
+  function amount(){
+    var p=(window.IYA_CONFIG&&IYA_CONFIG.price)||'';
+    return parseInt(String(p).replace(/[^0-9]/g,''),10)||199;
+  }
+
+  function firstTime(id){
+    var now=Date.now();
+    try{
+      var raw=localStorage.getItem(KEY);
+      if(raw){
+        var o=JSON.parse(raw);
+        if(id && o.id===id) return false;
+        if(!id && o.t && now-o.t < DEDUPE_HOURS*3600e3) return false;
+      }
+      localStorage.setItem(KEY,JSON.stringify({id:id||null,t:now}));
+    }catch(e){/* private mode: better to report the sale than to lose it */}
+    return true;
+  }
+
+  var id=orderId();
+  if(!firstTime(id)) return;
+  var eid = id ? 'purchase_'+id
+               : 'purchase_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
+  var props={value:amount(),currency:'INR'};
+  if(window.fbq) fbq('track','Purchase',props,{eventID:eid});
+  if(window.dataLayer) dataLayer.push(Object.assign(
+    {event:'purchase',event_id:eid},props));
 })();
 
 /* ── countdown to the class + sticky WhatsApp reminder ──────────────────
