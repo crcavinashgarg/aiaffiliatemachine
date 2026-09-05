@@ -311,65 +311,11 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
   }
 })();
 
-/* ── Purchase ──────────────────────────────────────────────────────────────
-   TagMango only redirects here after it has taken payment, so this page is
-   the conversion signal. It is also refreshable, bookmarkable and shareable,
-   and every one of those would otherwise report another sale and quietly
-   inflate ROAS — so the event is fired at most once.
-
-   Deduped on the order id when TagMango puts one in the redirect (that same
-   id is the eventID, so a server-side Purchase for the order dedupes against
-   this one instead of double-counting). With no id to key on, it falls back
-   to once per browser per DEDUPE_HOURS: long enough to swallow a refresh,
-   short enough that a genuine second purchase still registers.
-
-   Goes to both pixels — plain fbq('track') reports to every init'd pixel. */
-(function(){
-  var KEY='iya_purchase_2', DEDUPE_HOURS=6;
-  var ORDER_KEYS=['orderId','order_id','transactionId','transaction_id',
-                  'paymentId','payment_id','txnId','txn_id','mangoId'];
-
-  function orderId(){
-    try{
-      var q=new URLSearchParams(location.search);
-      for(var i=0;i<ORDER_KEYS.length;i++){
-        var v=q.get(ORDER_KEYS[i]);
-        if(v) return v;
-      }
-    }catch(e){}
-    return null;
-  }
-
-  /* Ticket price, same source the landing page uses for InitiateCheckout so
-     the two events agree. */
-  function amount(){
-    var p=(window.IYA_CONFIG&&IYA_CONFIG.price)||'';
-    return parseInt(String(p).replace(/[^0-9]/g,''),10)||199;
-  }
-
-  function firstTime(id){
-    var now=Date.now();
-    try{
-      var raw=localStorage.getItem(KEY);
-      if(raw){
-        var o=JSON.parse(raw);
-        if(id && o.id===id) return false;
-        if(!id && o.t && now-o.t < DEDUPE_HOURS*3600e3) return false;
-      }
-      localStorage.setItem(KEY,JSON.stringify({id:id||null,t:now}));
-    }catch(e){/* private mode: better to report the sale than to lose it */}
-    return true;
-  }
-
-  var id=orderId();
-  if(!firstTime(id)) return;
-  var eid = id ? 'purchase_'+id
-               : 'purchase_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
-  var props={value:amount(),currency:'INR'};
-  if(window.fbq) fbq('track','Purchase',props,{eventID:eid});
-  if(window.dataLayer) dataLayer.push(Object.assign(
-    {event:'purchase',event_id:eid},props));
-})();
+/* No Purchase event here on purpose. TagMango fires one itself from the
+   product's mangoFacebookPixelId at the moment payment clears, so a second
+   one from this page reported every sale twice. Server-side beats a
+   redirect that a closed tab can skip, and Meta cannot dedupe the pair —
+   TagMango generates its own event_id and will not share ours. */
 
 /* ── countdown to the class + sticky WhatsApp reminder ──────────────────
    Same IST handling as the landing page: webinarDate/webinarTime are IST
