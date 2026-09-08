@@ -1980,5 +1980,80 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
 }catch(err){document.documentElement.className=document.documentElement.className.replace(/\bjs\b/,'');}})();
 </script>
 <script>(function(){var v=document.querySelector(".hero__bgv");if(v){v.muted=true;v.setAttribute("muted","");v.setAttribute("playsinline","");function go(){var p=v.play();if(p&&p.catch)p.catch(function(){});}go();document.addEventListener("visibilitychange",go);window.addEventListener("load",go);}})();</script>
+<!-- ── Visit recorder ────────────────────────────────────────────────────────
+     Records the arrival and carries a click id into the TagMango checkout as
+     ?cid=. Works alongside the InitiateCheckout block above — does not replace
+     it. Every failure is swallowed: if the recorder is down the visitor still
+     reaches checkout and we lose one row. A tracker that can break this page is
+     worse than no tracker. -->
+<script>
+(function () {
+  var API = 'https://affiltrack.vercel.app/api/visit';
+  var KEY = 'iya_cid';
+  var TAGS = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content',
+              'fbclid','ttclid','gclid'];
+
+  function q(name) {
+    try { return new URLSearchParams(location.search).get(name); } catch (e) { return null; }
+  }
+  /* The _fbp cookie. Readable only here, on our own page — the server cannot
+     reconstruct it, and Meta weighs it. */
+  function fbp() {
+    try {
+      var m = document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/);
+      return m ? decodeURIComponent(m[1]) : null;
+    } catch (e) { return null; }
+  }
+  function stored() {
+    try { return localStorage.getItem(KEY); } catch (e) { return null; }
+  }
+  function keep(id) {
+    try { localStorage.setItem(KEY, id); } catch (e) {}
+    try { document.cookie = KEY + '=' + id + ';path=/;max-age=2592000;SameSite=Lax'; } catch (e) {}
+  }
+
+  /* Append ?cid= at CLICK time, not on load — the admin-config sync rewrites
+     these hrefs asynchronously and would otherwise wipe it. Same reason and the
+     same moment as the existing source-tag code. */
+  function attach(id) {
+    var links = document.querySelectorAll('[data-cfg-href="registrationUrl"]');
+    [].forEach.call(links, function (a) {
+      a.addEventListener('click', function () {
+        try {
+          var u = new URL(a.getAttribute('href'), location.href);
+          if (!u.searchParams.has('cid')) u.searchParams.set('cid', id);
+          a.setAttribute('href', u.toString());
+        } catch (e) {}
+      });
+    });
+  }
+
+  var existing = stored();
+  if (existing) { attach(existing); return; }
+
+  var body = { landingUrl: location.href, referrer: document.referrer || null, fbp: fbp() };
+  TAGS.forEach(function (t) {
+    var v = q(t);
+    if (!v) return;
+    if (t.indexOf('utm_') === 0) {
+      body[t.replace(/_(.)/g, function (_, c) { return c.toUpperCase(); })] = v;
+    } else {
+      body[t] = v;
+    }
+  });
+
+  try {
+    fetch(API, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(body),
+      keepalive: true
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (d) { if (d && d.clickId) { keep(d.clickId); attach(d.clickId); } })
+      .catch(function () { /* page keeps working; we lose one row */ });
+  } catch (e) { /* no fetch, very old browser — page keeps working */ }
+})();
+</script>
 </body>
 </html>
