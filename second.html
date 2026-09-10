@@ -2028,7 +2028,24 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
       a.addEventListener('click', function () {
         try {
           var u = new URL(a.getAttribute('href'), location.href);
+          /* TWO PARAMETERS, ONE ID, AND utm_id IS THE ONE THAT SURVIVES.
+
+             TagMango keeps a FIXED set of tracking fields — utm_source, utm_medium,
+             utm_campaign, utm_content, utm_term, fbclid, gclid, utm_id, device_type,
+             initiated_platform — and silently discards anything else. `cid` is not on
+             that list, so it reached the checkout and died there: measured 10 Sep 2026,
+             every order since this tracker went live has click_id NULL, and all nine
+             orders that could be matched to their arrival matched on fbclid instead.
+
+             utm_id is captured, exported and forwarded to Pabbly, and it is EMPTY on
+             every order ever taken (the literal string "N/A" on 42 of 53 rows, blank on
+             the other 11). Nothing reads it and Meta does not use it for attribution,
+             so it is free to carry our id.
+
+             `cid` is still sent. It costs one query parameter, it is the correct name,
+             and it starts working the day TagMango passes unknown params through. */
           if (!u.searchParams.has('cid')) u.searchParams.set('cid', id);
+          if (!u.searchParams.has('utm_id')) u.searchParams.set('utm_id', id);
           a.setAttribute('href', u.toString());
         } catch (e) {}
       });
