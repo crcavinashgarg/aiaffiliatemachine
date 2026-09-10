@@ -2052,6 +2052,29 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
     });
   }
 
+  /* AN INCOMING ?cid= WINS OVER EVERYTHING, INCLUDING A REMEMBERED ONE.
+
+     Our own short link mints the click id on the SERVER, records the arrival with
+     the link it came through, and appends ?cid= here. That row already knows
+     which link sent this person — which is the only way an Instagram-bio or
+     WhatsApp visitor can ever be identified, since they carry no fbclid and no
+     utm at all.
+
+     Minting a second id on this page would orphan that row: the sale would carry
+     an id the arrival never had, and the link that produced it would go unnamed.
+     A returning visitor with an older id in localStorage is deliberately
+     overwritten for the same reason — last touch is the arrival we just recorded.
+
+     And nothing is POSTed in this branch: the visit is already stored. Sending it
+     again would create a second row for one arrival, inflating the denominator
+     every rate in the tool is measured against. */
+  var incoming = q('cid');
+  if (incoming && /^[a-f0-9]{16,64}$/i.test(incoming)) {
+    keep(incoming);
+    attach(incoming);
+    return;
+  }
+
   var existing = stored();
   if (existing) { attach(existing); return; }
 
