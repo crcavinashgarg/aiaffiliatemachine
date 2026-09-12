@@ -2063,10 +2063,24 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
     return;
   }
 
+  /* POST ON EVERY LOAD — this one line is what made the whole thing wrong.
+
+     It used to read:  if (existing) { attach(existing); return; }
+
+     So a RETURNING visitor was never reported. Someone clicked an ad on Monday,
+     came back through a DIFFERENT ad on Wednesday and bought — and the tool only
+     ever knew about Monday, because Wednesday never left the browser. Every sale
+     by a returning buyer was credited to the first ad they ever clicked.
+
+     Now: attach straight away if we already have an id — the checkout links must
+     work before the network answers, which is why the early return existed — and
+     post anyway, sending the stored id as `browserId` so the server files this
+     arrival under the same person instead of inventing a new one. */
   var existing = stored();
-  if (existing) { attach(existing); return; }
+  if (existing) { attach(existing); }
 
   var body = { landingUrl: location.href, referrer: document.referrer || null, fbp: fbp() };
+  if (existing) { body.browserId = existing; }
   TAGS.forEach(function (t) {
     var v = q(t);
     if (!v) return;
@@ -2085,7 +2099,21 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
       keepalive: true
     })
       .then(function (r) { return r.json(); })
-      .then(function (d) { if (d && d.clickId) { keep(d.clickId); attach(d.clickId); } })
+      .then(function (d) {
+        /* KEEP `browserId`, NOT `clickId`. The click id now names THIS ARRIVAL and is
+           different on every load; the browser id is the thirty-day identity that goes
+           to the checkout as cid/utm_id and comes back on the order. Keeping the click
+           id would hand the checkout a value tied to one page view — for a returning
+           buyer, the one view they did not buy from. `clickId` stays as a fallback so
+           this page keeps working against an older server. */
+        var id = d && (d.browserId || d.clickId);
+        if (!id) return;
+        keep(id);
+        /* attach() adds a click listener per link, so it is not called twice for the
+           same visitor: if we already attached the stored id above, the server just
+           echoed that same id back. */
+        if (!existing) { attach(id); }
+      })
       .catch(function () { /* page keeps working; we lose one row */ });
   } catch (e) { /* no fetch, very old browser — page keeps working */ }
 })();
