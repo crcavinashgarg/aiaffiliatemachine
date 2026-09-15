@@ -77,18 +77,18 @@ body{background:radial-gradient(120% 70% at 50% 0%,#1a1348,#0d0930 55%,#07061a);
     <div class="scene sys" id="scSys">
       <div class="corebar">
         <svg class="gear" viewBox="0 0 24 24" fill="currentColor"><path d="M12 8a4 4 0 100 8 4 4 0 000-8zm0 6a2 2 0 110-4 2 2 0 010 4z"/><path d="M19.4 13a7.9 7.9 0 000-2l2-1.6-2-3.4-2.4 1a7.6 7.6 0 00-1.7-1l-.4-2.5H10.9l-.4 2.5a7.6 7.6 0 00-1.7 1l-2.4-1-2 3.4 2 1.6a7.9 7.9 0 000 2l-2 1.6 2 3.4 2.4-1a7.6 7.6 0 001.7 1l.4 2.5h4.2l.4-2.5a7.6 7.6 0 001.7-1l2.4 1 2-3.4-2-1.6zM12 18.5a6.5 6.5 0 110-13 6.5 6.5 0 010 13z"/></svg>
-        <div><div class="ct">AI Affiliate <span>Machine</span></div><div class="cs" id="cst">Building everything…</div></div>
+        <div><div class="ct">AI Affiliate <span>Machine</span></div><div class="cs" id="cst">Drafting everything…</div></div>
       </div>
       <div class="feed" id="feed"></div>
     </div>
     <div class="scene free" id="scFree">
       <div class="fstars"><span style="left:14%;top:8%"></span><span style="left:30%;top:18%"></span><span style="left:70%;top:12%"></span><span style="left:84%;top:26%"></span><span style="left:22%;top:40%"></span><span style="left:78%;top:46%"></span></div>
       <div class="moon"></div>
-      <div class="clock"><div class="t">3:14<span>AM</span></div><div class="sub">You’re asleep — the machine is <b>still selling.</b></div></div>
-      <div class="ftoast" id="ft1"><span class="ico" id="ft_yt"></span>New sale <b>✓</b></div>
-      <div class="ftoast" id="ft2"><span class="ico" id="ft_ig"></span>New sale <b>✓</b></div>
-      <div class="ftoast" id="ft3"><span class="ico" id="ft_g"></span>New commission <b>✓</b></div>
-      <div class="badge" id="bd">No team · No code · <span class="g">it runs 24/7</span></div>
+      <div class="clock"><div class="t">3:14<span>AM</span></div><div class="sub">You’re asleep — the machine is <b>still drafting.</b></div></div>
+      <div class="ftoast" id="ft1"><span class="ico" id="ft_yt"></span>Post drafted <b>✓</b></div>
+      <div class="ftoast" id="ft2"><span class="ico" id="ft_ig"></span>Reel drafted <b>✓</b></div>
+      <div class="ftoast" id="ft3"><span class="ico" id="ft_g"></span>Page drafted <b>✓</b></div>
+      <div class="badge" id="bd">Drafted overnight · <span class="g">ready in the morning</span></div>
     </div>
   </div>
   <div class="cap" id="cap"></div>
@@ -127,14 +127,14 @@ A.pains.forEach((p,i)=>{$('pa'+(i+1)).innerHTML='<span class="x">✕</span><div>
 
 const FEED=[
  {lane:'Organic · SEO',cls:'gr'},
- {ic:'rank',l:'Website ranked',st:'#1 ↑',gold:1},{ic:'link',l:'Backlinks',st:'BUILT'},
- {ic:'globe',l:'Social links',st:'LIVE'},{ic:'blog',l:'Blog posts',st:'PUBLISHED'},
+ {ic:'rank',l:'Website drafted',st:'READY',gold:1},{ic:'link',l:'Backlink plan',st:'DRAFTED'},
+ {ic:'globe',l:'Social posts',st:'DRAFTED'},{ic:'blog',l:'Blog posts',st:'DRAFTED'},
  {lane:'Research · Setup',cls:'go'},
- {ic:'box',l:'Winning product',st:'FOUND',gold:1},{ic:'target',l:'Best audience',st:'TARGETED',gold:1},
- {ic:'mail',l:'Approval email',st:'SENT',gold:1},{ic:'mail',l:'Email marketing',st:'SENDING',gold:1},
+ {ic:'box',l:'Product research',st:'DONE',gold:1},{ic:'target',l:'Audience notes',st:'DRAFTED',gold:1},
+ {ic:'mail',l:'Approval email',st:'DRAFTED',gold:1},{ic:'mail',l:'Email sequence',st:'DRAFTED',gold:1},
  {lane:'Paid · Social',cls:''},
- {ic:'yt',l:'YouTube video',st:'PUBLISHED'},{ic:'ig',l:'Instagram reel',st:'PUBLISHED'},
- {ic:'fb',l:'Facebook · LinkedIn',st:'POSTED'},{ic:'page',l:'Landing page + ads',st:'LIVE',gold:1}
+ {ic:'yt',l:'YouTube video',st:'DRAFTED'},{ic:'ig',l:'Instagram reel',st:'DRAFTED'},
+ {ic:'fb',l:'Facebook · LinkedIn',st:'DRAFTED'},{ic:'page',l:'Landing page + ads',st:'DRAFTED',gold:1}
 ];
 function on(id){$(id).classList.add('on');}function off(id){$(id).classList.remove('on');}
 function cap(h){$('cap').innerHTML=h;}function hd(h){$('hd').innerHTML=h;}
@@ -150,15 +150,15 @@ function addFeed(it){
 }
 function run(){
   ['scProb','scSys','scFree'].forEach(off);hd('');cap('');feed.innerHTML='';
-  ['ft1','ft2','ft3','bd'].forEach(off);$('cst').textContent='Building everything…';
+  ['ft1','ft2','ft3','bd'].forEach(off);$('cst').textContent='Drafting everything…';
   const S=[];
   S.push({d:150,fn:()=>{on('scProb');hd(A.hd);cap(A.capIn);}});
   S.push({d:3400,fn:()=>{off('scProb');}});
-  S.push({d:500,fn:()=>{on('scSys');hd('One system does <span class="g">all of it.</span>');cap('One command in — it builds everything.');}});
+  S.push({d:500,fn:()=>{on('scSys');hd('One system drafts <span class="g">every piece.</span>');cap('One command in — it drafts everything for review.');}});
   FEED.forEach((it,i)=>{S.push({d:i===0?500:520,fn:()=>addFeed(it)});});
-  S.push({d:300,fn:()=>{$('cst').textContent='Optimising 24/7';cap('Organic + paid — <span class="g">built, published, optimised.</span>');}});
+  S.push({d:300,fn:()=>{$('cst').textContent='Drafting on a schedule';cap('Organic + paid — <span class="g">drafted for you to review.</span>');}});
   S.push({d:1700,fn:()=>{}});
-  S.push({d:500,fn:()=>{off('scSys');on('scFree');hd('You sleep. <span class="g">It keeps selling.</span>');cap('');}});
+  S.push({d:500,fn:()=>{off('scSys');on('scFree');hd('You sleep. <span class="g">It keeps drafting.</span>');cap('');}});
   S.push({d:600,fn:()=>on('ft1')});S.push({d:650,fn:()=>on('ft2')});S.push({d:650,fn:()=>on('ft3')});
   S.push({d:500,fn:()=>on('bd')});
   S.push({d:2400,fn:()=>{}});
