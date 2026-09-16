@@ -1852,6 +1852,12 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
      it. Every failure is swallowed: if the recorder is down the visitor still
      reaches checkout and we lose one row. A tracker that can break this page is
      worse than no tracker. -->
+<!-- META'S OWN PARAMETER BUILDER (meta-capi-param-builder-clientjs 1.3.1, self-hosted,
+     npm integrity sha512-9KfOeZKvj5QF0Z+BP5mwuAswQh8iFfHXPCTauIukxE0wFkB48lD9nDM1rjK5iklQeRwD7J7HCDxg48KPOMIcaw==).
+     It writes the _fbp browser-id cookie IMMEDIATELY, in Meta's format, instead of waiting
+     for the pixel to write it a moment later — the race that left the browser id off 60%
+     of purchases sent to Meta. The pixel reuses a cookie that already exists. -->
+<script src="/assets/meta-param-builder-1.3.1.js"></script>
 <script>
 (function () {
   var API = 'https://affiltrack.vercel.app/api/visit';
@@ -1864,8 +1870,15 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
   }
   /* The _fbp cookie. Readable only here, on our own page — the server cannot
      reconstruct it, and Meta weighs it. */
+  var built = false;
   function fbp() {
     try {
+      /* Meta's builder writes the cookie synchronously if the pixel has not yet. Once per
+         page: each call re-runs its collection. Any failure leaves the old behaviour. */
+      if (!built && window.clientParamBuilder) {
+        built = true;
+        try { window.clientParamBuilder.processAndCollectAllParams(location.href); } catch (e) {}
+      }
       var m = document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/);
       return m ? decodeURIComponent(m[1]) : null;
     } catch (e) { return null; }
@@ -2038,12 +2051,27 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
         fetch(API, {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({
-            landingUrl: location.href,
-            referrer: document.referrer || null,
-            browserId: id,
-            fbp: late
-          }),
+          /* THE SAME TAGS AS THE FIRST POST. Without them the server could not tell this
+             was the same ad arrival and recorded a second, tagless one (16 Sep). The server
+             now also reads them from the address; sending them is the belt to that brace. */
+          body: JSON.stringify((function () {
+            var b = {
+              landingUrl: location.href,
+              referrer: document.referrer || null,
+              browserId: id,
+              fbp: late
+            };
+            TAGS.forEach(function (t) {
+              var v = q(t);
+              if (!v) return;
+              if (t.indexOf('utm_') === 0) {
+                b[t.replace(/_(.)/g, function (_, c) { return c.toUpperCase(); })] = v;
+              } else {
+                b[t] = v;
+              }
+            });
+            return b;
+          })()),
           keepalive: true
         }).catch(function () {});
       } catch (e) {}
