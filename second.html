@@ -2040,6 +2040,28 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
              and it starts working the day TagMango passes unknown params through. */
           if (!u.searchParams.has('cid')) u.searchParams.set('cid', id);
           if (!u.searchParams.has('utm_id')) u.searchParams.set('utm_id', id);
+
+          /* DROP ANY LEFTOVER {{placeholder}} BEFORE IT REACHES THE CHECKOUT.
+
+             The registration link carries utm_campaign={{campaign.id}} and friends
+             as its DEFAULT. A visitor arriving from an ad overwrites them with real
+             ids; a visitor who comes BACK later, directly, has nothing to overwrite
+             them with — so the literal text goes to TagMango and the order names an
+             ad called {{ad.id}}. Two sales were filed that way (7 and 12 Sep), each
+             days after the click that actually earned them.
+
+             It DELETES rather than guessing. Filling the placeholder in from this
+             visitor's first arrival would credit a sale to a click that may not have
+             produced it, and print the result as a fact. The identity already travels
+             as cid/utm_id and the server decides which arrival to credit. An absent
+             parameter is honestly unknown; a placeholder is a value that lies. */
+          var drop = [];
+          u.searchParams.forEach(function (value, key) {
+            if (value.indexOf('{{') > -1) { drop.push(key); return; }
+            if (value.indexOf('%7B%7B') > -1) { drop.push(key); }
+          });
+          drop.forEach(function (key) { u.searchParams.delete(key); });
+
           a.setAttribute('href', u.toString());
         } catch (e) {}
       });
@@ -2122,6 +2144,46 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
       })
       .catch(function () { /* page keeps working; we lose one row */ });
   } catch (e) { /* no fetch, very old browser — page keeps working */ }
+
+  /* ── THE BROWSER ID META WRITES A MOMENT TOO LATE ────────────────────────
+     _fbp is written by Meta's own pixel, ASYNCHRONOUSLY, and the POST above
+     runs on load — so on a FIRST visit we read document.cookie before the
+     cookie exists. Measured across 3,417 arrivals: 12.6% of first visits carry
+     it against 94.6% of repeat visits by the same browser. A race, not
+     missing data.
+
+     Waiting for it before the first POST would be worse: a first-time visitor
+     has no click id until that request answers, so a 2-3 second delay risks
+     someone reaching the checkout with no cid at all — losing the arrival-to-
+     sale link to save a lesser signal. So: look again, and tell the server
+     once it appears. The server folds this into the same arrival and lets it
+     do exactly one thing — fill an fbp that is still NULL. It can never
+     replace one already recorded, and it writes no new visit. */
+  if (!fbp()) {
+    var tries = 0;
+    var timer = setInterval(function () {
+      tries = tries + 1;
+      if (tries > 15) { clearInterval(timer); return; }
+      var late = fbp();
+      if (!late) { return; }
+      var id = stored();
+      if (!id) { return; }
+      clearInterval(timer);
+      try {
+        fetch(API, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            landingUrl: location.href,
+            referrer: document.referrer || null,
+            browserId: id,
+            fbp: late
+          }),
+          keepalive: true
+        }).catch(function () {});
+      } catch (e) {}
+    }, 400);
+  }
 })();
 </script>
 </body>
