@@ -15,7 +15,29 @@
      ad click id (gclid) is stored on this domain and is still there on the thank-you page. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16836151309"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-16836151309');</script>
-<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1673061543783104');fbq('track','PageView');</script>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');</script>
+<script>
+/* ONE ID FOR THE VISIT AND THE SALE (17 Sep 2026). The browser id our tracker keeps
+   (iya_cid) goes to Meta as external_id, SHA-256 hashed - the same hash the server sends on
+   the purchase - so Meta can tell that the visitor and the buyer are one person. PageView
+   carried no shared identifier before this and scored 6.1/10. A first visit gets its id
+   HERE, before PageView, and the visit recorder at the end of the page sends this same id
+   to the server, so the two can never disagree. */
+(function(P,MINT){var K='iya_cid',id=null;
+try{var c=new URLSearchParams(location.search).get('cid');if(c&&/^[a-f0-9]{16,64}$/i.test(c))id=c.toLowerCase()}catch(e){}
+if(!id){try{id=localStorage.getItem(K)}catch(e){}}
+if(!id){var m=document.cookie.match(/(?:^|;\s*)iya_cid=([a-f0-9]{16,64})/i);if(m)id=m[1].toLowerCase()}
+if(!id&&MINT){try{var a=new Uint8Array(16);crypto.getRandomValues(a);id=[].map.call(a,function(x){return(x+256).toString(16).slice(1)}).join('')}catch(e){}
+if(id){try{localStorage.setItem(K,id)}catch(e){}try{document.cookie=K+'='+id+';path=/;max-age=2592000;SameSite=Lax'}catch(e){}}}
+window.__iyaBid=id;
+function go(h){fbq('init',P,h?{external_id:h}:{});fbq('track','PageView')}
+if(!id||!(window.crypto&&crypto.subtle&&window.TextEncoder)){go(null);return}
+/* The hash is asynchronous; PageView must never wait on it for long or be lost. */
+var done=false,t=setTimeout(function(){if(!done){done=true;go(null)}},1500);
+crypto.subtle.digest('SHA-256',new TextEncoder().encode(id)).then(function(b){if(done)return;done=true;clearTimeout(t);
+go([].map.call(new Uint8Array(b),function(x){return(x+256).toString(16).slice(1)}).join(''))},
+function(){if(!done){done=true;clearTimeout(t);go(null)}});
+})('1673061543783104',true);</script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1673061543783104&ev=PageView&noscript=1" alt=""/></noscript>
 
 <title>The AI Affiliate Machine — Live Masterclass with Avinash Garg</title>
@@ -1982,7 +2004,9 @@ var IYA_CONFIG_API = "https://www.internetyouthacademy.com/api/masterclass/publi
      work before the network answers, which is why the early return existed — and
      post anyway, sending the stored id as `browserId` so the server files this
      arrival under the same person instead of inventing a new one. */
-  var existing = stored();
+  /* The pixel snippet in <head> already chose this browser's id (17 Sep 2026); use it
+     even when storage is blocked, so the server files the visit under the id Meta got. */
+  var existing = stored() || window.__iyaBid || null;
   if (existing) { attach(existing); }
 
   var body = { landingUrl: location.href, referrer: document.referrer || null, fbp: fbp() };
