@@ -876,7 +876,7 @@ svg.ic{width:14px;height:14px;fill:var(--gold-2);vertical-align:-2px}
         <a href="#register" class="btn btn--big">Book my seat — <span data-cfg="price">₹199</span> <span class="btn__arrow">→</span></a>
         <a href="#learn" class="btn--ghost">See what you'll learn</a>
       </div>
-      <a href="#bonuses" class="bonus-teaser">&#127873; Plus <b>four free bonuses</b> &mdash; included free</a>
+      <a href="#bonuses" class="bonus-teaser">&#127873; Plus <b>six free bonuses</b> &mdash; included free</a>
       <div class="hero__meta">
         <div class="m"><span class="mk">When</span><span class="mv"><span class="g" data-cfg="dateShort">Sun 13 Sep</span></span></div>
         <div class="m"><span class="mk">Doors</span><span class="mv"><span data-cfg="time">11:00 AM IST</span></span></div>
@@ -1382,7 +1382,7 @@ run();
     <div class="was" style="font-size:22px;margin-bottom:-4px">₹4,999</div>
     <div class="offer__price" data-cfg="price">₹199</div>
     <div class="offer__sub">Everything above, shown live in 90 minutes.</div>
-    <a href="#bonuses" class="bonus-teaser" style="margin:4px 0 6px">&#127873; Plus <b>four free bonuses</b> included</a>
+    <a href="#bonuses" class="bonus-teaser" style="margin:4px 0 6px">&#127873; Plus <b>six free bonuses</b> included</a>
     <a href="https://learn.internetyouthacademy.com/l/dffe2cd9ad" data-cfg-href="registrationUrl" class="btn btn--big">Book my seat now <span class="btn__arrow">→</span></a>
     <div class="offer__meta"><span data-cfg="dateFull">Sun 13 Sep · 11:00 AM IST</span> · seat confirmed instantly · join link on WhatsApp</div>
   </div></div>
@@ -1590,46 +1590,178 @@ run();
 @media(prefers-reduced-motion:reduce){.bonus-teaser{animation:none}}
 </style>
 <!-- BONUSES -->
+<style>
+.bcard--wide{grid-column:1/-1}
+@media(min-width:820px){.bcard--wide{display:grid;grid-template-columns:1.1fr 1fr}.bcard--wide .bcard__img{aspect-ratio:auto;min-height:100%}.bcard--wide .bcard__body{display:flex;flex-direction:column;justify-content:center}}
+.bcard__live{position:absolute;top:14px;right:14px;background:#0F9D6B;color:#fff;font-weight:800;font-size:12px;padding:6px 12px;border-radius:999px;z-index:2;letter-spacing:.3px}
+#bonuses.bon-in .bcard:nth-child(5){animation-delay:.75s}
+/* ---- Bonus 06 spotlight ---- */
+.trk{--em:#0F9D6B;--em2:#14B87E;--mint:#48E8A8;--teal:#1590A3;--gd:#06120E;position:relative;margin:56px auto 0;text-align:left;border-radius:28px;padding:34px 30px 30px;background:radial-gradient(120% 90% at 100% 0%,rgba(15,157,107,.28),transparent 55%),radial-gradient(90% 80% at 0% 100%,rgba(21,144,163,.22),transparent 60%),#07140F;border:1px solid rgba(72,232,168,.35);box-shadow:0 40px 120px -40px rgba(15,157,107,.55),inset 0 0 0 1px rgba(255,255,255,.03);overflow:hidden}
+.trk::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(72,232,168,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(72,232,168,.06) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(180deg,#000,transparent 70%);pointer-events:none}
+.trk>*{position:relative}
+.trk__top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.trk__tag{background:var(--mint);color:var(--gd);font-weight:800;font-size:12.5px;letter-spacing:.8px;padding:6px 13px;border-radius:999px;text-transform:uppercase}
+.trk__star{border:1px solid rgba(72,232,168,.55);color:var(--mint);font-weight:800;font-size:12.5px;padding:5px 12px;border-radius:999px}
+.trk__h{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(26px,4vw,40px);line-height:1.08;color:#fff;margin:4px 0 10px}
+.trk__h span{color:var(--mint)}
+.trk__lead{font-size:17px;color:#D8F5E8;max-width:780px;line-height:1.55}
+.trk__chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 26px}
+.trk__chip{background:rgba(72,232,168,.10);border:1px solid rgba(72,232,168,.35);color:#E6FFF4;border-radius:999px;padding:7px 13px;font-size:13.5px;font-weight:700}
+.trk__chip b{color:var(--mint)}
+/* mini dashboard */
+.dash{background:#FBFDFC;border-radius:18px;padding:0;overflow:hidden;box-shadow:0 30px 70px -30px rgba(0,0,0,.8);color:#0B241B;font-family:Arial,Helvetica,sans-serif}
+.dash__bar{background:#06120E;color:#fff;padding:12px 18px;display:flex;align-items:center;gap:10px;border-bottom:4px solid #0F9D6B}
+.dash__bar b{font-size:15px;letter-spacing:.3px}
+.dash__bar i{font-style:normal;margin-left:auto;font-size:11.5px;color:#48E8A8;font-weight:700}
+.dash__dots{display:flex;gap:5px}.dash__dots span{width:9px;height:9px;border-radius:50%;background:#2c3f38}
+.dash__in{padding:16px 16px 18px}
+.dash__tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media(min-width:760px){.dash__tiles{grid-template-columns:repeat(6,1fr)}}
+.tile{background:#06120E;color:#fff;border-radius:10px;padding:10px 8px;text-align:center}
+.tile--em{background:#0F9D6B}
+.tile__k{font-size:10px;font-weight:700;letter-spacing:.6px;color:#48E8A8;text-transform:uppercase}
+.tile--em .tile__k{color:#E6FFF4}
+.tile__v{font-size:clamp(16px,2.2vw,21px);font-weight:800;margin-top:3px;font-variant-numeric:tabular-nums}
+.dash__goal{margin:16px 2px 6px;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center}
+.dash__goal .pct{font-size:28px;font-weight:800;color:#0F9D6B;grid-row:span 2;font-variant-numeric:tabular-nums}
+.dash__goal .lab{font-size:11px;font-weight:700;color:#0F9D6B;letter-spacing:.6px;text-transform:uppercase}
+.gbar{height:14px;border-radius:999px;background:#E3EFEA;overflow:hidden}
+.gbar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#0F9D6B,#48E8A8);transition:width 1.6s cubic-bezier(.22,1,.36,1)}
+.dash__goal small{grid-column:2;font-size:12px;color:#35524A;font-weight:600}
+.dash__grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
+@media(min-width:760px){.dash__grid{grid-template-columns:1.45fr 1fr}}
+.panel{border:1px solid #D3E7DF;border-radius:12px;padding:12px 12px 10px;background:#fff}
+.panel h4{font-size:12.5px;font-weight:800;color:#0B241B;margin:0 0 8px}
+.chart{display:flex;align-items:flex-end;gap:4px;height:120px;border-bottom:1px solid #D3E7DF;padding-bottom:2px}
+.chart .d{flex:1;display:flex;gap:2px;align-items:flex-end;height:100%}
+.chart .d i{flex:1;border-radius:3px 3px 0 0;height:0;transition:height 1.1s cubic-bezier(.22,1,.36,1)}
+.chart .d i.s{background:#A9C4BB}.chart .d i.r{background:#0F9D6B}
+.legend{display:flex;gap:14px;font-size:11px;color:#35524A;margin-top:7px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;background:#A9C4BB}
+.legend span.r::before{background:#0F9D6B}
+.vrow{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:7px 0;border-bottom:1px dashed #D3E7DF;font-size:12.5px}
+.vrow:last-child{border-bottom:0}
+.vrow .n{font-weight:700}.vrow .p{font-weight:800;font-variant-numeric:tabular-nums}.vrow .p.neg{color:#D64545}.vrow .p.pos{color:#0F9D6B}
+.badge{font-size:10.5px;font-weight:800;letter-spacing:.5px;padding:4px 9px;border-radius:6px;opacity:0;transform:scale(.6);transition:opacity .4s,transform .5s cubic-bezier(.3,1.6,.5,1)}
+.badge.on{opacity:1;transform:none}
+.b-prof{background:#BFEBD7;color:#0B5E40}.b-kill{background:#D64545;color:#fff}.b-scale{background:#0F9D6B;color:#fff}
+.dash__note{font-size:11px;color:#6d8a80;text-align:right;padding:0 16px 12px;font-style:italic}
+/* screenshots */
+.shots{display:grid;grid-template-columns:1fr;gap:14px;margin-top:26px}
+@media(min-width:760px){.shots{grid-template-columns:1fr 1fr}}
+.shot{background:#0b1f18;border:1px solid rgba(72,232,168,.25);border-radius:16px;overflow:hidden;transition:transform .3s,border-color .3s}
+.shot:hover{transform:translateY(-4px);border-color:rgba(72,232,168,.6)}
+.shot__img{background:#fff;aspect-ratio:16/8.2;overflow:hidden}
+.shot__img img{width:100%;height:100%;object-fit:cover;object-position:top left;display:block}
+.shot__cap{padding:12px 16px 14px;color:#E6FFF4;font-size:14.5px;line-height:1.45}
+.shot__cap b{display:block;color:#48E8A8;font-size:12px;letter-spacing:.7px;text-transform:uppercase;margin-bottom:3px}
+.trk__foot{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;border-top:1px solid rgba(72,232,168,.2);padding-top:16px}
+.trk__foot p{color:#BFE9D6;font-size:14px;margin:0;max-width:640px}
+.trk__foot p b{color:#fff}
+#bonuses.anim-ready .trk{opacity:0;transform:translateY(42px) scale(.97)}
+#bonuses.bon-in .trk{animation:bPop .9s cubic-bezier(.22,1.15,.36,1) .9s forwards}
+@media(max-width:520px){.trk{padding:24px 16px 20px;border-radius:22px}.dash__dots{display:none}.dash__bar{padding:10px 12px}.dash__bar b{font-size:13px}.dash__bar i{font-size:10px}.dash__in{padding:12px 10px 14px}}
+@media(prefers-reduced-motion:reduce){#bonuses .trk{opacity:1!important;transform:none!important;animation:none!important}.gbar i,.chart .d i,.badge{transition:none!important}}
+</style>
 <section class="sec sec--dark" id="bonuses">
     <div class="bon-bg" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="p" style="left:7%;width:5px;height:5px;animation-duration:9s;animation-delay:0s"></span><span class="p" style="left:16%;width:3px;height:3px;animation-duration:7s;animation-delay:-3s"></span><span class="p" style="left:27%;width:5px;height:5px;animation-duration:11s;animation-delay:-1s"></span><span class="p" style="left:36%;width:4px;height:4px;animation-duration:8s;animation-delay:-5s"></span><span class="p" style="left:45%;width:3px;height:3px;animation-duration:10s;animation-delay:-2s"></span><span class="p" style="left:54%;width:6px;height:6px;animation-duration:12s;animation-delay:-6s"></span><span class="p" style="left:63%;width:4px;height:4px;animation-duration:7s;animation-delay:-4s"></span><span class="p" style="left:72%;width:5px;height:5px;animation-duration:9s;animation-delay:-8s"></span><span class="p" style="left:81%;width:3px;height:3px;animation-duration:8s;animation-delay:-1s"></span><span class="p" style="left:90%;width:5px;height:5px;animation-duration:11s;animation-delay:-7s"></span><span class="p" style="left:33%;width:4px;height:4px;animation-duration:12s;animation-delay:-9s"></span><span class="p" style="left:58%;width:3px;height:3px;animation-duration:9s;animation-delay:-10s"></span></div>
   <div class="wrap" style="text-align:center">
     <div class="b-head">
       <span class="eyebrow">&#9733; Free bonuses included</span>
-      <h2 class="sec__h">Register today and also unlock <span class="g">four bonuses &mdash; free.</span></h2>
-      <p class="sec__lead" style="margin-left:auto;margin-right:auto">Everything you need to actually start &mdash; and keep going &mdash; after the class. All delivered the moment you register.</p>
+      <h2 class="sec__h">Register today and also unlock <span class="g">six bonuses &mdash; free.</span></h2>
+      <p class="sec__lead" style="margin-left:auto;margin-right:auto">Tools to create, test and track your campaigns &mdash; ready to use the day after the class. Bonuses 1 to 4 and 6 are delivered the moment you register.</p>
     </div>
     <div class="bonusgrid">
       <div class="bcard">
-        <div class="bcard__img"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_34HR7WmluewwEsPfvKgySyo21uE/hf_20260808_032757_f63d6233-cd00-4cd5-93eb-e09758bf3ae0_min.webp" alt="The Affiliate Beginner Kit"><span class="bcard__tag">Bonus 1</span><span class="bcard__free">FREE</span></div>
-        <div class="bcard__body"><div class="bcard__h">The Affiliate Beginner Kit</div><div class="bcard__d">Your complete starter playbook &mdash; mindset, budget, methods, niches and a 7-day action plan.</div><div class="bcard__pill"><span class="now">&#10003; Free with your seat</span></div></div>
+        <div class="bcard__img"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_34HR7WmluewwEsPfvKgySyo21uE/hf_20260918_165843_666577ed-61b8-49b1-b0b0-ca107f4305d5_min.webp" alt="The Creative Refill Pack"><span class="bcard__tag">Bonus 1</span><span class="bcard__free">FREE</span></div>
+        <div class="bcard__body"><div class="bcard__h">The Creative Refill Pack</div><div class="bcard__d">Turn one winning ad into ten fresh ones in a single sitting &mdash; with 6 copy-ready AI prompts and a built-in Meta-safe check.</div><div class="bcard__pill"><span class="now">&#10003; Free with your seat</span></div></div>
       </div>
       <div class="bcard">
-        <div class="bcard__img"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_34HR7WmluewwEsPfvKgySyo21uE/hf_20260808_032757_43880bb9-dd10-4b30-97b8-1f231ef273bf_min.webp" alt="The Monetization Path"><span class="bcard__tag">Bonus 2</span><span class="bcard__free">FREE</span></div>
-        <div class="bcard__body"><div class="bcard__h">The Monetization Path</div><div class="bcard__d">Find the income model that fits you and build your online presence &mdash; a clear 90-day roadmap.</div><div class="bcard__pill"><span class="now">&#10003; Free with your seat</span></div></div>
+        <div class="bcard__img"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_34HR7WmluewwEsPfvKgySyo21uE/hf_20260918_165843_4e79301b-5dd4-4460-88db-3f73c4b6720a_min.webp" alt="The Landing Page Variant Kit"><span class="bcard__tag">Bonus 2</span><span class="bcard__free">FREE</span></div>
+        <div class="bcard__body"><div class="bcard__h">The Landing Page Variant Kit</div><div class="bcard__d">Five proven page styles for one offer &mdash; story, quiz, listicle, video and comparison &mdash; with prompts to build each one fast.</div><div class="bcard__pill"><span class="now">&#10003; Free with your seat</span></div></div>
       </div>
       <div class="bcard">
-        <div class="bcard__img"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_34HR7WmluewwEsPfvKgySyo21uE/hf_20260808_032757_ebcbab15-9001-4aeb-9ea9-d0f31f8a524b_min.webp" alt="Lifetime AI Updates"><span class="bcard__tag">Bonus 3</span><span class="bcard__free">FREE</span></div>
-        <div class="bcard__body"><div class="bcard__h">Lifetime AI Updates</div><div class="bcard__d">Fresh AI tools, prompts and tactics dropped in your private group &mdash; so you never fall behind.</div><div class="bcard__pill"><span class="now">&#10003; Free with your seat</span></div></div>
+        <div class="bcard__img"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_34HR7WmluewwEsPfvKgySyo21uE/hf_20260918_165843_d634d53b-c729-4d12-962f-1355e43a28f7_min.webp" alt="The Ad Account Safety Checklist"><span class="bcard__tag">Bonus 3</span><span class="bcard__free">FREE</span></div>
+        <div class="bcard__body"><div class="bcard__h">The Ad Account Safety Checklist</div><div class="bcard__d">The clean setup, the 12-point pre-launch check and the weekly review that keep your ad account healthy.</div><div class="bcard__pill"><span class="now">&#10003; Free with your seat</span></div></div>
       </div>
       <div class="bcard">
-        <div class="bcard__img"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_34HR7WmluewwEsPfvKgySyo21uE/hf_20260808_032757_b9a1b977-3920-4159-9ab1-295c37101df6_min.webp" alt="Social Media Growth Path"><span class="bcard__tag">Bonus 4</span><span class="bcard__free">FREE</span></div>
-        <div class="bcard__body"><div class="bcard__h">Social Media Growth Path</div><div class="bcard__d">30 days of platform-optimized content in ~15 minutes, using our premium prompt engine.</div><div class="bcard__pill"><span class="now">&#10003; Free with your seat</span></div></div>
+        <div class="bcard__img"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_34HR7WmluewwEsPfvKgySyo21uE/hf_20260918_165843_84f38d6e-5922-44e7-a54a-9f528637f18c_min.webp" alt="The Offer Scorecard"><span class="bcard__tag">Bonus 4</span><span class="bcard__free">FREE</span></div>
+        <div class="bcard__body"><div class="bcard__h">The Offer Scorecard</div><div class="bcard__d">Score any offer in 10 minutes, before you spend a rupee on ads. Ten questions, one number, one clear decision.</div><div class="bcard__pill"><span class="now">&#10003; Free with your seat</span></div></div>
+      </div>
+      <div class="bcard bcard--wide">
+        <div class="bcard__img"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_34HR7WmluewwEsPfvKgySyo21uE/hf_20260918_165843_a9efbc9e-7047-4e3b-b635-a978fe33b8d7_min.webp" alt="The 7-Day Launch Planner"><span class="bcard__tag">Bonus 5</span><span class="bcard__live">&#9733; LIVE-ONLY</span></div>
+        <div class="bcard__body"><div class="bcard__h">The 7-Day Launch Planner</div><div class="bcard__d">One offer, seven days: every bonus put to work, one day at a time &mdash; and a clear keep, fix or drop decision at the end. <b style="color:#fff">Given only to those who stay till the end of the masterclass.</b></div><div class="bcard__pill"><span class="now">&#9733; Stay till the end to unlock</span></div></div>
       </div>
     </div>
-    <div class="bonus-total">All four bonuses are <b>included free</b> with your &#8377;199 seat. This is why the room fills up.</div>
+
+    <!-- BONUS 06 SPOTLIGHT -->
+    <div class="trk" id="trk">
+      <div class="trk__top"><span class="trk__tag">Bonus 6</span><span class="trk__star">&#9733; The one you'll open every day</span></div>
+      <h3 class="trk__h">The Affiliate Business Tracker &mdash; <span>your whole business on one screen.</span></h3>
+      <p class="trk__lead">Type your spend, clicks and sales. Profit, ROAS, cost per sale and your goal progress calculate themselves &mdash; and every offer gets a verdict: scale it, fix it, or stop it.</p>
+      <div class="trk__chips"><span class="trk__chip"><b>10</b> tabs</span><span class="trk__chip"><b>5,000+</b> ready formulas</span><span class="trk__chip">Automatic offer verdicts</span><span class="trk__chip">Monthly goal progress bar</span><span class="trk__chip">Ads · website · social · email</span><span class="trk__chip">Account security check</span><span class="trk__chip">Excel (.xlsx) file</span></div>
+
+      <div class="dash" aria-label="Preview of the tracker dashboard with demo data">
+        <div class="dash__bar"><div class="dash__dots"><span></span><span></span><span></span></div><b>PROFIT DASHBOARD</b><i>SEPTEMBER · DEMO DATA</i></div>
+        <div class="dash__in">
+          <div class="dash__tiles">
+            <div class="tile"><div class="tile__k">Net revenue</div><div class="tile__v" data-to="83733" data-pre="₹">₹0</div></div>
+            <div class="tile"><div class="tile__k">Ad spend</div><div class="tile__v" data-to="70003" data-pre="₹">₹0</div></div>
+            <div class="tile tile--em"><div class="tile__k">Profit</div><div class="tile__v" data-to="13730" data-pre="₹">₹0</div></div>
+            <div class="tile"><div class="tile__k">ROAS</div><div class="tile__v" data-to="1.20" data-dec="2" data-suf="x">0.00x</div></div>
+            <div class="tile"><div class="tile__k">Sales</div><div class="tile__v" data-to="24">0</div></div>
+            <div class="tile"><div class="tile__k">Cost per sale</div><div class="tile__v" data-to="2917" data-pre="₹">₹0</div></div>
+          </div>
+          <div class="dash__goal"><div class="pct" data-to="27" data-suf="%">0%</div><div class="lab">Monthly profit goal</div><div class="gbar"><i data-w="27.5"></i></div><small>₹13,730 of ₹50,000 goal &middot; ₹36,270 to go</small></div>
+          <div class="dash__grid">
+            <div class="panel"><h4>Daily ad spend vs net revenue</h4><div class="chart" id="trkChart"></div><div class="legend"><span>Ad spend</span><span class="r">Net revenue</span></div></div>
+            <div class="panel"><h4>Every offer gets a verdict</h4>
+              <div class="vrow"><span class="n">Garden guide</span><span class="p pos">+₹14,529</span><span class="badge b-prof">PROFITABLE</span></div>
+              <div class="vrow"><span class="n">Language course</span><span class="p pos">+₹4,542</span><span class="badge b-prof">PROFITABLE</span></div>
+              <div class="vrow"><span class="n">Fitness app</span><span class="p neg">&minus;₹5,341</span><span class="badge b-kill">KILL</span></div>
+              <div class="vrow"><span class="n">Best landing page</span><span class="p">₹13.79 / visit</span><span class="badge b-scale">RANK 1</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="dash__note">Demo data from imaginary offers &mdash; you get the blank template to fill with your own numbers.</div>
+      </div>
+
+      <div class="shots">
+        <div class="shot"><div class="shot__img"><img loading="lazy" src="assets/tracker/tracker-map.jpg" alt="Business Map tab: revenue by channel and business health"></div><div class="shot__cap"><b>Business map</b>See where your money really comes from &mdash; ads, website, social or email.</div></div>
+        <div class="shot"><div class="shot__img"><img loading="lazy" src="assets/tracker/tracker-offers.jpg" alt="Offers tab: automatic verdict per offer"></div><div class="shot__cap"><b>Offer verdicts</b>Know when to scale an offer &mdash; and when to stop it before it eats your budget.</div></div>
+        <div class="shot"><div class="shot__img"><img loading="lazy" src="assets/tracker/tracker-pages.jpg" alt="Landing Pages tab: pages ranked by rupees per visit"></div><div class="shot__cap"><b>Landing page ranking</b>Find the page that earns the most per visit &mdash; ranked and highlighted for you.</div></div>
+        <div class="shot"><div class="shot__img"><img loading="lazy" src="assets/tracker/tracker-accounts.jpg" alt="Accounts tab: two-factor, renewals and security score"></div><div class="shot__cap"><b>Account security</b>Every account, its two-factor status and renewal date &mdash; before a lost login or expired domain costs you a week.</div></div>
+      </div>
+      <div class="trk__foot"><p><b>Built for affiliate marketers</b> &mdash; and just as useful for course creators, coaches and anyone running an online business. Screens show demo data; this is a tracking tool, not a promise of results.</p><span class="trk__chip">&#10003; Free with your seat</span></div>
+    </div>
+
+    <div class="bonus-total">All six bonuses are <b>included free</b> with your &#8377;199 seat.</div>
   </div>
 </section>
 <script>(function(){var s=document.getElementById('bonuses');if(!s)return;
 if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
 s.classList.add('anim-ready');
-function count(){var el=document.getElementById('bnum');if(!el)return;var target=17900,dur=1400,t0=null;
-function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=1-Math.pow(1-p,3);var v=Math.round(target*e);
-el.textContent='₹'+v.toLocaleString('en-IN')+(p>=1?'+':'');if(p<1)requestAnimationFrame(step);}
-requestAnimationFrame(step);}
-function go(){s.classList.add('bon-in');count();}
+function go(){s.classList.add('bon-in');}
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){go();io.disconnect();}});},{threshold:.18});io.observe(s);
 setTimeout(function(){if(!s.classList.contains('bon-in'))go();},3000);}else{go();}
 })();</script>
+<script>(function(){var t=document.getElementById('trk');if(!t)return;
+var data=[[4958,3737],[5736,7074],[5684,3760],[5775,3979],[5586,3855],[5323,7192],[5059,6917],[4410,7042],[4859,7188],[4550,3857],[4493,7206],[4918,7154],[4407,7626],[4245,7144]];
+var ch=document.getElementById('trkChart'),mx=8000,html='';
+data.forEach(function(d){html+='<div class="d"><i class="s" data-h="'+(d[0]/mx*100).toFixed(1)+'"></i><i class="r" data-h="'+(d[1]/mx*100).toFixed(1)+'"></i></div>';});
+ch.innerHTML=html;
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+function fmt(v,dec){return dec?v.toFixed(dec):Math.round(v).toLocaleString('en-IN');}
+function count(el){var to=parseFloat(el.getAttribute('data-to')),dec=+(el.getAttribute('data-dec')||0),pre=el.getAttribute('data-pre')||'',suf=el.getAttribute('data-suf')||'';
+ if(reduce){el.textContent=pre+fmt(to,dec)+suf;return;}var t0=null,dur=1500;
+ function st(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=pre+fmt(to*e,dec)+suf;if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}
+function run(){t.querySelectorAll('[data-to]').forEach(count);
+ var g=t.querySelector('.gbar i');if(g)g.style.width=g.getAttribute('data-w')+'%';
+ ch.querySelectorAll('i').forEach(function(b,i){setTimeout(function(){b.style.height=b.getAttribute('data-h')+'%';},reduce?0:i*35);});
+ t.querySelectorAll('.badge').forEach(function(b,i){setTimeout(function(){b.classList.add('on');},reduce?0:900+i*250);});}
+if(!reduce&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){run();io.disconnect();}},{threshold:.3});io.observe(t.querySelector('.dash'));}else{run();}
+})();</script>
+
 
 
 
