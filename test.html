@@ -1,0 +1,879 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The AI Affiliate Machine — Live 90-minute masterclass</title>
+<meta name="description" content="A live 90-minute masterclass. Watch four affiliate systems get built on screen — content, operations, finance and websites — then build your own.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:title" content="The AI Affiliate Machine — Live 90-minute masterclass">
+<meta property="og:description" content="Watch four affiliate systems get built on screen, live. Then build your own.">
+<meta property="og:image" content="assets/og-cover.jpg">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script>
+/* ------------------------------------------------------------------
+   IYA_CONFIG — build-time fallback.
+   scripts/inject-config.mjs discovers any *.html carrying this block and
+   rewrites these values from the admin API on every Vercel build, so the
+   date/time/price here are never more than one save stale.
+   registrationUrl is PINNED below (registrationUrl:IYA_CONFIG.registrationUrl),
+   which tells the injector to leave this page's checkout link alone.
+   ------------------------------------------------------------------ */
+IYA_CONFIG = {
+  webinarDate:     "2026-09-23",
+  webinarTime:     "08:00 PM",
+  price:           "₹199",
+  registrationUrl: "https://learn.internetyouthacademy.com/l/36035e6e88",
+  whatsappLink:    "https://chat.whatsapp.com/KqvfB8iCeIEHxb4gWtRapL",
+  seatCount:       300
+};
+</script>
+
+<style>
+/* ==================================================================
+   PALETTE
+   Deep green-black ground + IYA emerald/teal. One warm CTA colour that
+   appears NOWHERE else on the page — that isolation is the whole point.
+   Contrast vs ground #06140F:
+     ink      #FFFFFF  18.84:1     emerald   #0E9F6E   5.56:1
+     body     #D7E8DE  14.79:1     teal      #0D9488   5.03:1
+     muted    #9FB8AC   8.05:1     CTA       #FF8A1F   7.99:1
+   CTA sits brighter than the accent, so the button still wins a squint
+   test and for colour-blind visitors — not just a hue difference.
+   ================================================================== */
+:root{
+  --ground:#06140F;  --surface:#0C211A;  --surface-2:#113024;
+  --line:#1C4435;    --line-soft:rgba(255,255,255,.07);
+  --ink:#FFFFFF;     --body:#D7E8DE;     --muted:#9FB8AC;
+  --emerald:#0E9F6E; --emerald-lt:#34D399; --teal:#0D9488;
+  --cta:#FF8A1F;     --cta-lt:#FFA53D;   --cta-ink:#1A0F02;
+  --r:16px; --r-lg:22px;
+  --wrap:1120px;
+  --display:'Anton',system-ui,sans-serif;
+  --sans:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  background:var(--ground);color:var(--body);
+  font-family:var(--sans);font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  padding-bottom:84px; /* clears the sticky mobile bar */
+}
+@media(min-width:861px){body{padding-bottom:0}}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
+section{padding:76px 0;position:relative}
+@media(max-width:700px){section{padding:54px 0}}
+
+/* --- type --- */
+h1,h2,h3{color:var(--ink);font-weight:800;line-height:1.14;letter-spacing:-.015em}
+h1{font-size:clamp(34px,6.2vw,58px)}
+h2{font-size:clamp(27px,4.4vw,42px)}
+h3{font-size:clamp(19px,2.2vw,23px)}
+.display{font-family:var(--display);font-weight:400;letter-spacing:.01em;text-transform:uppercase;line-height:1.02}
+.eyebrow{
+  font-size:12px;font-weight:800;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--emerald-lt);margin-bottom:14px;display:block
+}
+.lede{font-size:clamp(17px,2vw,20px);color:var(--body);max-width:62ch}
+.muted{color:var(--muted)}
+.em{color:var(--emerald-lt)}
+
+/* --- section head --- */
+.shead{max-width:70ch;margin-bottom:38px}
+.shead h2+p{margin-top:16px}
+.rule{width:56px;height:4px;border-radius:99px;background:var(--emerald);margin:18px 0 0}
+
+/* --- buttons: the ONLY amber on the page --- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:linear-gradient(135deg,var(--cta-lt),var(--cta));
+  color:var(--cta-ink);border:0;border-radius:14px;
+  font-family:var(--sans);font-size:18px;font-weight:800;letter-spacing:-.01em;
+  padding:19px 34px;cursor:pointer;text-decoration:none;
+  box-shadow:0 10px 30px -10px rgba(255,138,31,.55);
+  transition:transform .15s ease,box-shadow .15s ease;
+  text-align:center
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 16px 38px -12px rgba(255,138,31,.7)}
+.btn:active{transform:translateY(0)}
+.btn--full{width:100%}
+.btn__arrow{font-size:20px;line-height:1}
+.btn-note{font-size:14px;color:var(--muted);margin-top:12px}
+
+/* --- cards --- */
+.card{
+  background:var(--surface);border:1px solid var(--line-soft);
+  border-radius:var(--r-lg);padding:26px
+}
+.card--edge{border-top:3px solid var(--emerald)}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:860px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+/* ================= TOPBAR ================= */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  background:rgba(6,20,15,.88);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line-soft)
+}
+.topbar__in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 20px;max-width:var(--wrap);margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.brand img{width:34px;height:34px;border-radius:9px}
+.brand b{color:var(--ink);font-size:15px;font-weight:800;letter-spacing:-.01em;line-height:1.15}
+.brand span{display:block;font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.04em}
+.topbar .btn{padding:12px 20px;font-size:15px;border-radius:11px}
+@media(max-width:620px){.topbar .btn{display:none}.brand span{display:none}}
+
+/* ================= HERO ================= */
+.hero{
+  padding:64px 0 72px;
+  background:
+    radial-gradient(900px 420px at 78% -8%, rgba(14,159,110,.20), transparent 62%),
+    radial-gradient(700px 380px at 6% 12%, rgba(13,148,136,.14), transparent 60%);
+}
+.hero__grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:start}
+@media(max-width:940px){.hero__grid{grid-template-columns:1fr;gap:32px}}
+.hero h1{margin-bottom:20px}
+.hero h1 .hl{color:var(--emerald-lt)}
+.badges{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px}
+.badge{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--surface-2);border:1px solid var(--line);
+  border-radius:99px;padding:8px 14px;font-size:13.5px;font-weight:600;color:var(--body)
+}
+.badge i{width:6px;height:6px;border-radius:99px;background:var(--emerald-lt);display:inline-block;flex:none}
+
+/* session / booking card */
+.book{
+  background:linear-gradient(180deg,var(--surface-2),var(--surface));
+  border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:26px;position:sticky;top:78px
+}
+@media(max-width:940px){.book{position:static}}
+.book__label{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--emerald-lt)}
+.book__when{font-size:25px;font-weight:800;color:var(--ink);margin:10px 0 4px;line-height:1.22}
+.book__meta{font-size:14.5px;color:var(--muted)}
+.book__rows{margin:20px 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:14px 0}
+.book__row{display:flex;justify-content:space-between;gap:14px;padding:7px 0;font-size:15px}
+.book__row span{color:var(--muted)}
+.book__row b{color:var(--ink);font-weight:700}
+.price{display:flex;align-items:baseline;gap:12px;margin-bottom:18px}
+.price__now{font-family:var(--display);font-size:46px;color:var(--ink);line-height:1}
+.price__was{font-size:18px;color:var(--muted);text-decoration:line-through}
+
+/* countdown */
+.cd{display:flex;gap:8px;margin:0 0 18px}
+.cd__unit{
+  flex:1;background:var(--ground);border:1px solid var(--line);
+  border-radius:12px;padding:10px 6px;text-align:center
+}
+.cd__n{font-family:var(--display);font-size:26px;color:var(--emerald-lt);line-height:1;display:block}
+.cd__l{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:5px;display:block}
+.cd--done{
+  display:block;background:var(--ground);border:1px solid var(--line);
+  border-radius:12px;padding:13px 14px;font-size:14.5px;color:var(--body);text-align:center
+}
+
+/* ================= CREDENTIAL STRIP ================= */
+.creds{border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:30px 0;background:var(--surface)}
+.creds__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+@media(max-width:760px){.creds__grid{grid-template-columns:repeat(2,1fr);gap:24px}}
+.cred b{display:block;font-family:var(--display);font-size:clamp(20px,2.4vw,27px);color:var(--ink);line-height:1.1}
+.cred span{display:block;font-size:13px;color:var(--muted);margin-top:7px;line-height:1.45}
+
+/* ================= CHIPS (the to-do list) ================= */
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:800px;margin:0 auto}
+.chip{
+  background:var(--surface);border:1px solid var(--line);border-radius:99px;
+  padding:11px 18px;font-size:15px;font-weight:600;color:var(--body);
+  display:inline-flex;align-items:center;gap:9px
+}
+.chip i{width:7px;height:7px;border-radius:99px;background:var(--teal);display:inline-block;flex:none}
+.verdict{text-align:center;margin-top:34px;font-size:clamp(18px,2.4vw,23px);font-weight:700;color:var(--ink)}
+.verdict .bad{color:var(--muted)}
+.verdict .good{color:var(--emerald-lt)}
+
+/* ================= SYSTEM CARDS ================= */
+.sys{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r-lg);padding:28px;border-top:3px solid var(--emerald)}
+.sys__no{font-family:var(--display);font-size:13px;letter-spacing:.14em;color:var(--emerald-lt)}
+.sys h3{margin:10px 0 6px}
+.sys__sub{font-size:15px;color:var(--muted);margin-bottom:20px}
+.cmp{width:100%;border-collapse:collapse;font-size:15px}
+.cmp th{
+  font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+  font-weight:800;text-align:left;padding:0 0 10px
+}
+.cmp th:last-child{color:var(--emerald-lt)}
+.cmp td{padding:11px 0;border-top:1px solid var(--line-soft);vertical-align:top}
+.cmp td:first-child{color:var(--muted);width:26%;font-weight:600;padding-right:10px}
+.cmp td:nth-child(2){color:var(--body);width:37%;padding-right:12px}
+.cmp td:last-child{color:var(--ink);font-weight:700}
+
+/* ================= MARKET RATES ================= */
+.rate{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r-lg);padding:26px;border-top:3px solid var(--teal)}
+.rate h3{font-size:17px;margin-bottom:12px}
+.rate b{display:block;font-family:var(--display);font-size:clamp(23px,2.8vw,31px);color:var(--ink);line-height:1.08}
+.rate span{display:block;font-size:13.5px;color:var(--muted);margin-top:9px}
+.src{font-size:13.5px;color:var(--muted);margin-top:22px;font-style:italic;text-align:center}
+
+/* ================= LISTS ================= */
+.ticks{display:grid;gap:13px;margin-top:6px}
+.tick{display:flex;gap:13px;align-items:flex-start;font-size:16.5px}
+.tick svg{flex:none;margin-top:3px}
+.tick b{color:var(--ink);font-weight:700}
+
+/* ================= AUTHOR ================= */
+.author{display:grid;grid-template-columns:270px 1fr;gap:38px;align-items:start}
+@media(max-width:760px){.author{grid-template-columns:1fr;gap:24px}}
+.author__img{border-radius:var(--r-lg);border:1px solid var(--line);width:100%;aspect-ratio:1/1;object-fit:cover;background:var(--surface-2)}
+.story{display:grid;gap:16px;margin-top:20px}
+.story__step{display:flex;gap:16px;align-items:flex-start}
+.story__n{
+  font-family:var(--display);font-size:14px;color:var(--ground);background:var(--emerald);
+  width:29px;height:29px;border-radius:99px;display:grid;place-items:center;flex:none;margin-top:3px
+}
+
+/* ================= FIT ================= */
+.fit{border-radius:var(--r-lg);padding:26px;border:1px solid var(--line)}
+.fit--yes{background:var(--surface-2);border-top:3px solid var(--emerald)}
+.fit--no{background:var(--surface);border-top:3px solid var(--line)}
+.fit h3{font-size:18px;margin-bottom:16px}
+.fit ul{list-style:none;display:grid;gap:11px}
+.fit li{display:flex;gap:11px;font-size:16px;align-items:flex-start}
+.fit li::before{content:"";width:7px;height:7px;border-radius:99px;flex:none;margin-top:9px;background:var(--emerald-lt)}
+.fit--no li::before{background:var(--muted)}
+
+/* ================= FAQ ================= */
+.faq{max-width:840px;margin:0 auto}
+.qa{border-bottom:1px solid var(--line-soft)}
+.qa summary{
+  cursor:pointer;list-style:none;padding:20px 40px 20px 0;position:relative;
+  font-size:17.5px;font-weight:700;color:var(--ink)
+}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{
+  content:"+";position:absolute;right:6px;top:19px;font-size:24px;color:var(--emerald-lt);
+  font-weight:400;transition:transform .2s ease
+}
+.qa[open] summary::after{transform:rotate(45deg)}
+.qa__a{padding:0 0 22px;color:var(--body);max-width:68ch}
+
+/* ================= DISCLOSURE ================= */
+/* CCPA 2022 cl.11(2)(b) and the ASCI education guideline both require the
+   disclaimer to be no smaller than the claim it qualifies. This is 17px —
+   the same as body copy. Do not shrink it. */
+.legal{
+  background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r-lg);
+  padding:28px;font-size:17px;line-height:1.62;color:var(--body);max-width:900px;margin:0 auto
+}
+.legal b{color:var(--ink);display:block;margin-bottom:10px;font-size:17px}
+.legal p+p{margin-top:13px}
+
+/* ================= FOOTER ================= */
+footer{border-top:1px solid var(--line-soft);padding:38px 0 46px;font-size:14.5px;color:var(--muted)}
+.foot{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+.foot a{color:var(--muted);text-decoration:none;margin-right:16px}
+.foot a:hover{color:var(--emerald-lt)}
+
+/* ================= STICKY MOBILE CTA ================= */
+.sticky{
+  position:fixed;left:0;right:0;bottom:0;z-index:70;
+  background:rgba(6,20,15,.96);backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);padding:11px 16px calc(11px + env(safe-area-inset-bottom));
+  display:flex;align-items:center;gap:14px
+}
+.sticky__price{flex:none}
+.sticky__price b{display:block;color:var(--ink);font-size:19px;font-weight:800;line-height:1.1}
+.sticky__price span{display:block;font-size:11.5px;color:var(--muted)}
+.sticky .btn{flex:1;padding:15px 18px;font-size:16px}
+@media(min-width:861px){.sticky{display:none}}
+
+@media(max-width:560px){
+  .badge{font-size:12.5px;padding:7px 11px;gap:6px}
+  .badges{gap:7px;margin-top:20px}
+  h1{font-size:clamp(30px,7.4vw,40px)}
+  .hero{padding:40px 0 52px}
+}
+.center{text-align:center}
+.mt-l{margin-top:34px}
+</style>
+</head>
+<body>
+
+<!-- ============ TOPBAR ============ -->
+<header class="topbar">
+  <div class="topbar__in">
+    <a class="brand" href="#top">
+      <img src="assets/iya-logo.png" alt="Internet Youth Academy">
+      <b>The AI Affiliate Machine<span>by Internet Youth Academy</span></b>
+    </a>
+    <a class="btn js-cta" href="#" data-loc="topbar">Book my seat — <span data-cfg="price">₹199</span></a>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero__grid">
+      <div>
+        <span class="eyebrow">Live masterclass · 90 minutes</span>
+        <h1>Turn one affiliate offer into a <span class="hl">complete system</span> — live, in 90 minutes.</h1>
+        <p class="lede">Website, ad creatives, content, follow-ups. You watch each one get built on screen, in real time. Then you build your own.</p>
+        <div class="badges">
+          <span class="badge"><i></i>Built live, not slides</span>
+          <span class="badge"><i></i>Q&amp;A in the room</span>
+          <span class="badge"><i></i>Beginners welcome</span>
+          <span class="badge"><i></i>English</span>
+        </div>
+      </div>
+
+      <aside class="book">
+        <span class="book__label">Next live session</span>
+        <div class="book__when" data-cfg="dateFull">Wed 23 Sep · 08:00 PM IST</div>
+        <div class="book__meta">90 minutes · live · no recording</div>
+
+        <div class="cd" id="cd">
+          <div class="cd__unit"><b class="cd__n" id="cdD">–</b><span class="cd__l">Days</span></div>
+          <div class="cd__unit"><b class="cd__n" id="cdH">–</b><span class="cd__l">Hrs</span></div>
+          <div class="cd__unit"><b class="cd__n" id="cdM">–</b><span class="cd__l">Min</span></div>
+          <div class="cd__unit"><b class="cd__n" id="cdS">–</b><span class="cd__l">Sec</span></div>
+        </div>
+        <div class="cd--done" id="cdDone" hidden>
+          Booking is open for the next session — the date above is always current.
+        </div>
+
+        <div class="book__rows">
+          <div class="book__row"><span>Format</span><b>Live on Zoom</b></div>
+          <div class="book__row"><span>Duration</span><b>90 minutes</b></div>
+          <div class="book__row"><span>Recording</span><b>Not provided</b></div>
+          <div class="book__row"><span>Language</span><b>English</b></div>
+        </div>
+
+        <div class="price">
+          <span class="price__now" data-cfg="price">₹199</span>
+          <span class="price__was">₹4,999</span>
+        </div>
+
+        <a class="btn btn--full js-cta" href="#" data-loc="hero">
+          Book my seat — <span data-cfg="price">₹199</span> <span class="btn__arrow">→</span>
+        </a>
+        <p class="btn-note">Secure checkout · UPI, cards and net banking</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CREDENTIALS (no currency figures anywhere) ============ -->
+<div class="creds">
+  <div class="wrap">
+    <div class="creds__grid">
+      <div class="cred"><b>ClickBank Platinum</b><span>An award issued by ClickBank</span></div>
+      <div class="cred"><b>~500 worldwide</b><span>People holding Platinum status</span></div>
+      <div class="cred"><b>4,000+</b><span>People mentored</span></div>
+      <div class="cred"><b>4.4 ★</b><span>Trustpilot rating</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ THE PROBLEM ============ -->
+<section>
+  <div class="wrap">
+    <div class="shead center" style="margin-left:auto;margin-right:auto">
+      <span class="eyebrow">Here's the catch</span>
+      <h2>Four different people. One identical to-do list.</h2>
+      <p class="lede muted" style="margin:16px auto 0">An affiliate marketer, a dropshipper, a working professional, a business owner. Completely different goals — and exactly the same list of things that have to get done.</p>
+    </div>
+    <div class="chips">
+      <span class="chip"><i></i>A website</span>
+      <span class="chip"><i></i>Ad creation</span>
+      <span class="chip"><i></i>Content creation</span>
+      <span class="chip"><i></i>Promotion</span>
+      <span class="chip"><i></i>Email marketing</span>
+      <span class="chip"><i></i>Lead management</span>
+      <span class="chip"><i></i>Voice agents</span>
+      <span class="chip"><i></i>Handling queries</span>
+      <span class="chip"><i></i>Team management</span>
+      <span class="chip"><i></i>P&amp;L management</span>
+    </div>
+    <p class="verdict">By hand, alone? <span class="bad">Impossible.</span> &nbsp;In one system? <span class="good">Effortless.</span></p>
+  </div>
+</section>
+
+<!-- ============ THE ANSWER ============ -->
+<section style="background:var(--surface)">
+  <div class="wrap">
+    <div class="shead">
+      <span class="eyebrow">Why a system — not just harder work</span>
+      <h2>You can't scale yourself. A system, you can.</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <span class="eyebrow" style="color:var(--muted)">By hand</span>
+        <h3>One of you. Every task manually.</h3>
+        <p class="muted" style="margin-top:10px">You are the ceiling. Every extra offer costs you another set of evenings, and the day you stop, everything stops.</p>
+      </div>
+      <div class="card card--edge">
+        <span class="eyebrow">With a system</span>
+        <h3>Build it once. It keeps running.</h3>
+        <p class="muted" style="margin-top:10px">The same work happens whether or not you are at the desk — so adding a second offer doesn't cost you a second life.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE FOUR SYSTEMS ============ -->
+<section>
+  <div class="wrap">
+    <div class="shead">
+      <span class="eyebrow">What gets built on screen</span>
+      <h2>Four systems. All four built live, in front of you.</h2>
+      <p class="lede muted">No slides pretending to be a demo. Each one gets built from nothing while you watch, and you can ask questions the whole way.</p>
+      <div class="rule"></div>
+    </div>
+
+    <div class="grid g2">
+
+      <article class="sys">
+        <span class="sys__no">SYSTEM 01</span>
+        <h3>Content marketing</h3>
+        <p class="sys__sub">Getting the right people to see your offer.</p>
+        <table class="cmp">
+          <tr><th></th><th>By hand</th><th>With the system</th></tr>
+          <tr><td>Time</td><td>A full week</td><td>Minutes</td></tr>
+          <tr><td>Effort</td><td>All on you</td><td>One prompt</td></tr>
+          <tr><td>Output</td><td>One piece at a time</td><td>A week at once</td></tr>
+        </table>
+      </article>
+
+      <article class="sys">
+        <span class="sys__no">SYSTEM 02</span>
+        <h3>Operations &amp; follow-up</h3>
+        <p class="sys__sub">The inbox, the calls and the follow-ups that eat your day.</p>
+        <table class="cmp">
+          <tr><th></th><th>By hand</th><th>With the system</th></tr>
+          <tr><td>Time</td><td>All day, every day</td><td>A few minutes</td></tr>
+          <tr><td>Effort</td><td>You chase all of it</td><td>It runs itself</td></tr>
+          <tr><td>Capacity</td><td>One of you</td><td>Runs 24×7</td></tr>
+        </table>
+      </article>
+
+      <article class="sys">
+        <span class="sys__no">SYSTEM 03</span>
+        <h3>Finance &amp; P&amp;L</h3>
+        <p class="sys__sub">Knowing, at any moment, exactly what you earn and keep.</p>
+        <table class="cmp">
+          <tr><th></th><th>By hand</th><th>With the system</th></tr>
+          <tr><td>Time</td><td>Hours in spreadsheets</td><td>Just ask aloud</td></tr>
+          <tr><td>Clarity</td><td>Guesswork</td><td>Exact numbers</td></tr>
+          <tr><td>Reporting</td><td>Built by hand</td><td>Ready instantly</td></tr>
+        </table>
+      </article>
+
+      <article class="sys">
+        <span class="sys__no">SYSTEM 04</span>
+        <h3>Websites</h3>
+        <p class="sys__sub">Your 24×7 storefront — where trust is built and sales happen.</p>
+        <table class="cmp">
+          <tr><th></th><th>By hand</th><th>With the system</th></tr>
+          <tr><td>Time</td><td>Three weeks</td><td>One day</td></tr>
+          <tr><td>Cost</td><td>A developer's bill</td><td>One prompt</td></tr>
+          <tr><td>Revisions</td><td>Back-and-forth</td><td>Re-run it</td></tr>
+        </table>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARKET RATES — the only money on the page,
+     and it is third-party market data, not a claim about anyone ============ -->
+<section style="background:var(--surface)">
+  <div class="wrap">
+    <div class="shead">
+      <span class="eyebrow">Some context on System 04</span>
+      <h2>This is what a website costs today.</h2>
+      <p class="lede muted">Not what you'll make. What the market currently charges to have one built — so you can judge for yourself what building one in a day is worth.</p>
+      <div class="rule"></div>
+    </div>
+    <div class="grid g3">
+      <div class="rate"><h3>Business website</h3><b>₹20,000 – 80,000</b><span>A freelancer, 1–2 weeks</span></div>
+      <div class="rate"><h3>E-commerce store</h3><b>₹50,000 – 2,50,000+</b><span>An agency, 3–6 weeks</span></div>
+      <div class="rate"><h3>Agency project</h3><b>₹25,000 – 2,00,000+</b><span>A structured team, months</span></div>
+    </div>
+    <p class="src">Typical India market rates, 2026. Shown for context only — nothing here is a statement about what you will earn.</p>
+  </div>
+</section>
+
+<!-- ============ WHAT YOU WALK AWAY WITH ============ -->
+<section>
+  <div class="wrap">
+    <div class="shead">
+      <span class="eyebrow">The next 90 minutes</span>
+      <h2>What you actually leave with.</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="grid g2">
+      <div class="ticks">
+        <div class="tick">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#0E9F6E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#06140F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p><b>The four systems, demonstrated end to end.</b> Not described — built, while you watch, with the screen shared.</p>
+        </div>
+        <div class="tick">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#0E9F6E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#06140F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p><b>How to choose an offer worth promoting.</b> The filter I use before I spend a rupee on traffic.</p>
+        </div>
+        <div class="tick">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#0E9F6E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#06140F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p><b>Where the time actually leaks.</b> Four specific places, and what to put in each one.</p>
+        </div>
+      </div>
+      <div class="ticks">
+        <div class="tick">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#0E9F6E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#06140F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p><b>How to keep an ad account clean.</b> What gets accounts restricted, and how to set up so one bad week doesn't end you.</p>
+        </div>
+        <div class="tick">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#0E9F6E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#06140F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p><b>Live Q&amp;A.</b> Bring your actual situation. I answer in the room, not by email later.</p>
+        </div>
+        <div class="tick">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#0E9F6E"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#06140F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p><b>A clear first step.</b> You leave knowing the one thing to do next, not a list of forty.</p>
+        </div>
+      </div>
+    </div>
+    <div class="center mt-l">
+      <a class="btn js-cta" href="#" data-loc="mid">Book my seat — <span data-cfg="price">₹199</span> <span class="btn__arrow">→</span></a>
+      <p class="btn-note"><span data-cfg="dateFull">Wed 23 Sep · 08:00 PM IST</span> · 90 minutes · live</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHO'S TEACHING ============ -->
+<section style="background:var(--surface)">
+  <div class="wrap">
+    <div class="shead">
+      <span class="eyebrow">Who's teaching this</span>
+      <h2>Avinash Garg</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="author">
+      <img class="author__img" src="assets/author-award.jpg" alt="Avinash Garg" loading="lazy">
+      <div>
+        <p class="lede">I am not a marketer who read about affiliate marketing. I built my way into it from a standing start, and the systems in this session are the ones I actually run.</p>
+        <div class="story">
+          <div class="story__step"><span class="story__n">1</span><p><b style="color:var(--ink)">I failed UPSC. Twice.</b><br><span class="muted">No plan B, no income, and a lot of people quietly wondering what I'd do next.</span></p></div>
+          <div class="story__step"><span class="story__n">2</span><p><b style="color:var(--ink)">Then I started from zero.</b><br><span class="muted">A homemaker with a laptop, teaching myself in the evenings. Nobody was coming to help.</span></p></div>
+          <div class="story__step"><span class="story__n">3</span><p><b style="color:var(--ink)">I stopped doing it all by hand.</b><br><span class="muted">I built systems instead — and that is the shift this session is about.</span></p></div>
+          <div class="story__step"><span class="story__n">4</span><p><b style="color:var(--ink)">ClickBank Platinum.</b><br><span class="muted">An award issued by ClickBank, held by roughly 500 people worldwide. I've since mentored more than 4,000 people.</span></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IS THIS FOR YOU ============ -->
+<section>
+  <div class="wrap">
+    <div class="shead">
+      <span class="eyebrow">Straight answer</span>
+      <h2>Is this for you?</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="grid g2">
+      <div class="fit fit--yes">
+        <h3>Come if…</h3>
+        <ul>
+          <li>You're doing something already and want to understand affiliate marketing properly before committing time to it.</li>
+          <li>You've tried pieces of this and it fell apart because every piece needed you.</li>
+          <li>You're willing to do the work. This is a skill, and skills take practice.</li>
+          <li>You want to see the thing work before you believe anyone about it.</li>
+        </ul>
+      </div>
+      <div class="fit fit--no">
+        <h3>Skip it if…</h3>
+        <ul>
+          <li>You're looking for something that pays you without you doing anything. That's not what this is.</li>
+          <li>You want a guarantee of a specific result. Nobody honest can give you one.</li>
+          <li>You can't make the live 90 minutes — there is no recording.</li>
+          <li>You want it handed over done. You'll be building it yourself.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section style="background:var(--surface)">
+  <div class="wrap">
+    <div class="shead center" style="margin-left:auto;margin-right:auto">
+      <span class="eyebrow">Before you book</span>
+      <h2>Common questions</h2>
+    </div>
+    <div class="faq">
+      <details class="qa"><summary>I'm a complete beginner. Is this for me?</summary><div class="qa__a">Yes. Nothing assumes prior experience — we start from how affiliate offers and links actually work. If you've been doing this a while, the systems section is where you'll get the most.</div></details>
+      <details class="qa"><summary>I'm not technical at all. Will I be able to keep up?</summary><div class="qa__a">You'll be able to follow it. Everything is shown on screen, step by step, and you can ask questions while it's happening. Nothing in the session requires you to write code.</div></details>
+      <details class="qa"><summary>Do I need an offer or a niche picked already?</summary><div class="qa__a">No. Choosing one is part of what gets covered — including the filter I use before putting money behind anything.</div></details>
+      <details class="qa"><summary>How much ad budget do I need to start?</summary><div class="qa__a">We'll talk about realistic starting budgets in the session. The honest answer is that it depends on your offer and market, and anyone giving you a single number without knowing either is guessing.</div></details>
+      <details class="qa"><summary>What about ad accounts getting restricted?</summary><div class="qa__a">Covered directly. How to keep a setup clean, what actually triggers restrictions, and how to structure things so one bad week doesn't wipe you out. No shady shortcuts — they're what cause the problem.</div></details>
+      <details class="qa"><summary>Is there a recording?</summary><div class="qa__a">No. It's live only — the walkthrough and the Q&amp;A happen in the room and nowhere else.</div></details>
+      <details class="qa"><summary>Is it really only <span data-cfg="price">₹199</span>?</summary><div class="qa__a">Yes. The ticket is small on purpose — it keeps the room full of people who actually turn up.</div></details>
+      <details class="qa"><summary>How do I join after paying?</summary><div class="qa__a">You'll get the joining link by email and WhatsApp right after checkout, plus a reminder before the session starts.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section>
+  <div class="wrap center">
+    <span class="eyebrow">Your move</span>
+    <h2 style="max-width:18ch;margin:0 auto 18px">Come and watch it get built.</h2>
+    <p class="lede muted" style="margin:0 auto 30px">90 minutes, live. <span data-cfg="dateFull">Wed 23 Sep · 08:00 PM IST</span>.</p>
+    <a class="btn js-cta" href="#" data-loc="final">Book my seat — <span data-cfg="price">₹199</span> <span class="btn__arrow">→</span></a>
+    <p class="btn-note">Secure checkout · UPI, cards and net banking</p>
+  </div>
+</section>
+
+<!-- ============ DISCLOSURE ============ -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="legal">
+      <b>Past record is no guarantee of future prospects.</b>
+      <p>This is an educational workshop. It is not a job, not an investment, and not an income guarantee. Nothing on this page promises that you will earn any amount.</p>
+      <p>Affiliate marketing is a skill and a business. Results depend entirely on your own effort, time, budget, skill and market conditions. Many people who try affiliate marketing earn little or nothing.</p>
+      <p>The website price ranges shown above are general India market rates for 2026, provided for context only. They describe what businesses currently pay for website development — they are not a statement about what any participant will earn.</p>
+      <p>ClickBank Platinum is an award issued by ClickBank. It is referenced here as a credential of the instructor and implies nothing about the results any participant will achieve.</p>
+      <p>Session times, seat availability and pricing reflect our booking system. They can change, and offers may be extended or withdrawn.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div style="color:var(--body);font-weight:700;margin-bottom:6px">Internet Youth Academy</div>
+      <!-- TODO(Avinash): replace with your real registered business address.
+           Only 1 of the 7 Indian competitor pages we audited publishes one —
+           it is a trust asset and a compliance asset. -->
+      <div>[Registered business address — to be added]</div>
+      <div style="margin-top:6px">support@internetyouthacademy.com</div>
+    </div>
+    <div>
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/refund">Refund policy</a>
+      <div style="margin-top:10px">© <span id="yr">2026</span> Internet Youth Academy. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ STICKY MOBILE BAR ============ -->
+<div class="sticky">
+  <div class="sticky__price">
+    <b data-cfg="price">₹199</b>
+    <span data-cfg="dateShort">Wed 23 Sep</span>
+  </div>
+  <a class="btn js-cta" href="#" data-loc="sticky">Book my seat <span class="btn__arrow">→</span></a>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var M = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var D = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  var CFG = window.IYA_CONFIG || {};
+
+  /* ---------- formatting, mirroring scripts/inject-config.mjs ---------- */
+  function fmt(c) {
+    var o = { price: c.price || "₹199", time: (c.webinarTime || "") + " IST" };
+    var p = String(c.webinarDate || "").split("-");
+    if (p.length === 3) {
+      var dt = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
+      var ds = D[dt.getUTCDay()] + " " + (+p[2]) + " " + M[+p[1] - 1];
+      o.dateShort = ds;
+      o.dateFull = ds + " · " + (c.webinarTime || "") + " IST";
+    }
+    return o;
+  }
+
+  function paint(c) {
+    var t = fmt(c);
+    ["price", "dateShort", "dateFull", "time"].forEach(function (k) {
+      if (!t[k]) return;
+      var nodes = document.querySelectorAll('[data-cfg="' + k + '"]');
+      for (var i = 0; i < nodes.length; i++) nodes[i].textContent = t[k];
+    });
+    startCountdown(c);
+  }
+
+  /* ---------- countdown ------------------------------------------------
+     The old pages flipped to a dead "we're live" state the moment the
+     configured time passed, and every click in the gap landed on it.
+     Here, an expired timer simply hides and the booking card carries on —
+     the page never looks broken, whatever the admin config says.
+     ------------------------------------------------------------------ */
+  var cdTimer = null;
+  function startCountdown(c) {
+    if (cdTimer) clearInterval(cdTimer);
+    var el = document.getElementById("cd");
+    var done = document.getElementById("cdDone");
+    var target = parseIST(c.webinarDate, c.webinarTime);
+    if (!target) { el.hidden = true; done.hidden = false; return; }
+
+    function tick() {
+      var diff = target - Date.now();
+      if (diff <= 0) { el.hidden = true; done.hidden = false; clearInterval(cdTimer); return; }
+      el.hidden = false; done.hidden = true;
+      var s = Math.floor(diff / 1000);
+      set("cdD", Math.floor(s / 86400));
+      set("cdH", Math.floor(s / 3600) % 24);
+      set("cdM", Math.floor(s / 60) % 60);
+      set("cdS", s % 60);
+    }
+    function set(id, n) {
+      document.getElementById(id).textContent = n < 10 ? "0" + n : String(n);
+    }
+    tick();
+    cdTimer = setInterval(tick, 1000);
+  }
+
+  /* IST is UTC+5:30 — parsed explicitly so the countdown is correct for a
+     visitor in any timezone, not just an Indian one. */
+  function parseIST(date, time) {
+    var d = String(date || "").split("-");
+    if (d.length !== 3) return null;
+    var m = String(time || "").trim().match(/^(\d{1,2}):(\d{2})\s*(AM|PM)?/i);
+    if (!m) return null;
+    var h = +m[1] % 12;
+    if (m[3] && m[3].toUpperCase() === "PM") h += 12;
+    return Date.UTC(+d[0], +d[1] - 1, +d[2], h - 5, +m[2] - 30);
+  }
+
+  /* ---------- attribution ----------------------------------------------
+     Checkout happens on TagMango, on a domain we don't control. If the
+     click identifiers don't travel with the visitor, the purchase comes
+     back unattributable and the bidder has nothing to learn from.
+     So: capture on arrival, persist, and re-attach at the handoff.
+     ------------------------------------------------------------------ */
+  var TRACK_KEYS = ["fbclid","gclid","utm_source","utm_medium","utm_campaign","utm_content","utm_term"];
+  var STORE = "iya_attr_v1";
+
+  function captureAttribution() {
+    var q, saved = {};
+    try { saved = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch (e) { saved = {}; }
+    try { q = new URLSearchParams(location.search); } catch (e) { return saved; }
+
+    var touched = false;
+    TRACK_KEYS.forEach(function (k) {
+      var v = q.get(k);
+      if (v) { saved[k] = v; touched = true; }
+    });
+    // Meta's own browser cookies, when the pixel has set them.
+    var fbp = cookie("_fbp"), fbc = cookie("_fbc");
+    if (fbp) { saved._fbp = fbp; touched = true; }
+    if (fbc) { saved._fbc = fbc; touched = true; }
+
+    if (touched) {
+      saved.landed_at = saved.landed_at || new Date().toISOString();
+      try { localStorage.setItem(STORE, JSON.stringify(saved)); } catch (e) {}
+    }
+    return saved;
+  }
+
+  function cookie(name) {
+    var m = document.cookie.match("(^|;)\\s*" + name + "\\s*=\\s*([^;]+)");
+    return m ? m.pop() : "";
+  }
+
+  function checkoutUrl() {
+    var base = CFG.registrationUrl || "#";
+    if (base === "#") return base;
+    var attr = captureAttribution();
+    var sep = base.indexOf("?") === -1 ? "?" : "&";
+    var parts = [];
+    Object.keys(attr).forEach(function (k) {
+      if (k === "landed_at") return;
+      parts.push(encodeURIComponent(k) + "=" + encodeURIComponent(attr[k]));
+    });
+    return parts.length ? base + sep + parts.join("&") : base;
+  }
+
+  /* ---------- CTA wiring ---------- */
+  function wireCTAs() {
+    var url = checkoutUrl();
+    var btns = document.querySelectorAll(".js-cta");
+    for (var i = 0; i < btns.length; i++) {
+      (function (b) {
+        b.setAttribute("href", url);
+        b.addEventListener("click", function () {
+          // Pixel hooks — fill in once the pixel IDs are on the page.
+          if (window.fbq) { try { fbq("track", "InitiateCheckout"); } catch (e) {} }
+          if (window.gtag) { try { gtag("event", "begin_checkout"); } catch (e) {} }
+        });
+      })(btns[i]);
+    }
+  }
+
+  /* ---------- live config ----------------------------------------------
+     The build step writes current values into IYA_CONFIG above; this fetch
+     catches anything saved since the last deploy. If it fails for any
+     reason the committed fallback is already on screen.
+     ------------------------------------------------------------------ */
+  function refreshConfig() {
+    var API = "https://www.internetyouthacademy.com/api/masterclass/public-config?site=ai-affiliate-machine";
+    fetch(API, { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        var c = d && d.config;
+        if (!c || !c.webinar_date) return;
+        CFG.webinarDate = c.webinar_date;
+        CFG.webinarTime = String(c.webinar_time || "").replace(/\s*IST\s*$/i, "").trim();
+        if (c.price) CFG.price = c.price;
+        // registrationUrl is deliberately NOT taken from the API — this page
+        // has its own TagMango product and its own pixel.
+        paint(CFG);
+      })
+      .catch(function () { /* fallback already rendered */ });
+  }
+
+  /* ---------- boot ---------- */
+  document.getElementById("yr").textContent = new Date().getFullYear();
+  captureAttribution();
+  paint(CFG);
+  wireCTAs();
+  refreshConfig();
+})();
+</script>
+
+<!-- =====================================================================
+     PIXELS — add IDs here when you're ready. Left out on purpose so the
+     test page doesn't pollute a dataset before you've approved the copy.
+
+     <script>
+       !function(f,b,e,v,n,t,s){ ...standard Meta pixel base code... }
+       fbq('init','YOUR_PIXEL_ID'); fbq('track','PageView');
+     </script>
+     ===================================================================== -->
+
+</body>
+</html>
