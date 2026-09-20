@@ -4,31 +4,24 @@
  * These pages are static HTML with no server, so the live date/time/price
  * arrive from a fetch() to the admin API *after* load. IYA_CONFIG is what
  * renders in the gap — and what stays if that fetch is slow, CORS-blocked or
- * the API is down. Nothing ever updated it, so it rotted: by Sep 20 the
- * thank-you page still advertised an Aug 23 class.
+ * the API is down. Nothing ever refreshed it, so it rotted: on 20 Sep
+ * aam-thank-you.html still advertised a 23 Aug class.
  *
  * This runs on every Vercel build, reads the same endpoint the browser reads,
- * and writes the current values into that fallback. Paired with a deploy hook
- * fired when /admin/funnels saves, the fallback is never more than one save
- * behind.
+ * and writes the current values into that fallback. Paired with the deploy
+ * hook that /admin/funnels fires on save, the fallback is never more than one
+ * save behind.
+ *
+ * Pages are DISCOVERED, not listed: every *.html carrying an IYA_CONFIG block
+ * is handled, so a new funnel page is covered the moment it is added and
+ * nobody has to remember to edit this file.
  *
  * Fails soft on purpose: a bad build must never take the site down, so any
- * error leaves the files untouched and exits 0.
+ * error leaves every file untouched and exits 0.
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 
 const API = "https://www.internetyouthacademy.com/api/masterclass/public-config?site=ai-affiliate-machine";
-
-// registrationUrl is per-funnel: second.html points at its own TagMango
-// product (/l/74a5895f5e) and deliberately ignores the API value, because the
-// API carries the MAIN funnel's link. Injecting it would silently redirect
-// that funnel's buyers into the wrong product and the wrong pixel.
-const FILES = [
-  { path: "index.html",            skip: [] },
-  { path: "second.html",           skip: ["registrationUrl"] },
-  { path: "AF-Thank-You.html",     skip: [] },
-  { path: "second-thank-you.html", skip: [] },
-];
 
 const M = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const D = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
@@ -45,20 +38,17 @@ function display(cfg) {
   return { time, dateShort, dateFull: `${dateShort} · ${time}` };
 }
 
-/** Replace one `key: "value"` inside the IYA_CONFIG literal, nothing else. */
-function setConfigString(src, key, value) {
-  const re = new RegExp(`(${key}:\\s*")[^"]*(")`);
-  return re.test(src) ? src.replace(re, `$1${value}$2`) : src;
-}
-function setConfigNumber(src, key, value) {
-  const re = new RegExp(`(${key}:\\s*)\\d+`);
-  return re.test(src) ? src.replace(re, `$1${value}`) : src;
-}
+const setString = (src, k, v) => {
+  const re = new RegExp(`(${k}:\\s*")[^"]*(")`);
+  return re.test(src) ? src.replace(re, `$1${v}$2`) : src;
+};
+const setNumber = (src, k, v) => {
+  const re = new RegExp(`(${k}:\\s*)\\d+`);
+  return re.test(src) ? src.replace(re, `$1${v}`) : src;
+};
 /** Refresh the no-JS text inside <… data-cfg="key">…</…>. */
-function setDataCfg(src, key, value) {
-  const re = new RegExp(`(<[^>]*data-cfg="${key}"[^>]*>)[^<]*(<)`, "g");
-  return src.replace(re, `$1${value}$2`);
-}
+const setDataCfg = (src, k, v) =>
+  src.replace(new RegExp(`(<[^>]*data-cfg="${k}"[^>]*>)[^<]*(<)`, "g"), `$1${v}$2`);
 
 try {
   const res = await fetch(API, { headers: { "cache-control": "no-cache" } });
@@ -77,26 +67,41 @@ try {
   const text = display(cfg);
   console.log(`[inject-config] ${cfg.webinarDate} ${cfg.webinarTime} · ${cfg.price} → ${text.dateFull}`);
 
-  for (const { path, skip } of FILES) {
+  const pages = readdirSync(".")
+    .filter((f) => f.endsWith(".html"))
+    .filter((f) => /IYA_CONFIG\s*=\s*\{/.test(readFileSync(f, "utf8")));
+
+  if (!pages.length) throw new Error("no pages with an IYA_CONFIG block");
+
+  for (const path of pages) {
     let src = readFileSync(path, "utf8");
     const before = src;
 
-    for (const key of ["webinarDate","webinarTime","price","registrationUrl","whatsappLink"]) {
-      if (skip.includes(key) || cfg[key] == null) continue;
-      src = setConfigString(src, key, cfg[key]);
+    // A page that reads registrationUrl from IYA_CONFIG instead of the API has
+    // its own TagMango product — /aam and /second each do. The API carries the
+    // MAIN funnel's link, so injecting it would hand their buyers to the wrong
+    // product and the wrong pixel. Detected, not hardcoded, so a new pinned
+    // page protects itself.
+    const pinsCheckout = src.includes("registrationUrl:IYA_CONFIG.registrationUrl");
+
+    for (const k of ["webinarDate","webinarTime","price","registrationUrl","whatsappLink"]) {
+      if (cfg[k] == null) continue;
+      if (k === "registrationUrl" && pinsCheckout) continue;
+      src = setString(src, k, cfg[k]);
     }
-    if (cfg.seatCount != null) src = setConfigNumber(src, "seatCount", cfg.seatCount);
+    if (cfg.seatCount != null) src = setNumber(src, "seatCount", cfg.seatCount);
 
     if (cfg.price != null) src = setDataCfg(src, "price", cfg.price);
     for (const k of ["dateShort","dateFull","time"]) {
       if (text[k]) src = setDataCfg(src, k, text[k]);
     }
 
+    const note = pinsCheckout ? " (kept its own checkout link)" : "";
     if (src !== before) {
       writeFileSync(path, src);
-      console.log(`[inject-config] updated ${path}${skip.length ? ` (kept own ${skip.join(", ")})` : ""}`);
+      console.log(`[inject-config] updated ${path}${note}`);
     } else {
-      console.log(`[inject-config] ${path} already current`);
+      console.log(`[inject-config] ${path} already current${note}`);
     }
   }
 } catch (err) {
