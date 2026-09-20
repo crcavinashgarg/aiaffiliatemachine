@@ -194,7 +194,8 @@ h3{font-size:clamp(19px,2.2vw,24px)}
 .stats{background:var(--surface);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:34px 0}
 .stats__g{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;text-align:center}
 @media(max-width:760px){.stats__g{grid-template-columns:repeat(2,1fr);gap:26px}}
-.stat b{display:block;font-family:var(--display);font-size:clamp(26px,3.4vw,40px);color:var(--ink);line-height:1}
+.stat b{display:block;font-family:var(--display);font-size:clamp(24px,3.2vw,38px);color:var(--ink);line-height:1.04;white-space:nowrap}
+.stat b.wrapok{white-space:normal}
 .stat span{display:block;font-size:13px;color:var(--muted);margin-top:8px;line-height:1.4}
 
 /* ================= JOURNEY PIPELINE ================= */
@@ -337,6 +338,52 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0 48px;font-size:14.5p
 .foot a{color:var(--muted);text-decoration:none;margin-right:16px}
 .foot a:hover{color:var(--emerald-lt)}
 
+
+/* ================= BONUSES ================= */
+.bon{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:940px){.bon{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.bon{grid-template-columns:1fr}}
+.bcard{
+  background:var(--ground);border:1px solid var(--line-soft);border-radius:var(--r);
+  padding:22px;transition:transform .28s ease,border-color .28s ease
+}
+.bcard:hover{transform:translateY(-4px);border-color:var(--line)}
+.bcard__top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.bcard__n{font-family:var(--display);font-size:12px;letter-spacing:.15em;color:var(--muted)}
+.tag{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:99px}
+.tag--free{background:rgba(163,230,53,.14);color:var(--lime);border:1px solid rgba(163,230,53,.34)}
+.tag--live{background:rgba(255,138,31,.14);color:var(--cta-lt);border:1px solid rgba(255,138,31,.4)}
+.bcard h3{font-size:18.5px;margin-bottom:7px}
+.bcard p{font-size:15px;color:var(--muted);line-height:1.5}
+.bcard--live{border-color:rgba(255,138,31,.34);background:linear-gradient(170deg,rgba(255,138,31,.07),var(--ground))}
+.bcard--hero{border-top:3px solid var(--emerald);background:linear-gradient(170deg,var(--surface-3),var(--ground))}
+.bon-sum{
+  margin-top:22px;background:linear-gradient(120deg,var(--surface-3),var(--surface-2));
+  border:1px solid var(--line);border-radius:var(--r-lg);padding:26px 28px;
+  display:flex;align-items:center;gap:28px;flex-wrap:wrap;justify-content:space-between
+}
+.bon-sum__n{font-family:var(--display);font-size:clamp(30px,4.4vw,48px);color:var(--ink);line-height:1}
+.bon-sum__n b{color:var(--lime);font-family:var(--display);font-weight:400}
+.bon-sum p{font-size:16.5px;color:var(--body);max-width:44ch}
+.bon-sum p b{color:var(--ink)}
+
+/* ================= GUARANTEE ================= */
+.gtee{
+  display:flex;align-items:center;gap:34px;flex-wrap:wrap;
+  background:linear-gradient(140deg,var(--surface-2),var(--surface));
+  border:1px solid var(--line);border-left:4px solid var(--emerald);
+  border-radius:var(--r-lg);padding:34px
+}
+.gtee>div:last-child{flex:1;min-width:280px}
+.gtee__seal{
+  width:150px;height:150px;border-radius:50%;flex:none;display:grid;place-content:center;
+  text-align:center;background:radial-gradient(circle at 34% 30%,var(--surface-3),var(--ground));
+  border:2px dashed var(--emerald)
+}
+.gtee__amt{display:block;font-family:var(--display);font-size:38px;color:var(--ink);line-height:1}
+.gtee__back{display:block;font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--emerald-lt);margin-top:5px}
+@media(max-width:620px){.gtee{padding:26px;gap:22px}.gtee__seal{width:118px;height:118px}.gtee__amt{font-size:30px}}
+
 /* ================= STICKY ================= */
 .sticky{position:fixed;left:0;right:0;bottom:0;z-index:70;background:rgba(6,20,15,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:11px 16px calc(11px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:14px}
 .sticky__p b{display:block;color:var(--ink);font-size:19px;font-weight:800;line-height:1.1}
@@ -373,6 +420,7 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0 48px;font-size:14.5p
           <span class="badge"><i></i>Built live</span>
           <span class="badge"><i></i>Q&amp;A in the room</span>
           <span class="badge"><i></i>Beginners welcome</span>
+          <span class="badge"><i></i>6 bonuses included</span>
         </div>
       </div>
 
@@ -410,7 +458,7 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0 48px;font-size:14.5p
           <div class="cd--done" id="cdDone" hidden>Booking is open for the next session — the date above is always current.</div>
 
           <a class="btn btn--full js-cta" href="#" data-loc="hero">Book my seat — <span data-cfg="price">₹199</span> →</a>
-          <p class="btn-note center">Secure checkout · UPI, cards and net banking</p>
+          <p class="btn-note center">Six bonuses included · secure checkout · UPI, cards, net banking</p>
         </div>
       </div>
     </div>
@@ -421,13 +469,32 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0 48px;font-size:14.5p
 <div class="stats">
   <div class="wrap">
     <div class="stats__g">
-      <div class="stat pop"><b>ClickBank<br>Platinum</b><span>An award issued by ClickBank</span></div>
+      <div class="stat pop"><b class="wrapok">ClickBank<br>Platinum</b><span>An award issued by ClickBank</span></div>
       <div class="stat pop" style="--d:90ms"><b class="count" data-to="500" data-pre="~">0</b><span>People worldwide holding it</span></div>
       <div class="stat pop" style="--d:180ms"><b class="count" data-to="4000" data-suf="+">0</b><span>People mentored</span></div>
       <div class="stat pop" style="--d:270ms"><b><span class="count" data-to="44" data-div="10">0</span> ★</b><span>Trustpilot rating</span></div>
     </div>
   </div>
 </div>
+
+<!-- ================= MARKET RATES — moved up front.
+     Third-party market data, the one money shape that survives review:
+     a fact about what the market charges, not a claim about the reader. -->
+<section style="background:var(--surface)">
+  <div class="wrap">
+    <div class="shead center reveal">
+      <span class="eyebrow">Before we start — some context</span>
+      <h2>This is what one website costs to have built.</h2>
+      <p class="lede muted" style="margin:16px auto 0">System 04 builds one in front of you tonight. The going rates are here so you can judge the gap yourself.</p>
+    </div>
+    <div class="grid g3">
+      <div class="rate reveal"><h3>Business website</h3><b>₹20,000 – 80,000</b><span>A freelancer, 1–2 weeks</span></div>
+      <div class="rate reveal" style="--d:110ms"><h3>E-commerce store</h3><b>₹50,000 – 2,50,000+</b><span>An agency, 3–6 weeks</span></div>
+      <div class="rate reveal" style="--d:220ms"><h3>Agency project</h3><b>₹25,000 – 2,00,000+</b><span>A structured team, months</span></div>
+    </div>
+    <p class="src reveal">Typical India market rates, 2026. Shown as market context — not a statement about what you will earn.</p>
+  </div>
+</section>
 
 <!-- ================= THE JOURNEY ================= -->
 <section>
@@ -572,20 +639,74 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0 48px;font-size:14.5p
   </div>
 </section>
 
-<!-- ================= RATES ================= -->
+
+<!-- ================= BONUSES =================
+     Copy taken verbatim from Avinash's own webinar deck ("You're not leaving
+     empty-handed"). No rupee values: her deck doesn't assign any, and
+     inventing them would be deceptive pricing under Meta's Prohibited
+     Commercial Practices and CCPA cl.12(e). Bonus 5 is live-only — it is the
+     show-up driver, which is worth more here than a fake discount. -->
 <section style="background:var(--surface)">
   <div class="wrap">
     <div class="shead center reveal">
-      <span class="eyebrow">Some context on System 04</span>
-      <h2>This is what a website costs today.</h2>
-      <p class="lede muted" style="margin:16px auto 0">Not what you'll make — what the market charges to have one built.</p>
+      <span class="eyebrow">Stay till the end</span>
+      <h2>You're not leaving empty-handed.</h2>
+      <p class="lede muted" style="margin:16px auto 0">Six bonuses that put the system to work the moment the session ends.</p>
     </div>
-    <div class="grid g3">
-      <div class="rate reveal"><h3>Business website</h3><b>₹20,000 – 80,000</b><span>A freelancer, 1–2 weeks</span></div>
-      <div class="rate reveal" style="--d:110ms"><h3>E-commerce store</h3><b>₹50,000 – 2,50,000+</b><span>An agency, 3–6 weeks</span></div>
-      <div class="rate reveal" style="--d:220ms"><h3>Agency project</h3><b>₹25,000 – 2,00,000+</b><span>A structured team, months</span></div>
+
+    <div class="bon">
+      <article class="bcard reveal">
+        <div class="bcard__top"><span class="bcard__n">Bonus 1</span><span class="tag tag--free">Free</span></div>
+        <h3>The Creative Refill Pack</h3><p>One ad idea into ten fresh ads.</p>
+      </article>
+      <article class="bcard reveal" style="--d:80ms">
+        <div class="bcard__top"><span class="bcard__n">Bonus 2</span><span class="tag tag--free">Free</span></div>
+        <h3>The Landing Page Variant Kit</h3><p>Five page styles for one offer.</p>
+      </article>
+      <article class="bcard reveal" style="--d:160ms">
+        <div class="bcard__top"><span class="bcard__n">Bonus 3</span><span class="tag tag--free">Free</span></div>
+        <h3>The Ad Account Safety Checklist</h3><p>A 12-point check before launch.</p>
+      </article>
+      <article class="bcard reveal" style="--d:240ms">
+        <div class="bcard__top"><span class="bcard__n">Bonus 4</span><span class="tag tag--free">Free</span></div>
+        <h3>The Offer Scorecard</h3><p>Ten questions before you spend.</p>
+      </article>
+      <article class="bcard bcard--live reveal" style="--d:320ms">
+        <div class="bcard__top"><span class="bcard__n">Bonus 5</span><span class="tag tag--live">Live only</span></div>
+        <h3>The 7-Day Launch Planner</h3><p>Every bonus at work, day by day. Given only to those still in the room at the end.</p>
+      </article>
+      <article class="bcard bcard--hero reveal" style="--d:400ms">
+        <div class="bcard__top"><span class="bcard__n">Bonus 6</span><span class="tag tag--free">Free</span></div>
+        <h3>The Affiliate Business Tracker</h3>
+        <p>Your business on one dashboard. Excel file, 10 tabs, 5,000+ ready formulas.</p>
+      </article>
     </div>
-    <p class="src reveal">Typical India market rates, 2026. Context only — not a statement about what you will earn.</p>
+
+    <div class="bon-sum reveal">
+      <div>
+        <span class="eyebrow" style="margin-bottom:8px">What you take home</span>
+        <div class="bon-sum__n"><b class="count" data-to="6">0</b> bonuses</div>
+      </div>
+      <p>Five arrive the moment you register. <b>Bonus 5 is only for the people still there at the end.</b></p>
+    </div>
+    <p class="src reveal">These are working tools and templates. They help you organise and plan — they do not guarantee any sale or any income.</p>
+  </div>
+</section>
+
+<!-- ================= GUARANTEE ================= -->
+<section>
+  <div class="wrap">
+    <div class="gtee reveal">
+      <div class="gtee__seal">
+        <span class="gtee__amt" data-cfg="price">₹199</span>
+        <span class="gtee__back">back</span>
+      </div>
+      <div>
+        <h2 style="font-size:clamp(25px,3.6vw,38px);margin-bottom:12px">Show up, or it's on me.</h2>
+        <p class="lede">Come live and stay to the end. If you don't think it was worth far more than you paid, message me straight after and I'll refund every rupee — no forms, no arguments.</p>
+        <p class="muted" style="margin-top:12px;font-size:15.5px">The only real risk here is not turning up.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -734,7 +855,7 @@ footer{border-top:1px solid var(--line-soft);padding:40px 0 48px;font-size:14.5p
         if(!e.isIntersecting) return;
         e.target.classList.add("in");
         io.unobserve(e.target);
-        if(e.target.classList.contains("stat")) countUp(e.target);
+        if(e.target.querySelector(".count")||e.target.classList.contains("count")) countUp(e.target);
       });
     },{threshold:.16,rootMargin:"0px 0px -8% 0px"});
     for(var j=0;j<els.length;j++) io.observe(els[j]);
