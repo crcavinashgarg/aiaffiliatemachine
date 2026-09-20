@@ -1,6 +1,8 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "buildCommand": "node scripts/inject-config.mjs",
+  "outputDirectory": ".",
   "rewrites": [
     {
       "source": "/AF-Thank-You",
