@@ -16,7 +16,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <script>
 /* IYA_CONFIG — build-time fallback, rewritten by scripts/inject-config.mjs
@@ -58,8 +58,8 @@ IYA_CONFIG = {
   --shadow:0 1px 2px rgba(11,31,23,.04), 0 8px 24px -10px rgba(11,31,23,.14);
   --shadow-lg:0 2px 4px rgba(11,31,23,.05), 0 22px 48px -18px rgba(11,31,23,.24);
   --r:16px; --r-lg:24px; --wrap:1140px;
-  --display:'Anton',Impact,system-ui,sans-serif;
-  --sans:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+  --display:'Archivo','Avenir Next Condensed','Archivo Narrow','Arial Narrow','Helvetica Neue Condensed',Impact,system-ui,sans-serif;
+  --sans:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none!important}
@@ -78,7 +78,7 @@ section{padding:86px 0;position:relative}
 h1,h2,h3{color:var(--ink);font-weight:800;line-height:1.1;letter-spacing:-.02em}
 h2{font-size:clamp(30px,5vw,50px)}
 h3{font-size:clamp(19px,2.2vw,24px)}
-.kicker{font-family:var(--display);font-weight:400;text-transform:uppercase;
+.kicker{font-family:var(--display);text-transform:uppercase;
   letter-spacing:.02em;line-height:.94;color:var(--ink);font-size:clamp(38px,7.4vw,84px)}
 .kicker .hl,.kicker .hl .w{
   background:linear-gradient(100deg,var(--emerald),var(--teal));
@@ -88,6 +88,23 @@ h3{font-size:clamp(19px,2.2vw,24px)}
 .eyebrow::before{content:"";width:22px;height:2px;background:var(--emerald);border-radius:9px}
 .lede{font-size:clamp(17px,2vw,20px);color:var(--body);max-width:58ch}
 .muted{color:var(--muted)}
+
+
+/* ---------- type system ----------
+   Display is Archivo at width 84 — the closest web face to the Avenir Next
+   Condensed Heavy she presents in: condensed, heavy, energetic rather than
+   elegant. Fallbacks are real condensed faces, so a blocked Google Fonts
+   request degrades to something close instead of a default sans. */
+.kicker,.price__now,.cd__n,.stat b,.rate b,.bon-sum__n,.sys__n,.tl__d,
+.step__n,.bcard__n,.gtee__amt,.verdict{
+  font-family:var(--display);
+  font-weight:800;
+  font-variation-settings:'wdth' 84;
+  font-stretch:84%
+}
+.kicker{letter-spacing:-.005em;line-height:.92}
+.verdict{letter-spacing:.005em}
+.stat b,.rate b,.price__now,.bon-sum__n{letter-spacing:-.01em}
 
 /* ---------- motion ---------- */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1);transition-delay:var(--d,0ms)}
@@ -299,6 +316,18 @@ h3{font-size:clamp(19px,2.2vw,24px)}
 .qa[open] summary::after{transform:rotate(135deg)}
 .qa__a{padding:0 0 22px;max-width:68ch;color:var(--body)}
 
+
+/* ================= TOOLS ================= */
+.tools{display:grid;gap:14px;max-width:960px;margin:0 auto}
+.tools__row{display:grid;grid-template-columns:168px 1fr;gap:20px;align-items:center;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow)}
+@media(max-width:720px){.tools__row{grid-template-columns:1fr;gap:12px}}
+.tools__lbl{font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--emerald)}
+.tools__set{display:flex;flex-wrap:wrap;gap:9px}
+.tool{display:inline-flex;align-items:center;gap:8px;background:var(--emerald-pale);border:1px solid var(--line);
+  border-radius:10px;padding:9px 14px;font-size:15px;font-weight:700;color:var(--ink);white-space:nowrap}
+.tool i{width:6px;height:6px;border-radius:99px;background:var(--emerald-lt);flex:none}
+
 /* ---------- bonuses ---------- */
 .bon{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media(max-width:940px){.bon{grid-template-columns:repeat(2,1fr)}}
@@ -374,7 +403,7 @@ footer{border-top:1px solid var(--line);padding:40px 0 48px;font-size:14.5px;col
       <div>
         <span class="eyebrow">Live masterclass · 90 minutes</span>
         <h1 class="kicker" id="kick">One offer. <span class="hl">Four systems.</span> Ninety minutes.</h1>
-        <p class="lede">Website, creatives, content, follow-ups — built on screen while you watch. Then you build yours.</p>
+        <p class="lede" id="sub">Website, creatives, content, follow-ups — built on screen while you watch. Then you build yours.</p>
         <div class="badges">
           <span class="badge"><i></i>Built live</span>
           <span class="badge"><i></i>Q&amp;A in the room</span>
@@ -599,6 +628,63 @@ footer{border-top:1px solid var(--line);padding:40px 0 48px;font-size:14.5px;col
 </section>
 
 
+<!-- ================= THE TOOLS =================
+     Text chips, not brand logos: third-party marks in a commercial page
+     invite a trademark problem and read to Meta's reviewers as brand bait
+     under Prohibited Commercial Practices. Naming the tools is fine. -->
+<section id="tools">
+  <div class="wrap">
+    <div class="shead center reveal">
+      <span class="eyebrow">The actual stack</span>
+      <h2>Six years of building with these.</h2>
+      <p class="lede muted" style="margin:16px auto 0">Not a list I looked up. These are the tools running my own work right now — and the ones you'll watch me use on screen.</p>
+    </div>
+
+    <div class="tools">
+      <div class="tools__row reveal">
+        <span class="tools__lbl">Build &amp; automate</span>
+        <div class="tools__set">
+          <span class="tool"><i></i>Claude</span>
+          <span class="tool"><i></i>Claude Code</span>
+          <span class="tool"><i></i>n8n</span>
+          <span class="tool"><i></i>Affiliate Forge</span>
+          <span class="tool"><i></i>Joy Board</span>
+          <span class="tool"><i></i>Profit OS</span>
+        </div>
+      </div>
+      <div class="tools__row reveal" style="--d:100ms">
+        <span class="tools__lbl">Content &amp; video</span>
+        <div class="tools__set">
+          <span class="tool"><i></i>Higgsfield</span>
+          <span class="tool"><i></i>Kling</span>
+          <span class="tool"><i></i>HeyGen</span>
+          <span class="tool"><i></i>ElevenLabs</span>
+          <span class="tool"><i></i>VEED</span>
+        </div>
+      </div>
+      <div class="tools__row reveal" style="--d:200ms">
+        <span class="tools__lbl">Run &amp; respond</span>
+        <div class="tools__set">
+          <span class="tool"><i></i>VAPI voice agents</span>
+          <span class="tool"><i></i>Telegram bots</span>
+          <span class="tool"><i></i>Docker</span>
+          <span class="tool"><i></i>Coolify</span>
+        </div>
+      </div>
+      <div class="tools__row reveal" style="--d:300ms">
+        <span class="tools__lbl">Networks I run on</span>
+        <div class="tools__set">
+          <span class="tool"><i></i>ClickBank</span>
+          <span class="tool"><i></i>MaxWeb</span>
+          <span class="tool"><i></i>Digistore24</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="src reveal">Tool names are used to describe what is taught. No affiliation with or endorsement by these companies is implied.</p>
+  </div>
+</section>
+
 <!-- ================= BONUSES =================
      Copy taken verbatim from Avinash's own webinar deck ("You're not leaving
      empty-handed"). No rupee values: her deck doesn't assign any, and
@@ -790,6 +876,39 @@ footer{border-top:1px solid var(--line);padding:40px 0 48px;font-size:14.5px;col
   var CFG=window.IYA_CONFIG||{};
   var REDUCED=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+
+  /* ---------- HOOKS ------------------------------------------------
+     She tests angles across ad sets. Adding ?h=2 (…3, 4) to the ad's
+     destination URL swaps the headline and subhead without touching the
+     file, and the hook id rides along to checkout with the rest of the
+     attribution, so each angle's sales are separable.
+     ---------------------------------------------------------------- */
+  var HOOKS = [
+    { /* 1 — default: the structure angle */
+      k:'One offer. <span class="hl">Four systems.</span> Ninety minutes.',
+      s:'Website, creatives, content, follow-ups — built on screen while you watch. Then you build yours.' },
+    { /* 2 — for people already doing well who are exploring this */
+      k:'You already built <span class="hl">one thing.</span> Here is the second.',
+      s:'A live session for people who are doing fine already, and want to understand affiliate marketing properly before giving it any time.' },
+    { /* 3 — proof-first, for the sceptical */
+      k:'Don\'t take my word. <span class="hl">Watch it get built.</span>',
+      s:'Ninety minutes, live, screen shared. Four systems built from nothing while you ask questions.' },
+    { /* 4 — the time angle */
+      k:'A month of setup. <span class="hl">Ninety minutes.</span>',
+      s:'The work that normally needs a team and four weeks, done in front of you in one sitting.' }
+  ];
+  function applyHook(){
+    var n=1;
+    try{ n=parseInt(new URLSearchParams(location.search).get('h'),10)||1; }catch(e){}
+    if(n<1||n>HOOKS.length) n=1;
+    window.__hook=n;
+    var h=HOOKS[n-1], k=document.getElementById('kick'), s=document.getElementById('sub');
+    if(k) k.innerHTML=h.k;
+    if(s) s.textContent=h.s;
+  }
+
+  applyHook();
+
   /* ---------- hero headline: word-by-word entrance ---------- */
   (function(){
     var k=document.getElementById("kick");
@@ -945,6 +1064,7 @@ footer{border-top:1px solid var(--line);padding:40px 0 48px;font-size:14.5px;col
       if(k==="landed_at") return;
       parts.push(encodeURIComponent(k)+"="+encodeURIComponent(a[k]));
     });
+    if(window.__hook) parts.push('iya_hook='+window.__hook);
     return parts.length ? base+(base.indexOf("?")===-1?"?":"&")+parts.join("&") : base;
   }
   function wireCTAs(){
