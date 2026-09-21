@@ -1,0 +1,983 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The AI Affiliate Machine — Live 90-minute masterclass</title>
+<!-- LIGHT VARIANT of /test. Same copy, same structure, same compliance position. -->
+<meta name="description" content="A live 90-minute masterclass. Watch four affiliate systems get built on screen — then build your own.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:title" content="The AI Affiliate Machine — Live 90-minute masterclass">
+<meta property="og:description" content="Watch four affiliate systems get built on screen, live. Then build your own.">
+<meta property="og:image" content="assets/og-cover.jpg">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script>
+/* IYA_CONFIG — build-time fallback, rewritten by scripts/inject-config.mjs
+   on every Vercel build. registrationUrl is PINNED (see the reference to
+   registrationUrl:IYA_CONFIG.registrationUrl below), so the injector leaves
+   this page's own checkout link alone. */
+IYA_CONFIG = {
+  webinarDate:     "2026-09-23",
+  webinarTime:     "08:00 PM",
+  price:           "₹199",
+  registrationUrl: "https://learn.internetyouthacademy.com/l/36035e6e88",
+  whatsappLink:    "https://chat.whatsapp.com/KqvfB8iCeIEHxb4gWtRapL",
+  seatCount:       300
+};
+</script>
+
+<style>
+/* ==================================================================
+   LIGHT THEME — referenced from Avinash's webinar deck, which is ~87%
+   light: an off-white ground (#F0F0F8), white cards, soft shadows and
+   large pastel blobs. Structure borrowed, palette swapped: the deck's
+   lavender/pink is replaced with the IYA emerald she approved.
+
+   Measured contrast on the ground #F4F7F4:
+     ink #0B1F17 15.91:1 · body #33473E 9.21:1 · muted #5F7369 4.70:1
+     emerald #07724F 5.51:1 · teal #0A6B62 5.91:1
+   On a light page the CTA cannot win on luminance (amber is 2.18:1 here),
+   so it wins by being the only saturated filled block on the page — the
+   same move Be10X and CoachEasily make with orange on white. The button
+   LABEL carries the readability at 7.73:1.
+   ================================================================== */
+:root{
+  --ground:#F4F7F4; --surface:#FFFFFF; --surface-2:#EAF2EC; --surface-3:#DDEBE1;
+  --band:#07231A; --band-2:#0C3527;
+  --line:#D2E2D7; --line-soft:#E4EDE7;
+  --ink:#0B1F17; --body:#33473E; --muted:#5F7369;
+  --emerald:#07724F; --emerald-lt:#0E9F6E; --emerald-pale:#E3F3EA; --teal:#0A6B62;
+  --cta:#FF8A1F; --cta-lt:#FFA53D; --cta-ink:#20120A;
+  --shadow:0 1px 2px rgba(11,31,23,.04), 0 8px 24px -10px rgba(11,31,23,.14);
+  --shadow-lg:0 2px 4px rgba(11,31,23,.05), 0 22px 48px -18px rgba(11,31,23,.24);
+  --r:16px; --r-lg:24px; --wrap:1140px;
+  --display:'Anton',Impact,system-ui,sans-serif;
+  --sans:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--ground);color:var(--body);font-family:var(--sans);
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;padding-bottom:86px}
+@media(min-width:861px){body{padding-bottom:0}}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
+section{padding:86px 0;position:relative}
+@media(max-width:700px){section{padding:58px 0}}
+.center{text-align:center}
+
+h1,h2,h3{color:var(--ink);font-weight:800;line-height:1.1;letter-spacing:-.02em}
+h2{font-size:clamp(30px,5vw,50px)}
+h3{font-size:clamp(19px,2.2vw,24px)}
+.kicker{font-family:var(--display);font-weight:400;text-transform:uppercase;
+  letter-spacing:.02em;line-height:.94;color:var(--ink);font-size:clamp(38px,7.4vw,84px)}
+.kicker .hl,.kicker .hl .w{
+  background:linear-gradient(100deg,var(--emerald),var(--teal));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:800;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--emerald);margin-bottom:16px}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--emerald);border-radius:9px}
+.lede{font-size:clamp(17px,2vw,20px);color:var(--body);max-width:58ch}
+.muted{color:var(--muted)}
+
+/* ---------- motion ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1);transition-delay:var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+.pop{opacity:0;transform:scale(.88);transition:opacity .5s ease,transform .5s cubic-bezier(.2,1.4,.4,1);transition-delay:var(--d,0ms)}
+.pop.in{opacity:1;transform:none}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(26px,-22px)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(1.55)}}
+@keyframes flow{to{stroke-dashoffset:-140}}
+@keyframes shimmer{0%{transform:translateX(-120%)}60%,100%{transform:translateX(220%)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes jitter{0%,100%{transform:translate(0,0) rotate(0)}25%{transform:translate(2px,-3px) rotate(-1.4deg)}50%{transform:translate(-3px,2px) rotate(1deg)}75%{transform:translate(2px,2px) rotate(.6deg)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal,.pop{opacity:1!important;transform:none!important}}
+
+/* ---------- buttons ---------- */
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;
+  gap:10px;background:linear-gradient(135deg,var(--cta-lt),var(--cta));color:var(--cta-ink);
+  border:0;border-radius:15px;font-family:var(--sans);font-size:18px;font-weight:800;
+  padding:20px 36px;cursor:pointer;text-decoration:none;text-align:center;
+  box-shadow:0 2px 0 rgba(150,72,0,.35), 0 14px 30px -10px rgba(255,138,31,.65);
+  transition:transform .16s ease,box-shadow .16s ease}
+.btn::after{content:"";position:absolute;inset:0;width:34%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
+  animation:shimmer 3.4s ease-in-out infinite;pointer-events:none}
+.btn:hover{transform:translateY(-3px);box-shadow:0 2px 0 rgba(150,72,0,.35),0 22px 42px -12px rgba(255,138,31,.8)}
+.btn:active{transform:translateY(0)}
+.btn--full{width:100%}
+.btn-note{font-size:14px;color:var(--muted);margin-top:12px}
+.prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:90;background:linear-gradient(90deg,var(--emerald),var(--emerald-lt))}
+
+/* ---------- topbar ---------- */
+.topbar{position:sticky;top:0;z-index:60;background:rgba(244,247,244,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar__in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 20px;max-width:var(--wrap);margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.brand img{width:34px;height:34px;border-radius:9px}
+.brand b{color:var(--ink);font-size:15px;font-weight:800;line-height:1.15}
+.brand span{display:block;font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.04em}
+.topbar .btn{padding:12px 20px;font-size:15px;border-radius:11px}
+@media(max-width:640px){.topbar .btn{display:none}.brand span{display:none}}
+
+/* ---------- hero: the deck's pastel blobs, in emerald ---------- */
+.hero{padding:56px 0 78px;position:relative;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
+.orb--a{width:560px;height:560px;background:rgba(14,159,110,.20);top:-190px;right:-130px;animation:drift 17s ease-in-out infinite}
+.orb--b{width:440px;height:440px;background:rgba(10,107,98,.14);bottom:-200px;left:-150px;animation:drift 21s ease-in-out infinite reverse}
+.hero .wrap{position:relative;z-index:1}
+.hero__grid{display:grid;grid-template-columns:1.02fr .98fr;gap:46px;align-items:center}
+@media(max-width:980px){.hero__grid{grid-template-columns:1fr;gap:34px}}
+.kicker .w{display:inline-block;opacity:0;transform:translateY(24px) rotate(2deg)}
+.kicker.go .w{animation:wordIn .62s cubic-bezier(.2,.9,.3,1) forwards;animation-delay:var(--wd)}
+@keyframes wordIn{to{opacity:1;transform:none}}
+.hero .lede{margin-top:20px}
+.badges{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);
+  border-radius:99px;padding:8px 14px;font-size:13.5px;font-weight:600;color:var(--body);box-shadow:var(--shadow)}
+.badge i{width:7px;height:7px;border-radius:99px;background:var(--emerald-lt);animation:pulse 2.6s ease-in-out infinite}
+@media(max-width:560px){.badge{font-size:12.5px;padding:7px 11px}.hero{padding:34px 0 52px}}
+
+.vid{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);
+  background:var(--surface-2);aspect-ratio:16/9;box-shadow:var(--shadow-lg)}
+.vid video{width:100%;height:100%;object-fit:cover;display:block}
+.vid__poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vid__veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,35,26,.10),rgba(7,35,26,.52))}
+.vid__play{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:13px;border:0;background:transparent;cursor:pointer;color:#fff;font-family:var(--sans)}
+.vid__disc{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(135deg,#17C08A,var(--emerald));
+  box-shadow:0 0 0 0 rgba(14,159,110,.55);animation:ring 2.4s ease-out infinite;transition:transform .18s ease}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(14,159,110,.55)}70%{box-shadow:0 0 0 26px rgba(14,159,110,0)}100%{box-shadow:0 0 0 0 rgba(14,159,110,0)}}
+.vid__play:hover .vid__disc{transform:scale(1.09)}
+.vid__label{font-size:14.5px;font-weight:700;text-shadow:0 2px 14px rgba(0,0,0,.75)}
+.vid__len{position:absolute;right:13px;bottom:13px;background:rgba(7,35,26,.85);border-radius:8px;padding:5px 10px;font-size:12px;font-weight:700;color:#fff}
+
+.book{margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow-lg)}
+.book__top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.book__when b{display:block;color:var(--ink);font-size:20px;font-weight:800;line-height:1.25}
+.book__when span{font-size:13.5px;color:var(--muted)}
+.price{display:flex;align-items:baseline;gap:10px}
+.price__now{font-family:var(--display);font-size:42px;color:var(--ink);line-height:1}
+.price__was{font-size:16px;color:var(--muted);text-decoration:line-through}
+.cd{display:flex;gap:7px;margin:18px 0}
+.cd__u{flex:1;background:var(--emerald-pale);border:1px solid var(--line);border-radius:11px;padding:9px 4px;text-align:center}
+.cd__n{font-family:var(--display);font-size:24px;color:var(--emerald);line-height:1;display:block}
+.cd__l{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:4px;display:block}
+.cd--done{display:block;background:var(--emerald-pale);border:1px solid var(--line);border-radius:11px;padding:12px;font-size:14px;text-align:center;margin:18px 0;color:var(--body)}
+
+/* ---------- stats ---------- */
+.stats{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:34px 0}
+.stats__g{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;text-align:center}
+@media(max-width:760px){.stats__g{grid-template-columns:repeat(2,1fr);gap:26px}}
+.stat b{display:block;font-family:var(--display);font-size:clamp(24px,3.2vw,38px);color:var(--ink);line-height:1.04;white-space:nowrap}
+.stat b.wrapok{white-space:normal}
+.stat span{display:block;font-size:13px;color:var(--muted);margin-top:8px;line-height:1.4}
+
+/* ---------- DARK BANDS — the Be10X move: a light page broken up by a
+     few heavy dark sections, rather than a whole dark page ---------- */
+.band{background:var(--band);color:#CFE3D8}
+.band h2,.band h3,.band b{color:#fff}
+.band .eyebrow{color:#34D399}
+.band .eyebrow::before{background:#34D399}
+.band .lede,.band p{color:#CFE3D8}
+.band .muted{color:#9FB8AC}
+.band .src{color:#9FB8AC}
+
+/* ---------- journey ---------- */
+.jr{position:relative;margin-top:44px}
+.jr__line{position:absolute;left:0;right:0;top:41px;height:2px;z-index:0}
+@media(max-width:860px){.jr__line{display:none}}
+.jr__g{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;position:relative;z-index:1}
+@media(max-width:860px){.jr__g{grid-template-columns:1fr;gap:12px}}
+.step{text-align:center}
+@media(max-width:860px){.step{display:flex;align-items:center;gap:16px;text-align:left;background:var(--band-2);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:14px}}
+.step__dot{width:82px;height:82px;margin:0 auto 14px;border-radius:24px;display:grid;place-items:center;
+  background:var(--band-2);border:1px solid rgba(52,211,153,.3);position:relative}
+@media(max-width:860px){.step__dot{margin:0;width:56px;height:56px;border-radius:16px;flex:none}}
+.step__dot::after{content:"";position:absolute;inset:-5px;border-radius:28px;border:1px solid rgba(52,211,153,.18)}
+@media(max-width:860px){.step__dot::after{display:none}}
+.step__n{font-family:var(--display);font-size:11px;letter-spacing:.14em;color:#34D399;display:block;margin-bottom:5px}
+.step h3{font-size:17px;margin-bottom:4px}
+.step p{font-size:14px;line-height:1.5}
+.step__dot svg{animation:bob 4.4s ease-in-out infinite;animation-delay:var(--bd,0s)}
+@media(max-width:860px){.step__dot svg{width:26px;height:26px}}
+
+/* ---------- chaos → order ---------- */
+.co{display:grid;grid-template-columns:1fr 78px 1fr;gap:20px;align-items:center;margin-top:12px}
+@media(max-width:860px){.co{grid-template-columns:1fr;gap:16px}}
+.co__side{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;min-height:270px;box-shadow:var(--shadow)}
+.co__side--bad{border-top:3px solid #B9C7BF}
+.co__side--good{border-top:3px solid var(--emerald);box-shadow:var(--shadow-lg)}
+.co__hd{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px}
+.co__side--bad .co__hd{color:var(--muted)}
+.co__side--good .co__hd{color:var(--emerald)}
+.mess{display:flex;flex-wrap:wrap;gap:8px}
+.mess span{background:var(--ground);border:1px solid var(--line);border-radius:8px;padding:7px 12px;
+  font-size:13.5px;color:var(--muted);font-weight:600;animation:jitter 3.6s ease-in-out infinite;animation-delay:var(--jd,0s)}
+.co__arrow{display:grid;place-items:center}
+.co__arrow div{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--emerald-lt),var(--teal));animation:bob 3s ease-in-out infinite;box-shadow:var(--shadow)}
+@media(max-width:860px){.co__arrow div{transform:rotate(90deg)}}
+.tidy{display:grid;gap:10px}
+.tidy div{display:flex;align-items:center;gap:11px;background:var(--emerald-pale);border:1px solid var(--line);
+  border-radius:11px;padding:12px 14px;font-size:15px;font-weight:700;color:var(--ink)}
+.tidy i{width:8px;height:8px;border-radius:99px;background:var(--emerald-lt);flex:none;animation:pulse 2.4s ease-in-out infinite;animation-delay:var(--pd,0s)}
+.verdict{text-align:center;margin-top:32px;font-family:var(--display);font-size:clamp(22px,3.4vw,34px);text-transform:uppercase;color:var(--ink)}
+.verdict .bad{color:var(--muted)}
+.verdict .good{color:var(--emerald)}
+
+/* ---------- system cards ---------- */
+.sys{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--emerald);
+  border-radius:var(--r-lg);padding:28px;position:relative;overflow:hidden;box-shadow:var(--shadow);
+  transition:transform .3s ease,box-shadow .3s ease}
+.sys:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.sys__ico{width:60px;height:60px;border-radius:18px;display:grid;place-items:center;background:var(--emerald-pale);border:1px solid var(--line);margin-bottom:16px}
+.sys__n{position:absolute;top:18px;right:22px;font-family:var(--display);font-size:52px;color:rgba(11,31,23,.06);line-height:1}
+.sys h3{margin-bottom:6px}
+.sys__sub{font-size:14.5px;color:var(--muted);margin-bottom:20px}
+.ba{display:grid;gap:11px}
+.ba__row{display:grid;grid-template-columns:70px 1fr;gap:12px;align-items:center}
+.ba__k{font-size:11px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+.ba__bar{display:flex;align-items:center;gap:10px}
+.ba__old{background:var(--ground);border:1px solid var(--line);border-radius:8px;padding:7px 11px;
+  font-size:13.5px;color:var(--muted);text-decoration:line-through;white-space:nowrap}
+.ba__arw{color:var(--emerald);flex:none}
+.ba__new{background:var(--emerald-pale);border:1px solid #A8D9C0;border-radius:8px;padding:7px 12px;
+  font-size:14px;color:var(--ink);font-weight:800;white-space:nowrap}
+
+/* ---------- rates ---------- */
+.rate{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--teal);
+  border-radius:var(--r-lg);padding:26px;text-align:center;box-shadow:var(--shadow)}
+.rate h3{font-size:16px;margin-bottom:14px;color:var(--muted);font-weight:700}
+.rate b{display:block;font-family:var(--display);font-size:clamp(24px,3vw,34px);color:var(--ink);line-height:1.06}
+.rate span{display:block;font-size:13.5px;color:var(--muted);margin-top:10px}
+.src{font-size:13.5px;color:var(--muted);margin-top:24px;font-style:italic;text-align:center}
+
+/* ---------- timeline ---------- */
+.tl{position:relative;padding-left:44px;margin-top:22px}
+.tl::before{content:"";position:absolute;left:15px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--emerald),var(--teal),transparent)}
+.tl__i{position:relative;padding-bottom:26px}
+.tl__i:last-child{padding-bottom:0}
+.tl__d{position:absolute;left:-36px;top:3px;width:32px;height:32px;border-radius:50%;background:var(--emerald);display:grid;place-items:center;font-family:var(--display);font-size:14px;color:#fff}
+.tl__i b{display:block;color:var(--ink);font-size:18px;margin-bottom:5px}
+.tl__i p{color:var(--muted);font-size:15.5px}
+
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:880px){.g3{grid-template-columns:1fr}}
+@media(max-width:620px){.g2{grid-template-columns:1fr}}
+.shead{max-width:64ch;margin-bottom:40px}
+.shead.center{margin-left:auto;margin-right:auto}
+
+/* ---------- fit ---------- */
+.fit{border-radius:var(--r-lg);padding:26px;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
+.fit--yes{border-top:3px solid var(--emerald);box-shadow:var(--shadow-lg)}
+.fit--no{border-top:3px solid #B9C7BF}
+.fit h3{font-size:19px;margin-bottom:16px}
+.fit ul{list-style:none;display:grid;gap:12px}
+.fit li{display:flex;gap:12px;font-size:16px;align-items:flex-start;color:var(--body)}
+.fit li::before{content:"";width:8px;height:8px;border-radius:99px;flex:none;margin-top:9px;background:var(--emerald-lt)}
+.fit--no li::before{background:#B9C7BF}
+
+/* ---------- faq ---------- */
+.faq{max-width:850px;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:8px 26px;box-shadow:var(--shadow)}
+.qa{border-bottom:1px solid var(--line-soft)}
+.qa:last-child{border-bottom:0}
+.qa summary{cursor:pointer;list-style:none;padding:21px 42px 21px 0;position:relative;font-size:17.5px;font-weight:700;color:var(--ink)}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"+";position:absolute;right:6px;top:19px;font-size:25px;color:var(--emerald);font-weight:400;transition:transform .25s ease}
+.qa[open] summary::after{transform:rotate(135deg)}
+.qa__a{padding:0 0 22px;max-width:68ch;color:var(--body)}
+
+/* ---------- bonuses ---------- */
+.bon{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:940px){.bon{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.bon{grid-template-columns:1fr}}
+.bcard{background:var(--band-2);border:1px solid rgba(255,255,255,.11);border-radius:var(--r);
+  padding:22px;transition:transform .28s ease,border-color .28s ease}
+.bcard:hover{transform:translateY(-4px);border-color:rgba(52,211,153,.4)}
+.bcard__top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.bcard__n{font-family:var(--display);font-size:12px;letter-spacing:.15em;color:#9FB8AC}
+.tag{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:99px}
+.tag--free{background:rgba(52,211,153,.16);color:#34D399;border:1px solid rgba(52,211,153,.4)}
+.tag--live{background:rgba(255,138,31,.16);color:#FFA53D;border:1px solid rgba(255,138,31,.45)}
+.bcard h3{font-size:18.5px;margin-bottom:7px;color:#fff}
+.bcard p{font-size:15px;color:#9FB8AC;line-height:1.5}
+.bcard--live{border-color:rgba(255,138,31,.4);background:linear-gradient(170deg,rgba(255,138,31,.10),var(--band-2))}
+.bcard--hero{border-top:3px solid #34D399}
+.bon-sum{margin-top:22px;background:var(--band-2);border:1px solid rgba(52,211,153,.28);border-radius:var(--r-lg);
+  padding:26px 28px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;justify-content:space-between}
+.bon-sum__n{font-family:var(--display);font-size:clamp(30px,4.4vw,48px);color:#fff;line-height:1}
+.bon-sum__n b{color:#34D399;font-family:var(--display);font-weight:400}
+.bon-sum p{font-size:16.5px;color:#CFE3D8;max-width:44ch}
+.bon-sum p b{color:#fff}
+
+/* ---------- guarantee ---------- */
+.gtee{display:flex;align-items:center;gap:34px;flex-wrap:wrap;background:var(--surface);
+  border:1px solid var(--line);border-left:4px solid var(--emerald);border-radius:var(--r-lg);
+  padding:34px;box-shadow:var(--shadow-lg)}
+.gtee>div:last-child{flex:1;min-width:280px}
+.gtee__seal{width:150px;height:150px;border-radius:50%;flex:none;display:grid;place-content:center;
+  text-align:center;background:var(--emerald-pale);border:2px dashed var(--emerald)}
+.gtee__amt{display:block;font-family:var(--display);font-size:38px;color:var(--ink);line-height:1}
+.gtee__back{display:block;font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--emerald);margin-top:5px}
+@media(max-width:620px){.gtee{padding:26px;gap:22px}.gtee__seal{width:118px;height:118px}.gtee__amt{font-size:30px}}
+
+/* ---------- footer / sticky ---------- */
+footer{border-top:1px solid var(--line);padding:40px 0 48px;font-size:14.5px;color:var(--muted);background:var(--surface)}
+.foot{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
+.foot a{color:var(--muted);text-decoration:none;margin-right:16px}
+.foot a:hover{color:var(--emerald)}
+.legal{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;
+  font-size:17px;line-height:1.62;max-width:900px;margin:0 auto;color:var(--body);box-shadow:var(--shadow)}
+.legal b{color:var(--ink);display:block;margin-bottom:10px;font-size:17px}
+.legal p+p{margin-top:13px}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:70;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);padding:11px 16px calc(11px + env(safe-area-inset-bottom));
+  display:flex;align-items:center;gap:14px;box-shadow:0 -8px 26px -14px rgba(11,31,23,.3)}
+.sticky__p b{display:block;color:var(--ink);font-size:19px;font-weight:800;line-height:1.1}
+.sticky__p span{display:block;font-size:11.5px;color:var(--muted)}
+.sticky .btn{flex:1;padding:15px 18px;font-size:16px}
+@media(min-width:861px){.sticky{display:none}}
+</style>
+</head>
+<body>
+
+<div class="prog" id="prog"></div>
+
+<header class="topbar">
+  <div class="topbar__in">
+    <a class="brand" href="#top">
+      <img src="assets/iya-logo.png" alt="Internet Youth Academy">
+      <b>The AI Affiliate Machine<span>by Internet Youth Academy</span></b>
+    </a>
+    <a class="btn js-cta" href="#" data-loc="topbar">Book my seat — <span data-cfg="price">₹199</span></a>
+  </div>
+</header>
+<a id="top"></a>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="orb orb--a"></div><div class="orb orb--b"></div>
+  <div class="wrap">
+    <div class="hero__grid">
+      <div>
+        <span class="eyebrow">Live masterclass · 90 minutes</span>
+        <h1 class="kicker" id="kick">One offer. <span class="hl">Four systems.</span> Ninety minutes.</h1>
+        <p class="lede">Website, creatives, content, follow-ups — built on screen while you watch. Then you build yours.</p>
+        <div class="badges">
+          <span class="badge"><i></i>Built live</span>
+          <span class="badge"><i></i>Q&amp;A in the room</span>
+          <span class="badge"><i></i>Beginners welcome</span>
+          <span class="badge"><i></i>6 bonuses included</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="vid reveal" id="vidBox">
+          <img class="vid__poster" id="vidPoster" src="AF-hero-v2-poster.jpg" alt="Avinash Garg" loading="eager">
+          <div class="vid__veil" id="vidVeil"></div>
+          <button class="vid__play" id="vidPlay" type="button" aria-label="Play the intro video">
+            <span class="vid__disc">
+              <svg width="27" height="27" viewBox="0 0 24 24" fill="#06140F"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg>
+            </span>
+            <span class="vid__label">Watch the intro</span>
+          </button>
+          <span class="vid__len" id="vidLen">0:47</span>
+        </div>
+
+        <div class="book reveal" style="--d:120ms">
+          <div class="book__top">
+            <div class="book__when">
+              <b data-cfg="dateFull">Wed 23 Sep · 08:00 PM IST</b>
+              <span>90 minutes · live · no recording</span>
+            </div>
+            <div class="price">
+              <span class="price__now" data-cfg="price">₹199</span>
+              <span class="price__was">₹4,999</span>
+            </div>
+          </div>
+
+          <div class="cd" id="cd">
+            <div class="cd__u"><b class="cd__n" id="cdD">–</b><span class="cd__l">Days</span></div>
+            <div class="cd__u"><b class="cd__n" id="cdH">–</b><span class="cd__l">Hrs</span></div>
+            <div class="cd__u"><b class="cd__n" id="cdM">–</b><span class="cd__l">Min</span></div>
+            <div class="cd__u"><b class="cd__n" id="cdS">–</b><span class="cd__l">Sec</span></div>
+          </div>
+          <div class="cd--done" id="cdDone" hidden>Booking is open for the next session — the date above is always current.</div>
+
+          <a class="btn btn--full js-cta" href="#" data-loc="hero">Book my seat — <span data-cfg="price">₹199</span> →</a>
+          <p class="btn-note center">Six bonuses included · secure checkout · UPI, cards, net banking</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<div class="stats">
+  <div class="wrap">
+    <div class="stats__g">
+      <div class="stat pop"><b class="wrapok">ClickBank<br>Platinum</b><span>An award issued by ClickBank</span></div>
+      <div class="stat pop" style="--d:90ms"><b class="count" data-to="500" data-pre="~">0</b><span>People worldwide holding it</span></div>
+      <div class="stat pop" style="--d:180ms"><b class="count" data-to="4000" data-suf="+">0</b><span>People mentored</span></div>
+      <div class="stat pop" style="--d:270ms"><b><span class="count" data-to="44" data-div="10">0</span> ★</b><span>Trustpilot rating</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MARKET RATES — moved up front.
+     Third-party market data, the one money shape that survives review:
+     a fact about what the market charges, not a claim about the reader. -->
+<section style="background:var(--surface)">
+  <div class="wrap">
+    <div class="shead center reveal">
+      <span class="eyebrow">Before we start — some context</span>
+      <h2>This is what one website costs to have built.</h2>
+      <p class="lede muted" style="margin:16px auto 0">System 04 builds one in front of you tonight. The going rates are here so you can judge the gap yourself.</p>
+    </div>
+    <div class="grid g3">
+      <div class="rate reveal"><h3>Business website</h3><b>₹20,000 – 80,000</b><span>A freelancer, 1–2 weeks</span></div>
+      <div class="rate reveal" style="--d:110ms"><h3>E-commerce store</h3><b>₹50,000 – 2,50,000+</b><span>An agency, 3–6 weeks</span></div>
+      <div class="rate reveal" style="--d:220ms"><h3>Agency project</h3><b>₹25,000 – 2,00,000+</b><span>A structured team, months</span></div>
+    </div>
+    <p class="src reveal">Typical India market rates, 2026. Shown as market context — not a statement about what you will earn.</p>
+  </div>
+</section>
+
+<!-- ================= THE JOURNEY (dark band) ================= -->
+<section class="band">
+  <div class="wrap">
+    <div class="shead center reveal">
+      <span class="eyebrow">The whole journey, one evening</span>
+      <h2>From a single offer to a machine that runs.</h2>
+      <p class="lede muted" style="margin:16px auto 0">Five steps. You watch every one of them happen.</p>
+    </div>
+
+    <div class="jr">
+      <svg class="jr__line" viewBox="0 0 1000 2" preserveAspectRatio="none" aria-hidden="true">
+        <line x1="0" y1="1" x2="1000" y2="1" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
+        <line x1="0" y1="1" x2="1000" y2="1" stroke="#34D399" stroke-width="2"
+              stroke-dasharray="10 12" style="animation:flow 3.4s linear infinite"/>
+      </svg>
+      <div class="jr__g">
+        <div class="step reveal">
+          <div class="step__dot" style="--bd:0s">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M3 12h18M3 17h10"/><circle cx="19" cy="17" r="2.4"/></svg>
+          </div>
+          <span class="step__n">STEP 01</span><h3>Pick the offer</h3><p>The filter, before a rupee goes out.</p>
+        </div>
+        <div class="step reveal" style="--d:110ms">
+          <div class="step__dot" style="--bd:.4s">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="15" rx="2.4"/><path d="M2.5 8.5h19M6 12h7M6 15h4"/></svg>
+          </div>
+          <span class="step__n">STEP 02</span><h3>Build the site</h3><p>One prompt. Live in a day.</p>
+        </div>
+        <div class="step reveal" style="--d:220ms">
+          <div class="step__dot" style="--bd:.8s">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h10l6 4.5-6 4.5H4z"/><path d="M4 5.5v13"/></svg>
+          </div>
+          <span class="step__n">STEP 03</span><h3>Make the content</h3><p>A week of it, in minutes.</p>
+        </div>
+        <div class="step reveal" style="--d:330ms">
+          <div class="step__dot" style="--bd:1.2s">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7.4"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22"/></svg>
+          </div>
+          <span class="step__n">STEP 04</span><h3>Send the traffic</h3><p>Set up clean so it stays alive.</p>
+        </div>
+        <div class="step reveal" style="--d:440ms">
+          <div class="step__dot" style="--bd:1.6s">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.2-8.55"/><path d="M8.5 12.2l2.6 2.6L21 5"/></svg>
+          </div>
+          <span class="step__n">STEP 05</span><h3>It keeps running</h3><p>Follow-ups without you in the loop.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHAOS → ORDER ================= -->
+<section style="background:var(--surface)">
+  <div class="wrap">
+    <div class="shead center reveal">
+      <span class="eyebrow">Here's the catch</span>
+      <h2>Four different people. One identical to-do list.</h2>
+    </div>
+    <div class="co">
+      <div class="co__side co__side--bad reveal">
+        <div class="co__hd">Doing it by hand</div>
+        <div class="mess">
+          <span style="--jd:0s">A website</span><span style="--jd:.3s">Ad creation</span>
+          <span style="--jd:.6s">Content</span><span style="--jd:.9s">Promotion</span>
+          <span style="--jd:1.2s">Email</span><span style="--jd:1.5s">Leads</span>
+          <span style="--jd:1.8s">Voice agents</span><span style="--jd:2.1s">Queries</span>
+          <span style="--jd:2.4s">Team</span><span style="--jd:2.7s">P&amp;L</span>
+        </div>
+      </div>
+      <div class="co__arrow reveal" style="--d:140ms">
+        <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06140F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg></div>
+      </div>
+      <div class="co__side co__side--good reveal" style="--d:260ms">
+        <div class="co__hd">In one system</div>
+        <div class="tidy">
+          <div><i style="--pd:0s"></i>Content, handled</div>
+          <div><i style="--pd:.4s"></i>Operations, handled</div>
+          <div><i style="--pd:.8s"></i>Numbers, handled</div>
+          <div><i style="--pd:1.2s"></i>Website, handled</div>
+        </div>
+      </div>
+    </div>
+    <p class="verdict reveal">By hand? <span class="bad">Impossible.</span> In one system? <span class="good">Effortless.</span></p>
+  </div>
+</section>
+
+<!-- ================= FOUR SYSTEMS ================= -->
+<section>
+  <div class="wrap">
+    <div class="shead reveal">
+      <span class="eyebrow">What gets built on screen</span>
+      <h2>Four systems. All four built live.</h2>
+      <p class="lede muted" style="margin-top:16px">No slides pretending to be a demo.</p>
+    </div>
+
+    <div class="grid g2">
+      <article class="sys reveal">
+        <span class="sys__n">01</span>
+        <div class="sys__ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h10l6 4.5-6 4.5H4z"/><path d="M4 5.5v13"/></svg></div>
+        <h3>Content marketing</h3>
+        <p class="sys__sub">Getting the right people to see your offer.</p>
+        <div class="ba">
+          <div class="ba__row"><span class="ba__k">Time</span><span class="ba__bar"><span class="ba__old">A full week</span><svg class="ba__arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg><span class="ba__new">Minutes</span></span></div>
+          <div class="ba__row"><span class="ba__k">Effort</span><span class="ba__bar"><span class="ba__old">All on you</span><svg class="ba__arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg><span class="ba__new">One prompt</span></span></div>
+        </div>
+      </article>
+
+      <article class="sys reveal" style="--d:110ms">
+        <span class="sys__n">02</span>
+        <div class="sys__ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2.5 2.5 0 0 1-2.5 2.5H7.5L3 21.5V5A2.5 2.5 0 0 1 5.5 2.5h13A2.5 2.5 0 0 1 21 5z"/><path d="M8 8h8M8 12h5"/></svg></div>
+        <h3>Operations &amp; follow-up</h3>
+        <p class="sys__sub">The inbox and the calls that eat your day.</p>
+        <div class="ba">
+          <div class="ba__row"><span class="ba__k">Time</span><span class="ba__bar"><span class="ba__old">All day</span><svg class="ba__arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg><span class="ba__new">A few minutes</span></span></div>
+          <div class="ba__row"><span class="ba__k">Capacity</span><span class="ba__bar"><span class="ba__old">One of you</span><svg class="ba__arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg><span class="ba__new">Runs 24×7</span></span></div>
+        </div>
+      </article>
+
+      <article class="sys reveal" style="--d:220ms">
+        <span class="sys__n">03</span>
+        <div class="sys__ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><rect x="5" y="11" width="3.6" height="7" rx="1"/><rect x="10.2" y="7" width="3.6" height="11" rx="1"/><rect x="15.4" y="3.5" width="3.6" height="14.5" rx="1"/></svg></div>
+        <h3>Finance &amp; P&amp;L</h3>
+        <p class="sys__sub">Knowing exactly what you earn and keep.</p>
+        <div class="ba">
+          <div class="ba__row"><span class="ba__k">Time</span><span class="ba__bar"><span class="ba__old">Spreadsheets</span><svg class="ba__arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg><span class="ba__new">Just ask</span></span></div>
+          <div class="ba__row"><span class="ba__k">Clarity</span><span class="ba__bar"><span class="ba__old">Guesswork</span><svg class="ba__arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg><span class="ba__new">Exact numbers</span></span></div>
+        </div>
+      </article>
+
+      <article class="sys reveal" style="--d:330ms">
+        <span class="sys__n">04</span>
+        <div class="sys__ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="15" rx="2.4"/><path d="M2.5 8.5h19"/><circle cx="5.8" cy="6.2" r=".7" fill="#34D399"/><circle cx="8.1" cy="6.2" r=".7" fill="#34D399"/></svg></div>
+        <h3>Websites</h3>
+        <p class="sys__sub">Your storefront — where trust is built.</p>
+        <div class="ba">
+          <div class="ba__row"><span class="ba__k">Time</span><span class="ba__bar"><span class="ba__old">Three weeks</span><svg class="ba__arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg><span class="ba__new">One day</span></span></div>
+          <div class="ba__row"><span class="ba__k">Cost</span><span class="ba__bar"><span class="ba__old">A dev's bill</span><svg class="ba__arw" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg><span class="ba__new">One prompt</span></span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= BONUSES =================
+     Copy taken verbatim from Avinash's own webinar deck ("You're not leaving
+     empty-handed"). No rupee values: her deck doesn't assign any, and
+     inventing them would be deceptive pricing under Meta's Prohibited
+     Commercial Practices and CCPA cl.12(e). Bonus 5 is live-only — it is the
+     show-up driver, which is worth more here than a fake discount. -->
+<section class="band">
+  <div class="wrap">
+    <div class="shead center reveal">
+      <span class="eyebrow">Stay till the end</span>
+      <h2>You're not leaving empty-handed.</h2>
+      <p class="lede muted" style="margin:16px auto 0">Six bonuses that put the system to work the moment the session ends.</p>
+    </div>
+
+    <div class="bon">
+      <article class="bcard reveal">
+        <div class="bcard__top"><span class="bcard__n">Bonus 1</span><span class="tag tag--free">Free</span></div>
+        <h3>The Creative Refill Pack</h3><p>One ad idea into ten fresh ads.</p>
+      </article>
+      <article class="bcard reveal" style="--d:80ms">
+        <div class="bcard__top"><span class="bcard__n">Bonus 2</span><span class="tag tag--free">Free</span></div>
+        <h3>The Landing Page Variant Kit</h3><p>Five page styles for one offer.</p>
+      </article>
+      <article class="bcard reveal" style="--d:160ms">
+        <div class="bcard__top"><span class="bcard__n">Bonus 3</span><span class="tag tag--free">Free</span></div>
+        <h3>The Ad Account Safety Checklist</h3><p>A 12-point check before launch.</p>
+      </article>
+      <article class="bcard reveal" style="--d:240ms">
+        <div class="bcard__top"><span class="bcard__n">Bonus 4</span><span class="tag tag--free">Free</span></div>
+        <h3>The Offer Scorecard</h3><p>Ten questions before you spend.</p>
+      </article>
+      <article class="bcard bcard--live reveal" style="--d:320ms">
+        <div class="bcard__top"><span class="bcard__n">Bonus 5</span><span class="tag tag--live">Live only</span></div>
+        <h3>The 7-Day Launch Planner</h3><p>Every bonus at work, day by day. Given only to those still in the room at the end.</p>
+      </article>
+      <article class="bcard bcard--hero reveal" style="--d:400ms">
+        <div class="bcard__top"><span class="bcard__n">Bonus 6</span><span class="tag tag--free">Free</span></div>
+        <h3>The Affiliate Business Tracker</h3>
+        <p>Your business on one dashboard. Excel file, 10 tabs, 5,000+ ready formulas.</p>
+      </article>
+    </div>
+
+    <div class="bon-sum reveal">
+      <div>
+        <span class="eyebrow" style="margin-bottom:8px">What you take home</span>
+        <div class="bon-sum__n"><b class="count" data-to="6">0</b> bonuses</div>
+      </div>
+      <p>Five arrive the moment you register. <b>Bonus 5 is only for the people still there at the end.</b></p>
+    </div>
+    <p class="src reveal">These are working tools and templates. They help you organise and plan — they do not guarantee any sale or any income.</p>
+  </div>
+</section>
+
+<!-- ================= GUARANTEE ================= -->
+<section>
+  <div class="wrap">
+    <div class="gtee reveal">
+      <div class="gtee__seal">
+        <span class="gtee__amt" data-cfg="price">₹199</span>
+        <span class="gtee__back">back</span>
+      </div>
+      <div>
+        <h2 style="font-size:clamp(25px,3.6vw,38px);margin-bottom:12px">Show up, or it's on me.</h2>
+        <p class="lede">Come live and stay to the end. If you don't think it was worth far more than you paid, message me straight after and I'll refund every rupee — no forms, no arguments.</p>
+        <p class="muted" style="margin-top:12px;font-size:15.5px">The only real risk here is not turning up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AUTHOR ================= -->
+<section>
+  <div class="wrap">
+    <div class="grid g2" style="gap:46px;align-items:center">
+      <div class="reveal">
+        <img src="assets/author-award.jpg" alt="Avinash Garg" loading="lazy"
+             style="border-radius:var(--r-lg);border:1px solid var(--line);width:100%;max-width:420px">
+      </div>
+      <div class="reveal" style="--d:120ms">
+        <span class="eyebrow">Who's teaching this</span>
+        <h2 style="margin-bottom:16px">Avinash Garg</h2>
+        <p class="lede">I didn't read about this. I built my way into it from a standing start — and these are the systems I actually run.</p>
+        <div class="tl">
+          <div class="tl__i"><span class="tl__d">1</span><b>Failed UPSC. Twice.</b><p>No plan B, no income.</p></div>
+          <div class="tl__i"><span class="tl__d">2</span><b>Started from zero.</b><p>A homemaker with a laptop, teaching myself in the evenings.</p></div>
+          <div class="tl__i"><span class="tl__d">3</span><b>Stopped doing it by hand.</b><p>Built systems instead. That's the shift this session is about.</p></div>
+          <div class="tl__i"><span class="tl__d">4</span><b>ClickBank Platinum.</b><p>An award issued by ClickBank, held by roughly 500 people worldwide. 4,000+ mentored since.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FIT ================= -->
+<section style="background:var(--surface)">
+  <div class="wrap">
+    <div class="shead center reveal"><span class="eyebrow">Straight answer</span><h2>Is this for you?</h2></div>
+    <div class="grid g2">
+      <div class="fit fit--yes reveal">
+        <h3>Come if…</h3>
+        <ul>
+          <li>You're already doing something and want to understand this properly first.</li>
+          <li>You've tried pieces of it and it fell apart because every piece needed you.</li>
+          <li>You're willing to do the work. It's a skill.</li>
+          <li>You want to see it work before you believe anyone.</li>
+        </ul>
+      </div>
+      <div class="fit fit--no reveal" style="--d:120ms">
+        <h3>Skip it if…</h3>
+        <ul>
+          <li>You want something that pays you without you doing anything.</li>
+          <li>You want a guarantee of a specific result. Nobody honest gives you one.</li>
+          <li>You can't make the live 90 minutes — there's no recording.</li>
+          <li>You want it handed over done.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section>
+  <div class="wrap">
+    <div class="shead center reveal"><span class="eyebrow">Before you book</span><h2>Common questions</h2></div>
+    <div class="faq reveal">
+      <details class="qa"><summary>I'm a complete beginner. Is this for me?</summary><div class="qa__a">Yes. Nothing assumes prior experience — we start from how affiliate offers and links actually work.</div></details>
+      <details class="qa"><summary>I'm not technical. Will I keep up?</summary><div class="qa__a">You'll be able to follow it. Everything is shown on screen step by step, and you can ask questions while it's happening. Nothing in the session requires you to write code.</div></details>
+      <details class="qa"><summary>Do I need an offer or niche picked already?</summary><div class="qa__a">No. Choosing one is part of what gets covered, including the filter I use before putting money behind anything.</div></details>
+      <details class="qa"><summary>How much ad budget do I need?</summary><div class="qa__a">We'll cover realistic starting budgets. The honest answer is it depends on your offer and market — anyone giving you one number without knowing either is guessing.</div></details>
+      <details class="qa"><summary>What about ad accounts getting restricted?</summary><div class="qa__a">Covered directly. What actually triggers restrictions, and how to structure things so one bad week doesn't wipe you out. No shady shortcuts — they're what cause the problem.</div></details>
+      <details class="qa"><summary>Is there a recording?</summary><div class="qa__a">No. It's live only — the walkthrough and Q&amp;A happen in the room and nowhere else.</div></details>
+      <details class="qa"><summary>Is it really only <span data-cfg="price">₹199</span>?</summary><div class="qa__a">Yes. The ticket is small on purpose — it keeps the room full of people who actually turn up.</div></details>
+      <details class="qa"><summary>How do I join after paying?</summary><div class="qa__a">You get the joining link by email and WhatsApp right after checkout, plus a reminder before it starts.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL ================= -->
+<section class="band" style="position:relative;overflow:hidden">
+  <div class="orb orb--a" style="opacity:.3"></div>
+  <div class="wrap center" style="position:relative;z-index:1">
+    <span class="eyebrow reveal">Your move</span>
+    <h2 class="kicker reveal" style="max-width:15ch;margin:0 auto 20px">Come watch it <span class="hl">get built.</span></h2>
+    <p class="lede muted reveal" style="margin:0 auto 30px">90 minutes, live. <span data-cfg="dateFull">Wed 23 Sep · 08:00 PM IST</span></p>
+    <a class="btn js-cta reveal" href="#" data-loc="final">Book my seat — <span data-cfg="price">₹199</span> →</a>
+    <p class="btn-note">Secure checkout · UPI, cards and net banking</p>
+  </div>
+</section>
+
+<!-- ================= LEGAL ================= -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="legal reveal">
+      <b>Past record is no guarantee of future prospects.</b>
+      <p>This is an educational workshop. It is not a job, not an investment, and not an income guarantee. Nothing on this page promises that you will earn any amount.</p>
+      <p>Affiliate marketing is a skill and a business. Results depend entirely on your own effort, time, budget, skill and market conditions. Many people who try affiliate marketing earn little or nothing.</p>
+      <p>The website price ranges shown above are general India market rates for 2026, provided for context only. They describe what businesses currently pay for website development — they are not a statement about what any participant will earn.</p>
+      <p>ClickBank Platinum is an award issued by ClickBank. It is referenced here as a credential of the instructor and implies nothing about the results any participant will achieve.</p>
+      <p>Session times, seat availability and pricing reflect our booking system. They can change, and offers may be extended or withdrawn.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div style="color:var(--body);font-weight:700;margin-bottom:6px">Internet Youth Academy</div>
+      <!-- TODO(Avinash): real registered business address goes here. -->
+      <div>[Registered business address — to be added]</div>
+      <div style="margin-top:6px">support@internetyouthacademy.com</div>
+    </div>
+    <div>
+      <a href="/terms">Terms</a><a href="/privacy">Privacy</a><a href="/refund">Refund policy</a>
+      <div style="margin-top:10px">© <span id="yr">2026</span> Internet Youth Academy. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky">
+  <div class="sticky__p"><b data-cfg="price">₹199</b><span data-cfg="dateShort">Wed 23 Sep</span></div>
+  <a class="btn js-cta" href="#" data-loc="sticky">Book my seat →</a>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var M=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var D=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  var CFG=window.IYA_CONFIG||{};
+  var REDUCED=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- hero headline: word-by-word entrance ---------- */
+  (function(){
+    var k=document.getElementById("kick");
+    if(!k||REDUCED) return;
+    var html=k.innerHTML, i=0;
+    // wrap plain words, leave the <span class="hl"> wrapper intact
+    k.innerHTML=html.replace(/([^\s<>]+)(?![^<]*>)/g,function(w){
+      return '<span class="w" style="--wd:'+(i++*70)+'ms">'+w+'</span>';
+    });
+    requestAnimationFrame(function(){k.classList.add("go")});
+  })();
+
+  /* ---------- scroll reveal ---------- */
+  (function(){
+    var els=document.querySelectorAll(".reveal,.pop");
+    if(!("IntersectionObserver" in window)){
+      for(var i=0;i<els.length;i++) els[i].classList.add("in");
+      return;
+    }
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+        if(e.target.querySelector(".count")||e.target.classList.contains("count")) countUp(e.target);
+      });
+    },{threshold:.16,rootMargin:"0px 0px -8% 0px"});
+    for(var j=0;j<els.length;j++) io.observe(els[j]);
+  })();
+
+  /* ---------- animated counters ---------- */
+  function countUp(scope){
+    var ns=scope.querySelectorAll(".count");
+    for(var i=0;i<ns.length;i++)(function(n){
+      var to=+n.dataset.to, div=+n.dataset.div||1;
+      var pre=n.dataset.pre||"", suf=n.dataset.suf||"";
+      if(REDUCED){ n.textContent=pre+fmtN(to/div)+suf; return; }
+      var t0=performance.now(), dur=1100;
+      (function step(t){
+        var p=Math.min(1,(t-t0)/dur);
+        var e=1-Math.pow(1-p,3);
+        n.textContent=pre+fmtN(Math.round(to*e)/div)+suf;
+        if(p<1) requestAnimationFrame(step);
+      })(t0);
+    })(ns[i]);
+  }
+  function fmtN(v){
+    return Number.isInteger(v) ? v.toLocaleString("en-IN") : v.toFixed(1);
+  }
+
+  /* ---------- reading progress ---------- */
+  (function(){
+    var bar=document.getElementById("prog");
+    function upd(){
+      var h=document.documentElement.scrollHeight-innerHeight;
+      bar.style.width=(h>0?(scrollY/h)*100:0)+"%";
+    }
+    addEventListener("scroll",upd,{passive:true}); upd();
+  })();
+
+  /* ---------- hero video: nothing downloads until they tap ----------
+     The old pages shipped four 7MB clips. Here the poster is the only
+     thing that loads; the <video> element isn't even created until the
+     play button is pressed, so the page costs nothing extra on arrival. */
+  (function(){
+    var box=document.getElementById("vidBox"),
+        btn=document.getElementById("vidPlay");
+    if(!box||!btn) return;
+    btn.addEventListener("click",function(){
+      var v=document.createElement("video");
+      v.src="AF-hero-v2.mp4";
+      v.controls=true; v.playsInline=true; v.autoplay=true; v.preload="auto";
+      v.setAttribute("controlslist","nodownload");
+      box.innerHTML=""; box.appendChild(v);
+      v.play().catch(function(){});
+      if(window.fbq){try{fbq("trackCustom","HeroVideoPlay")}catch(e){}}
+    });
+  })();
+
+  /* ---------- config + countdown ---------- */
+  function fmt(c){
+    var o={price:c.price||"₹199",time:(c.webinarTime||"")+" IST"};
+    var p=String(c.webinarDate||"").split("-");
+    if(p.length===3){
+      var dt=new Date(Date.UTC(+p[0],+p[1]-1,+p[2]));
+      var ds=D[dt.getUTCDay()]+" "+(+p[2])+" "+M[+p[1]-1];
+      o.dateShort=ds; o.dateFull=ds+" · "+(c.webinarTime||"")+" IST";
+    }
+    return o;
+  }
+  function paint(c){
+    var t=fmt(c);
+    ["price","dateShort","dateFull","time"].forEach(function(k){
+      if(!t[k]) return;
+      var n=document.querySelectorAll('[data-cfg="'+k+'"]');
+      for(var i=0;i<n.length;i++) n[i].textContent=t[k];
+    });
+    startCountdown(c);
+  }
+
+  var cdTimer=null;
+  function startCountdown(c){
+    if(cdTimer) clearInterval(cdTimer);
+    var el=document.getElementById("cd"), done=document.getElementById("cdDone");
+    var target=parseIST(c.webinarDate,c.webinarTime);
+    if(!target){ el.hidden=true; done.hidden=false; return; }
+    function set(id,n){document.getElementById(id).textContent=n<10?"0"+n:String(n)}
+    function tick(){
+      var diff=target-Date.now();
+      /* An expired timer hides itself and the booking card carries on. The
+         old pages flipped to a dead "we're live" state and every click that
+         landed in the gap saw it. */
+      if(diff<=0){ el.hidden=true; done.hidden=false; clearInterval(cdTimer); return; }
+      el.hidden=false; done.hidden=true;
+      var s=Math.floor(diff/1000);
+      set("cdD",Math.floor(s/86400)); set("cdH",Math.floor(s/3600)%24);
+      set("cdM",Math.floor(s/60)%60); set("cdS",s%60);
+    }
+    tick(); cdTimer=setInterval(tick,1000);
+  }
+  /* IST is UTC+5:30, parsed explicitly so the countdown is right in any timezone. */
+  function parseIST(date,time){
+    var d=String(date||"").split("-"); if(d.length!==3) return null;
+    var m=String(time||"").trim().match(/^(\d{1,2}):(\d{2})\s*(AM|PM)?/i); if(!m) return null;
+    var h=+m[1]%12; if(m[3]&&m[3].toUpperCase()==="PM") h+=12;
+    return Date.UTC(+d[0],+d[1]-1,+d[2],h-5,+m[2]-30);
+  }
+
+  /* ---------- attribution across the TagMango hop ---------- */
+  var KEYS=["fbclid","gclid","utm_source","utm_medium","utm_campaign","utm_content","utm_term"];
+  var STORE="iya_attr_v1";
+  function cookie(n){var m=document.cookie.match("(^|;)\\s*"+n+"\\s*=\\s*([^;]+)");return m?m.pop():""}
+  function capture(){
+    var saved={};
+    try{saved=JSON.parse(localStorage.getItem(STORE)||"{}")}catch(e){saved={}}
+    var q; try{q=new URLSearchParams(location.search)}catch(e){return saved}
+    var touched=false;
+    KEYS.forEach(function(k){var v=q.get(k); if(v){saved[k]=v;touched=true}});
+    var fbp=cookie("_fbp"), fbc=cookie("_fbc");
+    if(fbp){saved._fbp=fbp;touched=true}
+    if(fbc){saved._fbc=fbc;touched=true}
+    if(touched){
+      saved.landed_at=saved.landed_at||new Date().toISOString();
+      try{localStorage.setItem(STORE,JSON.stringify(saved))}catch(e){}
+    }
+    return saved;
+  }
+  function checkoutUrl(){
+    var base=CFG.registrationUrl||"#";
+    if(base==="#") return base;
+    var a=capture(), parts=[];
+    Object.keys(a).forEach(function(k){
+      if(k==="landed_at") return;
+      parts.push(encodeURIComponent(k)+"="+encodeURIComponent(a[k]));
+    });
+    return parts.length ? base+(base.indexOf("?")===-1?"?":"&")+parts.join("&") : base;
+  }
+  function wireCTAs(){
+    var url=checkoutUrl(), b=document.querySelectorAll(".js-cta");
+    for(var i=0;i<b.length;i++){
+      b[i].setAttribute("href",url);
+      b[i].addEventListener("click",function(){
+        if(window.fbq){try{fbq("track","InitiateCheckout")}catch(e){}}
+        if(window.gtag){try{gtag("event","begin_checkout")}catch(e){}}
+      });
+    }
+  }
+
+  function refreshConfig(){
+    fetch("https://www.internetyouthacademy.com/api/masterclass/public-config?site=ai-affiliate-machine",{cache:"no-store"})
+      .then(function(r){return r.ok?r.json():null})
+      .then(function(d){
+        var c=d&&d.config; if(!c||!c.webinar_date) return;
+        CFG.webinarDate=c.webinar_date;
+        CFG.webinarTime=String(c.webinar_time||"").replace(/\s*IST\s*$/i,"").trim();
+        if(c.price) CFG.price=c.price;
+        /* registrationUrl deliberately NOT taken from the API — this page has
+           its own TagMango product and its own pixel. */
+        paint(CFG);
+      })
+      .catch(function(){});
+  }
+
+  document.getElementById("yr").textContent=new Date().getFullYear();
+  capture(); paint(CFG); wireCTAs(); refreshConfig();
+})();
+</script>
+
+<!-- PIXELS: add fbq init here once the copy is approved. -->
+</body>
+</html>
