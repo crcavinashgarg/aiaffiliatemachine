@@ -17,6 +17,12 @@ module.exports = async (req, res) => {
   const phone = String(body.phone || "").replace(/\D/g, "").slice(-10);
   const email = String(body.email || "").trim().toLowerCase().slice(0, 120);
   const page = String(body.page || "").slice(0, 60);
+  // WHICH SITE TOOK THIS PAYMENT. Razorpay webhooks are per-ACCOUNT, not per-site:
+  // every enabled endpoint is called for every payment, whichever site it came from.
+  // Without this the webhook cannot tell its own sales from the other site's, so both
+  // forward to the same automation and the buyer is messaged twice. Measured 24 Oct
+  // 2026: one payment, delivered to both domains 8ms apart.
+  const site = String(body.site || "").toLowerCase().replace(/^www\./, "").slice(0, 80);
 
   // Attribution from the landing page. Razorpay allows 15 notes of 256 chars each.
   // Kept as the SAME names TagMango returned, so downstream mappings do not change.
@@ -34,7 +40,7 @@ module.exports = async (req, res) => {
       amount: AMOUNT_PAISE,
       currency: "INR",
       receipt: `aam_${Date.now().toString(36)}`,
-      notes: Object.assign({ name, phone, email, page, mangoName: PRODUCT_NAME }, attr)
+      notes: Object.assign({ name, phone, email, page, site, mangoName: PRODUCT_NAME }, attr)
     });
     return json(res, 200, {
       order_id: order.id,

@@ -166,7 +166,8 @@
     fetch(CONFIG.CREATE_ORDER_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(Object.assign({}, data, { page: location.pathname, attribution: attribution() }))
+      body: JSON.stringify(Object.assign({}, data, {
+        page: location.pathname, site: location.host, attribution: attribution() }))
     })
       .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || "Order failed"); return j; }); })
       .then(function (o) { order = o; return loadCheckout(); })
