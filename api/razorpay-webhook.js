@@ -21,6 +21,10 @@ const { env, json, readRawBody, hmac, safeEqual, notify, registrationRecord } = 
 // shipped — is still forwarded. A guard that goes silent on unfamiliar input would turn a
 // duplicate message into NO message, which is the worse failure: the buyer pays and hears
 // nothing.
+// How long we are willing to hold Razorpay open. Comfortably inside its retry window,
+// and far below the 13s that triggered a redelivery.
+const ACK_BUDGET_MS = 2500;
+
 const SITE = "aiaffiliatemachine.co";
 
 function belongsToAnotherSite(p) {
@@ -42,7 +46,23 @@ module.exports = async (req, res) => {
 
   if (evt.event === "payment.captured") {
     const p = evt.payload && evt.payload.payment && evt.payload.payment.entity;
-    if (p && !belongsToAnotherSite(p)) await notify(registrationRecord(p));
+    // DO NOT WAIT FOR THE AUTOMATION TO FINISH. Razorpay wants a prompt 2xx and
+    // redelivers when it does not get one — and a redelivery runs the whole automation
+    // again, which messages the buyer a second time.
+    //
+    // Measured 24 Oct 2026, one payment:
+    //   12:32:35.752  Razorpay -> here
+    //   12:32:48.774  the automation finally reached our tracker, 13.0s later
+    //   12:32:49.333  Razorpay REDELIVERED, 13.6s after the first
+    // Pabbly runs its five steps before acknowledging the webhook, so awaiting it meant
+    // holding Razorpay open for thirteen seconds.
+    //
+    // The POST is still sent and still processed; we simply stop WAITING for it. The
+    // request is never aborted — abandoning the wait must not cancel the delivery.
+    if (p && !belongsToAnotherSite(p)) {
+      const sent = notify(registrationRecord(p));
+      await Promise.race([sent, new Promise((r) => setTimeout(r, ACK_BUDGET_MS))]);
+    }
   }
   // Always 200 so Razorpay does not keep retrying events we ignore
   return json(res, 200, { received: true });
