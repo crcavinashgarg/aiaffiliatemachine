@@ -76,13 +76,46 @@ async function razorpay(path, method, body) {
  * utm_id). The Pabbly workflow's mappings therefore carry over label-for-label.
  * `cid` is sent both as `cid` and as `utm_id` because the old API step mapped cid ← utm_id.
  */
+/**
+ * A wall-clock timestamp in IST, for humans and for Google Sheets.
+ *
+ * Built with Intl rather than by adding 5.5 hours to a UTC date, because an offset typed as
+ * a number is a second source of truth that nobody updates. `hourCycle: 'h23'` is deliberate:
+ * `hour12: false` yields "24" for midnight in some runtimes, which Sheets rejects outright.
+ */
+function istStamp(epochSeconds) {
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Kolkata',
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23',
+  }).formatToParts(new Date(epochSeconds * 1000));
+  const g = (t) => (parts.find((x) => x.type === t) || {}).value || '00';
+  return `${g('year')}-${g('month')}-${g('day')} ${g('hour')}:${g('minute')}:${g('second')}`;
+}
+
 function registrationRecord(p) {
   const n = p.notes || {};
   const paise = Number(p.amount || 0);
   const fee = Number(p.fee || 0);            // Razorpay fee incl. GST on the fee, in paise
   return {
     orderId: p.id,
+    // ── TWO TIME FIELDS, AND THEY ARE NOT INTERCHANGEABLE (26 Oct 2026) ───────────
+    //
+    // `orderTime` STAYS UTC. The tracker parses it with Date.parse() and it decides which
+    // webinar an order belongs to (D50) — "a wrong date puts real money on the wrong
+    // cohort". A naive local string like "2026-10-26 18:13:52" has no offset, so Date.parse
+    // reads it in the SERVER's zone; Vercel runs UTC, so every order would land 5h30m late
+    // and some would jump to the next day's cohort. The machine field is left alone.
+    //
+    // `orderTimeIST` is the one for the Google Sheet. The sheet was showing UTC — a 6:13 pm
+    // payment written as 12:43 — which reads as the row arriving hours late. It is not late:
+    // measured over the last two days, payment to arrival is 5–67 seconds, mostly ~20.
+    // Nothing was slow; the number was simply in the wrong zone.
+    //
+    // Format is `YYYY-MM-DD HH:MM:SS`, which Sheets parses as a real datetime in any locale.
+    // `DD/MM/YYYY` would be read as US month-first by a sheet that is not set to en-IN.
     orderTime: new Date((p.created_at || 0) * 1000).toISOString(),
+    orderTimeIST: istStamp(p.created_at || 0),
     mangoName: n.mangoName || "AI Affiliate Masterclass",
     amountPayable: paise / 100,
     netAmountPayable: fee > 0 ? (paise - fee) / 100 : "",   // measured settlement, blank if unknown
